@@ -1,0 +1,14 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
+  "simpleName" : "SprintUser",
+  "namespace" : "ch.ivyteam.ivy.scrum.management",
+  "fields" : [ {
+    "name" : "name"
+  }, {
+    "name" : "workingDays",
+    "type" : "Number"
+  }, {
+    "name" : "capacity",
+    "type" : "Number"
+  } ]
+}

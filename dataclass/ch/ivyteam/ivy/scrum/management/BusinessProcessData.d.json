@@ -1,5 +1,26 @@
 {
   "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
   "simpleName" : "BusinessProcessData",
-  "namespace" : "ch.ivyteam.ivy.scrum.management"
+  "namespace" : "ch.ivyteam.ivy.scrum.management",
+  "fields" : [ {
+    "name" : "versionCode"
+  }, {
+    "name" : "sprintNumber",
+    "type" : "Number"
+  }, {
+    "name" : "startDate",
+    "type" : "Date"
+  }, {
+    "name" : "endDate",
+    "type" : "Date"
+  }, {
+    "name" : "members",
+    "type" : "List<SprintUser>"
+  }, {
+    "name" : "maxWorkingDays",
+    "type" : "Number"
+  }, {
+    "name" : "sprintPointsPerDay",
+    "type" : "Number"
+  } ]
 }
