@@ -12,22 +12,63 @@
       <ui:define name="title">TestDialog</ui:define>
       <ui:define name="content">
         <h1>#{data.sprint.versionCode}</h1>
-        <p:dataTable value="#{data.sprint.members}" var="member">
-          <p:column headerText="Name">
-            <h:outputText value="#{member.name}" />
-          </p:column>
-          <p:column headerText="Work Days">
-            <h:outputText value="#{member.workingDays}" />
-          </p:column>
-          <p:column headerText="Work">
-            <h:outputText value="#{member.capacity}" />
-          </p:column>
-          <p:column headerText="Points">
-            <h:outputText value="#{member.workingDays.intValue() * 0.4}">
-              <f:convertNumber pattern="#0.0" />
-            </h:outputText>
-          </p:column>
-        </p:dataTable>
+        <h:form id="form">
+          <p:dataTable
+            value="#{data.sprint.members}"
+            var="member"
+            rowIndexVar="index"
+            stickyHeader="true"
+            editable="true"
+            rowKey="#{index}"
+            id="spda"
+          >
+            <p:ajax event="rowEdit" update="spda" />
+            <p:ajax event="rowEditCancel" update="spda" />
+
+            <p:column headerText="Name">
+              <p:cellEditor>
+                <f:facet name="output">
+                  <h:outputText value="#{member.name}" />
+                </f:facet>
+
+                <f:facet name="input">
+                  <p:inputText value="#{member.name}" />
+                </f:facet>
+              </p:cellEditor>
+            </p:column>
+            <p:column headerText="Work days">
+              <p:cellEditor>
+                <f:facet name="output">
+                  <h:outputText value="#{member.workingDays}" />
+                </f:facet>
+                <f:facet name="input">
+                  <p:inputText value="#{member.workingDays}" />
+                </f:facet>
+              </p:cellEditor>
+            </p:column>
+            <p:column headerText="Work">
+              <p:cellEditor>
+                <f:facet name="output">
+                  <h:outputText value="#{member.capacity}" />
+                </f:facet>
+                <f:facet name="input">
+                  <p:inputText value="#{member.capacity}" />
+                </f:facet>
+              </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Points">
+              <h:outputText value="#{member.workingDays.doubleValue() * 0.4}">
+                <f:convertNumber pattern="#0.0" />
+              </h:outputText>
+            </p:column>
+            <p:column style="width: 6rem">
+              <p:rowEditor />
+            </p:column>
+          </p:dataTable>
+        </h:form>
+
+        <style type="text/css"></style>
       </ui:define>
     </ui:composition>
   </h:body>
