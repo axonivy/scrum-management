@@ -23,8 +23,7 @@
             <h:outputText value="#{member.capacity}" />
           </p:column>
           <p:column headerText="Points">
-            <!-- disable validator next-line: el-validator -->
-            <h:outputText value="#{member.workingDays * 0.4}">
+            <h:outputText value="#{member.workingDays.intValue() * 0.4}">
               <f:convertNumber pattern="#0.0" />
             </h:outputText>
           </p:column>
