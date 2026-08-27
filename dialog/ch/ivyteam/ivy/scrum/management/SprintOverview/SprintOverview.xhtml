@@ -26,15 +26,7 @@
             <p:ajax event="rowEditCancel" update="Sprint-datatabel" />
 
             <p:column headerText="Name">
-              <p:cellEditor>
-                <f:facet name="output">
-                  <h:outputText value="#{member.name}" />
-                </f:facet>
-
-                <f:facet name="input">
-                  <p:inputText value="#{member.name}" />
-                </f:facet>
-              </p:cellEditor>
+              <h:outputText value="#{member.name}" />
             </p:column>
             <p:column headerText="Work days">
               <p:cellEditor>
@@ -84,8 +76,6 @@
             icon="pi pi-check"
           />
         </div>
-
-        <style type="text/css"></style>
       </ui:define>
     </ui:composition>
   </h:body>
