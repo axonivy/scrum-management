@@ -16,13 +16,13 @@
           <p:column headerText="Name">
             <h:outputText value="#{member.name}" />
           </p:column>
-          <p:column headerText="Work Days">
+          <p:column headerText="Capacity">
             <h:outputText value="#{member.workingDays}" />
           </p:column>
           <p:column headerText="Work">
             <h:outputText value="#{member.capacity}" />
           </p:column>
-          <p:column headerText="Points">
+          <p:column headerText="Story Points">
             <h:outputText value="#{member.workingDays.intValue() * 0.4}">
               <f:convertNumber pattern="#0.0" />
             </h:outputText>
