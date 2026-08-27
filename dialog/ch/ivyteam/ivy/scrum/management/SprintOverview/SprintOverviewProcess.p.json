@@ -17,13 +17,13 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f1" }
+        { "id" : "f2", "to" : "f6" }
       ]
     }, {
       "id" : "f1",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 224, "y" : 64 }
+        "at" : { "x" : 352, "y" : 64 }
       }
     }, {
       "id" : "f3",
@@ -44,5 +44,46 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 160 }
       }
+    }, {
+      "id" : "f6",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.security.user.IUserRepository;",
+            "import ch.ivyteam.ivy.security.IUser;",
+            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+            "in.sprint.versionCode = \"test\";",
+            "in.sprint.members.add(new SprintUser());",
+            "in.sprint.members.add(new SprintUser());",
+            "in.sprint.members.add(new SprintUser());",
+            "in.sprint.members.add(new SprintUser());",
+            "in.sprint.members.add(new SprintUser());",
+            "in.sprint.members.get(0).name = \"Colin\";",
+            "in.sprint.members.get(1).name = \"asdf\";",
+            "in.sprint.members.get(2).name = \"12314\";",
+            "in.sprint.members.get(3).name = \"xbdgdfg\";",
+            "in.sprint.members.get(4).name = \"Luaks\";",
+            "",
+            "in.sprint.members.get(0).workingDays = 12;",
+            "in.sprint.members.get(1).workingDays = 13;",
+            "in.sprint.members.get(2).workingDays = 9;",
+            "in.sprint.members.get(3).workingDays = 11;",
+            "in.sprint.members.get(4).workingDays = 5;",
+            "",
+            "in.sprint.members.get(0).capacity = 80;",
+            "in.sprint.members.get(1).capacity = 100;",
+            "in.sprint.members.get(2).capacity = 60;",
+            "in.sprint.members.get(3).capacity = 90;",
+            "in.sprint.members.get(4).capacity = 100;"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f1", "color" : "default" }
+      ]
     } ]
 }

@@ -1,5 +1,9 @@
 {
   "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
   "simpleName" : "SprintOverviewData",
-  "namespace" : "ch.ivyteam.ivy.scrum.management.SprintOverview"
+  "namespace" : "ch.ivyteam.ivy.scrum.management.SprintOverview",
+  "fields" : [ {
+    "name" : "sprint",
+    "type" : "ch.ivyteam.ivy.scrum.management.Sprint"
+  } ]
 }
