@@ -50,10 +50,13 @@
       "config" : {
         "output" : {
           "code" : [
+            "",
             "import ch.ivyteam.ivy.security.user.IUserRepository;",
             "import ch.ivyteam.ivy.security.IUser;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "in.sprint.versionCode = \"test\";",
+            "in.sprint.versionCode = \"Diavolezza\";",
+            "in.sprint.startDate = new Date(\"2026-08-07\");",
+            "in.sprint.endDate = new Date(\"2026-08-29\");",
             "in.sprint.members.add(new SprintUser());",
             "in.sprint.members.add(new SprintUser());",
             "in.sprint.members.add(new SprintUser());",
