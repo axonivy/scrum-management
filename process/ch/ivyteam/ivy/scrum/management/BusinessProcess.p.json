@@ -7,7 +7,7 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "start",
+      "name" : "SprintOverview",
       "config" : {
         "signature" : "start"
       },
@@ -36,5 +36,37 @@
       "connect" : [
         { "id" : "f4", "to" : "f1", "color" : "default" }
       ]
+    }, {
+      "id" : "f5",
+      "type" : "RequestStart",
+      "name" : "NewSprint",
+      "config" : {
+        "signature" : "start2"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "DialogCall",
+      "name" : "NewSprint",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f7" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 152 }
+      }
     } ]
 }
