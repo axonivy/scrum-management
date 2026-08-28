@@ -20,7 +20,7 @@
             stickyHeader="true"
             editable="true"
             rowKey="#{index}"
-            id="Sprint-datatabel"
+            id="sprint-datatable"
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
@@ -77,7 +77,7 @@
           <p:remoteCommand
             name="refreshSprintTable"
             process="@this"
-            update="Sprint-datatabel"
+            update="sprint-datatable"
           />
         </h:form>
 
