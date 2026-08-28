@@ -67,7 +67,7 @@
             "    SprintUser user = new SprintUser();",
             "    user.name = \"Test user \" + i;",
             "    user.workingDays = rand.nextInt(13) + 10; ",
-            "    user.capacity = rand.nextInt(60,100);",
+            "    user.capacity = rand.nextInt(6,10) *10;",
             "    in.sprint.members.add(user);",
             "}"
           ]
