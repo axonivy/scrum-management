@@ -11,7 +11,20 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">SprintOverview</ui:define>
       <ui:define name="content">
-        <h1>#{data.sprint.versionCode}</h1>
+        <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
+          <h:outputText value="#{data.sprint.startDate}">
+            <f:convertDateTime pattern="dd/MM/yyyy" />
+          </h:outputText>
+
+          <h:outputText value=" - " />
+
+          <h:outputText value="#{data.sprint.endDate}">
+            <f:convertDateTime pattern="dd/MM/yyyy" />
+          </h:outputText>
+        </p:panel>
+
+        <br />
+
         <h:form id="form">
           <p:dataTable
             value="#{data.sprint.members}"
