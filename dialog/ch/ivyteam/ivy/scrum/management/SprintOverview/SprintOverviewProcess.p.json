@@ -50,8 +50,6 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.security.user.IUserRepository;",
-            "import ch.ivyteam.ivy.security.IUser;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "in.sprint.versionCode = \"test\";",
             "in.sprint.members.add(new SprintUser());",
@@ -75,7 +73,11 @@
             "in.sprint.members.get(1).capacity = 100;",
             "in.sprint.members.get(2).capacity = 60;",
             "in.sprint.members.get(3).capacity = 90;",
-            "in.sprint.members.get(4).capacity = 100;"
+            "in.sprint.members.get(4).capacity = 100;",
+            "",
+            "in.sprint.versionCode = \"Diavolezza\";",
+            "in.sprint.startDate = new Date(\"2026-08-07\");",
+            "in.sprint.endDate = new Date(\"2026-08-29\");"
           ]
         }
       },
