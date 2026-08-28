@@ -3,12 +3,15 @@
   "simpleName" : "SprintUser",
   "namespace" : "ch.ivyteam.ivy.scrum.management",
   "fields" : [ {
-    "name" : "name"
+    "name" : "name",
+    "modifiers" : [ ]
   }, {
     "name" : "workingDays",
-    "type" : "Number"
+    "type" : "Number",
+    "modifiers" : [ ]
   }, {
     "name" : "capacity",
-    "type" : "Number"
+    "type" : "Number",
+    "modifiers" : [ ]
   } ]
 }
