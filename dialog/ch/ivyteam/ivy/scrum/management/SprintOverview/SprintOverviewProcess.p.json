@@ -105,5 +105,54 @@
       "connect" : [
         { "id" : "f9", "to" : "f4", "color" : "default" }
       ]
+    }, {
+      "id" : "f10",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "calculateTotalPoints()",
+      "config" : {
+        "signature" : "calculateTotalPoints",
+        "result" : {
+          "params" : [
+            { "name" : "totalPoints", "type" : "Number", "desc" : "" }
+          ],
+          "map" : {
+            "result.totalPoints" : "in.totalPoints"
+          }
+        },
+        "guid" : "1A047DB8DAE72C1D"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 280 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+            "",
+            "in.totalPoints = 0;",
+            "for(SprintUser member : in.sprint.members) {",
+            "  in.totalPoints += member.workingDays;",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 288, "y" : 280 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 480, "y" : 280 }
+      }
     } ]
 }
