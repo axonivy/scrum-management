@@ -1,3 +1,4 @@
 {
-  "axonivy.process.animation.animate": false
+  "axonivy.process.animation.animate": false,
+  "axonivy.engine.releaseTrain": "dev"
 }
