@@ -22,8 +22,7 @@
             rowKey="#{index}"
             id="Sprint-datatabel"
           >
-            <p:ajax event="rowEdit" update="Sprint-datatabel" />
-            <p:ajax event="rowEditCancel" update="Sprint-datatabel" />
+            <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
             <p:column headerText="Name">
               <h:outputText value="#{member.name}" />
@@ -57,7 +56,29 @@
             <p:column style="width: 6rem">
               <p:rowEditor />
             </p:column>
+
+            <p:columnGroup type="footer">
+              <p:row>
+                <p:column colspan="3" />
+                <p:column>
+                  <f:facet name="footer">
+                    <h:outputText
+                      id="totalPoints"
+                      value="#{logic.calculateTotalPoints()}"
+                    >
+                      <f:convertNumber pattern="#0.0"
+                    /></h:outputText>
+                  </f:facet>
+                </p:column>
+                <p:column />
+              </p:row>
+            </p:columnGroup>
           </p:dataTable>
+          <p:remoteCommand
+            name="refreshSprintTable"
+            process="@this"
+            update="Sprint-datatabel"
+          />
         </h:form>
 
         <br />
