@@ -12,22 +12,70 @@
       <ui:define name="title">SprintOverview</ui:define>
       <ui:define name="content">
         <h1>#{data.sprint.versionCode}</h1>
-        <p:dataTable value="#{data.sprint.members}" var="member">
-          <p:column headerText="Name">
-            <h:outputText value="#{member.name}" />
-          </p:column>
-          <p:column headerText="Capacity">
-            <h:outputText value="#{member.workingDays}" />
-          </p:column>
-          <p:column headerText="Work">
-            <h:outputText value="#{member.capacity}" />
-          </p:column>
-          <p:column headerText="Story Points">
-            <h:outputText value="#{member.workingDays.intValue() * 0.4}">
-              <f:convertNumber pattern="#0.0" />
-            </h:outputText>
-          </p:column>
-        </p:dataTable>
+        <h:form id="form">
+          <p:dataTable
+            value="#{data.sprint.members}"
+            var="member"
+            rowIndexVar="index"
+            stickyHeader="true"
+            editable="true"
+            rowKey="#{index}"
+            id="Sprint-datatabel"
+          >
+            <p:ajax event="rowEdit" update="Sprint-datatabel" />
+            <p:ajax event="rowEditCancel" update="Sprint-datatabel" />
+
+            <p:column headerText="Name">
+              <h:outputText value="#{member.name}" />
+            </p:column>
+            <p:column headerText="Work days">
+              <p:cellEditor>
+                <f:facet name="output">
+                  <h:outputText value="#{member.workingDays}" />
+                </f:facet>
+                <f:facet name="input">
+                  <p:inputText value="#{member.workingDays}" />
+                </f:facet>
+              </p:cellEditor>
+            </p:column>
+            <p:column headerText="Work">
+              <p:cellEditor>
+                <f:facet name="output">
+                  <h:outputText value="#{member.capacity}" />
+                </f:facet>
+                <f:facet name="input">
+                  <p:inputText value="#{member.capacity}" />
+                </f:facet>
+              </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Points">
+              <h:outputText value="#{member.workingDays.doubleValue() * 0.4}">
+                <f:convertNumber pattern="#0.0" />
+              </h:outputText>
+            </p:column>
+            <p:column style="width: 6rem">
+              <p:rowEditor />
+            </p:column>
+          </p:dataTable>
+        </h:form>
+
+        <br />
+        <div class="command-btns">
+          <p:commandLink
+            id="cancel"
+            actionListener="#{ivyWorkflowView.cancel()}"
+            process="@this"
+            value="Cancel"
+          />
+          <p:commandButton
+            id="proceed"
+            actionListener="#{logic.close}"
+            value="Proceed"
+            update="form"
+            icon="pi pi-check"
+          />
+        </div>
       </ui:define>
     </ui:composition>
   </h:body>
