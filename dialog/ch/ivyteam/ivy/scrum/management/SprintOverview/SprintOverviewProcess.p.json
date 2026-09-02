@@ -131,13 +131,11 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData; import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData;",
-            "import ch.ivyteam.ivy.security.user.IUserRepository; ",
-            "import ch.ivyteam.ivy.security.IUser; ",
+            "import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser; ",
             "in.totalpoints = 0; ",
-            "for (SprintUser members : in.sprint.members) { ",
-            "   in.totalpoints = in.totalpoints + members.workingDays.doubleValue() * (members.capacity.doubleValue() / 100) * 0.4; ",
+            "for (SprintUser member : in.sprint.members) { ",
+            "   in.totalpoints = in.totalpoints + member.workingDays.doubleValue() * (member.capacity.doubleValue() / 100) * 0.4; ",
             "  }"
           ]
         }
