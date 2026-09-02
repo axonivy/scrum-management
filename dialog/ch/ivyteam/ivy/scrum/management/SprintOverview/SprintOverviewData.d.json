@@ -5,11 +5,13 @@
   "fields": [
     {
       "name": "sprint",
-      "type": "ch.ivyteam.ivy.scrum.management.Sprint"
+      "type": "ch.ivyteam.ivy.scrum.management.Sprint",
+      "modifiers" : [ ]
     },
     {
       "name": "totalPoints",
-      "type": "Number"
+      "type": "Number",
+      "modifiers" : [ ]
     }
   ]
 }
