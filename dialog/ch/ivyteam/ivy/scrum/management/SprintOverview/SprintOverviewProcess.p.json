@@ -47,38 +47,32 @@
     }, {
       "id" : "f6",
       "type" : "Script",
+      "name" : "Creating Variables",
       "config" : {
         "output" : {
           "code" : [
+            "import java.util.Random;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "in.sprint.versionCode = \"test\";",
-            "in.sprint.members.add(new SprintUser());",
-            "in.sprint.members.add(new SprintUser());",
-            "in.sprint.members.add(new SprintUser());",
-            "in.sprint.members.add(new SprintUser());",
-            "in.sprint.members.add(new SprintUser());",
-            "in.sprint.members.get(0).name = \"Colin\";",
-            "in.sprint.members.get(1).name = \"asdf\";",
-            "in.sprint.members.get(2).name = \"12314\";",
-            "in.sprint.members.get(3).name = \"xbdgdfg\";",
-            "in.sprint.members.get(4).name = \"Luaks\";",
-            "",
-            "in.sprint.members.get(0).workingDays = 12;",
-            "in.sprint.members.get(1).workingDays = 13;",
-            "in.sprint.members.get(2).workingDays = 9;",
-            "in.sprint.members.get(3).workingDays = 11;",
-            "in.sprint.members.get(4).workingDays = 5;",
-            "",
-            "in.sprint.members.get(0).capacity = 80;",
-            "in.sprint.members.get(1).capacity = 100;",
-            "in.sprint.members.get(2).capacity = 60;",
-            "in.sprint.members.get(3).capacity = 90;",
-            "in.sprint.members.get(4).capacity = 100;",
             "",
             "in.sprint.versionCode = \"Diavolezza\";",
+            "in.sprint.sprintNumber = 236236152791;",
+            "",
             "in.sprint.startDate = new Date(\"2026-08-07\");",
+            "",
             "in.sprint.endDate = new Date(\"2026-08-29\");",
-            "in.sprint.sprintNumber = 236236152791;"
+            "",
+            "in.sprint.maxWorkingDays = 15;",
+            "",
+            "int Repetitions = 20;",
+            "int i = 0;",
+            "while (i < Repetitions) {",
+            "  in.sprint.members.add(new SprintUser());",
+            "  in.sprint.members.get(i).name = \"TestUser\";",
+            "  in.sprint.members.get(i).workingDays = new java.util.Random().nextInt(7) + 8; ",
+            "  in.sprint.members.get(i).capacity = new java.util.Random().nextInt(51) + 50;",
+            "  i++;",
+            "}"
           ]
         }
       },
@@ -91,6 +85,7 @@
     }, {
       "id" : "f8",
       "type" : "Script",
+      "name" : "Printing out variables (testing)",
       "config" : {
         "output" : {
           "code" : [
@@ -133,16 +128,15 @@
     }, {
       "id" : "f11",
       "type" : "Script",
+      "name" : "Totalpoints",
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData; import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData;",
-            "import ch.ivyteam.ivy.security.user.IUserRepository; ",
-            "import ch.ivyteam.ivy.security.IUser; ",
+            "import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser; ",
             "in.totalpoints = 0; ",
-            "for (SprintUser members : in.sprint.members) { ",
-            "   in.totalpoints = in.totalpoints + members.workingDays.doubleValue() * (members.capacity.doubleValue() / 100) * 0.4; ",
+            "for (SprintUser member : in.sprint.members) { ",
+            "   in.totalpoints = in.totalpoints + member.workingDays.doubleValue() * (member.capacity.doubleValue() / 100) * 0.4; ",
             "  }"
           ]
         }

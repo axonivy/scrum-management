@@ -9,7 +9,7 @@
 >
   <h:body>
     <ui:composition template="/layouts/frame-10.xhtml">
-      <ui:define name="title">SprintOverview</ui:define>
+      <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
         <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
           <h:outputText value="#{data.sprint.startDate}">
@@ -35,34 +35,52 @@
             editable="true"
             rowKey="#{index}"
             id="sprint-datatable"
+            scrollable="true"
+            scrollHeight="550"
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
-            <p:column headerText="Name">
+            <p:column headerText="Name" title="Name of user">
               <h:outputText value="#{member.name}" />
             </p:column>
-            <p:column headerText="Work days">
+            <p:column headerText="Days" title="Days the user is working">
               <p:cellEditor>
                 <f:facet name="output">
                   <h:outputText value="#{member.workingDays}" />
                 </f:facet>
                 <f:facet name="input">
-                  <p:inputText value="#{member.workingDays}" />
+                  <p:inputNumber
+                    value="#{member.workingDays}"
+                    minValue="0"
+                    maxValue="#{data.sprint.maxWorkingDays}"
+                    decimalPlaces="1"
+                    emptyValue="#{data.sprint.maxWorkingDays}"
+                  />
                 </f:facet>
               </p:cellEditor>
             </p:column>
-            <p:column headerText="Work">
+            <p:column
+              headerText="Capacity"
+              title="Percentage user is working on sprint"
+            >
               <p:cellEditor>
                 <f:facet name="output">
-                  <h:outputText value="#{member.capacity}" />
+                  <h:outputText value="#{member.capacity}%" />
                 </f:facet>
                 <f:facet name="input">
-                  <p:inputText value="#{member.capacity}" />
+                  <p:inputNumber
+                    value="#{member.capacity}"
+                    minValue="0"
+                    maxValue="100"
+                    decimalPlacesRawValue="0"
+                    validatorMessage="0-100"
+                    emptyValue="0"
+                  />
                 </f:facet>
               </p:cellEditor>
             </p:column>
 
-            <p:column headerText="Points">
+            <p:column headerText="Points" title="story points">
               <h:outputText value="#{member.workingDays.doubleValue() * 0.4}">
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
@@ -96,19 +114,15 @@
         </h:form>
 
         <br />
-        <div class="command-btns">
-          <p:commandLink
-            id="cancel"
-            actionListener="#{ivyWorkflowView.cancel()}"
-            process="@this"
-            value="Cancel"
-          />
+        <div
+          class="command-btns"
+          style="position: fixed; bottom: 20px; right: 20px"
+        >
           <p:commandButton
             id="proceed"
             actionListener="#{logic.close}"
-            value="Proceed"
+            value="Close"
             update="form"
-            icon="pi pi-check"
           />
         </div>
       </ui:define>
