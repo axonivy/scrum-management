@@ -9,7 +9,7 @@
 >
   <h:body>
     <ui:composition template="/layouts/frame-10.xhtml">
-      <ui:define name="title">TestDialog</ui:define>
+      <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
         <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
           <h:outputText value="#{data.sprint.startDate}">
@@ -39,10 +39,10 @@
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
-            <p:column headerText="Name">
+            <p:column headerText="Name" title="Name of user">
               <h:outputText value="#{member.name}" />
             </p:column>
-            <p:column headerText="Work days">
+            <p:column headerText="Days" title="Days the user is working">
               <p:cellEditor>
                 <f:facet name="output">
                   <h:outputText value="#{member.workingDays}" />
@@ -58,7 +58,10 @@
                 </f:facet>
               </p:cellEditor>
             </p:column>
-            <p:column headerText="Work">
+            <p:column
+              headerText="Capacity"
+              title="Percentage user is working on sprint"
+            >
               <p:cellEditor>
                 <f:facet name="output">
                   <h:outputText value="#{member.capacity}%" />
@@ -76,7 +79,7 @@
               </p:cellEditor>
             </p:column>
 
-            <p:column headerText="Points">
+            <p:column headerText="Points" title="story points">
               <h:outputText value="#{member.workingDays.doubleValue() * 0.4}">
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>

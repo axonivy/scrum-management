@@ -47,6 +47,7 @@
     }, {
       "id" : "f6",
       "type" : "Script",
+      "name" : "Creating Variables",
       "config" : {
         "output" : {
           "code" : [
@@ -83,6 +84,7 @@
     }, {
       "id" : "f8",
       "type" : "Script",
+      "name" : "Printing out variables (testing)",
       "config" : {
         "output" : {
           "code" : [
@@ -125,6 +127,7 @@
     }, {
       "id" : "f11",
       "type" : "Script",
+      "name" : "Totalpoints",
       "config" : {
         "output" : {
           "code" : [
