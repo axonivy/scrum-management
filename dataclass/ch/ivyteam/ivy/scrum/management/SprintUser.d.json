@@ -6,7 +6,8 @@
     "name" : "name"
   }, {
     "name" : "workingDays",
-    "type" : "Number"
+    "type" : "Number",
+    "modifiers" : [ ]
   }, {
     "name" : "capacity",
     "type" : "Number"
