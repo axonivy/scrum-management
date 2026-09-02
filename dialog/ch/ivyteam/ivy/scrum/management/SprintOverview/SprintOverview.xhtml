@@ -35,7 +35,7 @@
             rowKey="#{index}"
             id="sprint-datatable"
             scrollable="true"
-            scrollHeight="400"
+            scrollHeight="550"
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
@@ -52,7 +52,7 @@
                     value="#{member.workingDays}"
                     minValue="0"
                     maxValue="#{data.sprint.maxWorkingDays}"
-                    decimalPlacesRawValue="2"
+                    decimalPlaces="1"
                     emptyValue="#{data.sprint.maxWorkingDays}"
                   />
                 </f:facet>
@@ -110,7 +110,10 @@
         </h:form>
 
         <br />
-        <div class="command-btns">
+        <div
+          class="command-btns"
+          style="position: fixed; bottom: 20px; right: 20px"
+        >
           <p:commandButton
             id="proceed"
             actionListener="#{logic.close}"
