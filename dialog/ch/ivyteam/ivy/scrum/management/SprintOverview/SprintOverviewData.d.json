@@ -11,7 +11,7 @@
     {
       "name": "totalPoints",
       "type": "Number",
-      "modifiers" : [ ]
+      "modifiers" : [ ]     
     }
   ]
 }
