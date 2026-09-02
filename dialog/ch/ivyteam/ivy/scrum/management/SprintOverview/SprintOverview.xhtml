@@ -109,18 +109,11 @@
 
         <br />
         <div class="command-btns">
-          <p:commandLink
-            id="cancel"
-            actionListener="#{ivyWorkflowView.cancel()}"
-            process="@this"
-            value="Cancel"
-          />
           <p:commandButton
             id="proceed"
             actionListener="#{logic.close}"
-            value="Proceed"
+            value="Close"
             update="form"
-            icon="pi pi-check"
           />
         </div>
       </ui:define>
