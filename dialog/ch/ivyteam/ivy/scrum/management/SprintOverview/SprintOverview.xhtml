@@ -46,7 +46,13 @@
                   <h:outputText value="#{member.workingDays}" />
                 </f:facet>
                 <f:facet name="input">
-                  <p:inputNumber value="#{member.workingDays}" />
+                  <p:inputNumber
+                    value="#{member.workingDays}"
+                    minValue="0"
+                    maxValue="#{data.sprint.maxWorkingDays}"
+                    decimalPlacesRawValue="2"
+                    emptyValue="#{data.sprint.maxWorkingDays}"
+                  />
                 </f:facet>
               </p:cellEditor>
             </p:column>
@@ -56,7 +62,14 @@
                   <h:outputText value="#{member.capacity}" />
                 </f:facet>
                 <f:facet name="input">
-                  <p:inputNumber value="#{member.capacity}" />
+                  <p:inputNumber
+                    value="#{member.capacity}"
+                    minValue="0"
+                    maxValue="100"
+                    decimalPlacesRawValue="0"
+                    validatorMessage="0-100"
+                    emptyValue="0"
+                  />
                 </f:facet>
               </p:cellEditor>
             </p:column>
