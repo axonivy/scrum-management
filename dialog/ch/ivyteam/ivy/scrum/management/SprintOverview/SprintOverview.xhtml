@@ -10,7 +10,6 @@
   <h:body>
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">TestDialog</ui:define>
-
       <ui:define name="content">
         <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
           <h:outputText value="#{data.sprint.startDate}">
@@ -31,12 +30,10 @@
             value="#{data.sprint.members}"
             var="member"
             rowIndexVar="index"
+            stickyHeader="true"
             editable="true"
             rowKey="#{index}"
             id="sprint-datatable"
-            scrollable="true"
-            scrollHeight="250"
-            scrollWidth="100%"
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
@@ -59,12 +56,7 @@
                   <h:outputText value="#{member.capacity}" />
                 </f:facet>
                 <f:facet name="input">
-                  <p:inputText value="#{member.capacity}" maxlength="3"
-                    ><f:validateLongRange minimum="5" maximum="100" />
-                    <f:validateRegex
-                      pattern="^(5|[1-9][05]|100)$"
-                    ></f:validateRegex
-                  ></p:inputText>
+                  <p:inputText value="#{member.capacity}" />
                 </f:facet>
               </p:cellEditor>
             </p:column>
@@ -87,8 +79,8 @@
                       id="totalPoints"
                       value="#{logic.calculateTotalPoints()}"
                     >
-                      <f:convertNumber pattern="#0.0"
-                    /></h:outputText>
+                      <f:convertNumber pattern="#0.0" />
+                    </h:outputText>
                   </f:facet>
                 </p:column>
                 <p:column />
