@@ -59,7 +59,12 @@
                   <h:outputText value="#{member.capacity}" />
                 </f:facet>
                 <f:facet name="input">
-                  <p:inputText value="#{member.capacity}" />
+                  <p:inputText value="#{member.capacity}" maxlength="3"
+                    ><f:validateLongRange minimum="5" maximum="100" />
+                    <f:validateRegex
+                      pattern="^(5|[1-9][05]|100)$"
+                    ></f:validateRegex
+                  ></p:inputText>
                 </f:facet>
               </p:cellEditor>
             </p:column>
