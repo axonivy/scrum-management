@@ -50,8 +50,6 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.security.user.IUserRepository;",
-            "import ch.ivyteam.ivy.security.IUser;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "in.sprint.versionCode = \"test\";",
             "in.sprint.members.add(new SprintUser());",
