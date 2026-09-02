@@ -4,6 +4,7 @@
   "namespace" : "ch.ivyteam.ivy.scrum.management.SprintOverview",
   "fields" : [ {
     "name" : "sprint",
-    "type" : "ch.ivyteam.ivy.scrum.management.Sprint"
+    "type" : "ch.ivyteam.ivy.scrum.management.Sprint",
+    "modifiers" : [ ]
   } ]
 }
