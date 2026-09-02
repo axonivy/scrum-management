@@ -50,8 +50,6 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.security.user.IUserRepository;",
-            "import ch.ivyteam.ivy.security.IUser;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "in.sprint.versionCode = \"test\";",
             "in.sprint.members.add(new SprintUser());",
@@ -105,5 +103,56 @@
       "connect" : [
         { "id" : "f9", "to" : "f4", "color" : "default" }
       ]
+    }, {
+      "id" : "f10",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "calculateTotalPoints()",
+      "config" : {
+        "signature" : "calculateTotalPoints",
+        "result" : {
+          "params" : [
+            { "name" : "totalPoints", "type" : "Number", "desc" : "" }
+          ],
+          "map" : {
+            "result.totalPoints" : "in.totalPoints"
+          }
+        },
+        "guid" : "1A047DB8DAE72C1D"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 280 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData; import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData;",
+            "import ch.ivyteam.ivy.security.user.IUserRepository; ",
+            "import ch.ivyteam.ivy.security.IUser; ",
+            "import ch.ivyteam.ivy.scrum.management.SprintUser; ",
+            "in.totalpoints = 0; ",
+            "for (SprintUser members : in.sprint.members) { ",
+            "   in.totalpoints = in.totalpoints + members.workingDays.doubleValue() * (members.capacity.doubleValue() / 100) * 0.4; ",
+            "  }"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 288, "y" : 280 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 480, "y" : 280 }
+      }
     } ]
 }

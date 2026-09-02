@@ -15,7 +15,7 @@
     "type" : "Date"
   }, {
     "name" : "members",
-    "type" : "List<SprintUser>"
+    "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>"
   }, {
     "name" : "maxWorkingDays",
     "type" : "Number"
