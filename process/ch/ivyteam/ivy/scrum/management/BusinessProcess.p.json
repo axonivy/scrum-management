@@ -26,6 +26,7 @@
     }, {
       "id" : "f3",
       "type" : "DialogCall",
+      "name" : "Sprint Overview",
       "config" : {
         "dialog" : "ch.ivyteam.ivy.scrum.management.SprintOverview:start()"
       },
