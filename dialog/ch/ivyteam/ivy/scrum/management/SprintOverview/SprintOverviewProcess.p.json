@@ -77,7 +77,8 @@
             "",
             "in.sprint.versionCode = \"Diavolezza\";",
             "in.sprint.startDate = new Date(\"2026-08-07\");",
-            "in.sprint.endDate = new Date(\"2026-08-29\");"
+            "in.sprint.endDate = new Date(\"2026-08-29\");",
+            "in.sprint.sprintNumber = 236236152791;"
           ]
         }
       },
