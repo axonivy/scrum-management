@@ -7,7 +7,7 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "start",
+      "name" : "SprintOverview",
       "config" : {
         "signature" : "start"
       },
@@ -39,7 +39,7 @@
     }, {
       "id" : "f5",
       "type" : "RequestStart",
-      "name" : "start2",
+      "name" : "NewSprint",
       "config" : {
         "signature" : "start2"
       },
@@ -52,6 +52,7 @@
     }, {
       "id" : "f6",
       "type" : "DialogCall",
+      "name" : "NewSprint",
       "config" : {
         "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start()"
       },
