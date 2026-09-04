@@ -1,5 +1,10 @@
 {
   "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
   "simpleName" : "NewSprintData",
-  "namespace" : "ch.ivyteam.ivy.scrum.management.NewSprint"
+  "namespace" : "ch.ivyteam.ivy.scrum.management.NewSprint",
+  "fields" : [ {
+    "name" : "sprint",
+    "type" : "ch.ivyteam.ivy.scrum.management.Sprint",
+    "modifiers" : [ ]
+  } ]
 }
