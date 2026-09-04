@@ -12,70 +12,73 @@
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
         <p:card title="Create sprint">
-          <div style="display: flex">
-            <div style="flex: 1">
-              <div class="field col-12 md:col-4">
-                <p:card style="height: 100%">
-                  <p:outputLabel for="button" value="From:" />
-                  <p:datePicker
-                    id="button"
-                    value="#{data.sprint.startDate}"
-                    showIcon="true"
-                    showOnFocus="false"
-                    style="
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                    "
-                  />
-                </p:card>
-              </div>
-              <p:card>
-                <p:outputPanel
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                  " 
-                  >Sprint name</p:outputPanel
-                >
-              </p:card>
-            </div>
-            <div style="flex: 1">
-              <div class="field col-12 md:col-4">
-                <p:card style="height: 100%">
-                  <p:outputLabel for="button" value="To:" />
-                  <p:datePicker
-                    id="buttons"
-                    value="#{data.sprint.endDate}"
-                    showIcon="true"
-                    showOnFocus="false"
-                    style="
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                    "
-                  />
-                </p:card >
-              </div>
-              <p:card >
+          <div class="grid">
+            <div class="field col-12">
+              <p:card style="width: 100%">
                 <p:inputText
                   style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
                     width: 100%;
-                    margin-bottom: 20px;
+                    height: 50px;
+                    font-size: 30px;
+                    text-align: center;
                   "
+                  value="Diavolezza"
                 ></p:inputText>
               </p:card>
             </div>
-          </div>
+            <div class="field col-12 sm:col-6">
+              <p:card title="Start Date" style="text-align: center">
+                <p:datePicker
+                  id="startdate"
+                  value="#{data.sprint.startDate}"
+                  showIcon="true"
+                  showOnFocus="false"
+                />
+              </p:card>
+            </div>
+            <div class="field col-12 sm:col-6">
+              <p:card title="End Date" style="text-align: center">
+                <p:datePicker
+                  id="enddate"
+                  value="#{data.sprint.endDate}"
+                  showIcon="true"
+                  showOnFocus="false"
+                />
+              </p:card>
+            </div>
+            <div class="field col-12 sm:col-6">
+              <p:card title="Max Working days" style="text-align: center">
+                <p:inputText></p:inputText>
+              </p:card>
+            </div>
 
-          <p:card subtitle="" style="gap: 20px">
-            <p:button value="Take presets"></p:button>
-            <p:button value="Save"></p:button>
-          </p:card>
+            <div class="field col-12 sm:col-6">
+              <p:card title="Story Points/Day" style="text-align: center">
+                <p:inputText></p:inputText>
+              </p:card>
+            </div>
+
+            <div class="field col-12 sm:col-6">
+              <p:card title="Version" style="text-align: center">
+                <p:inputNumber></p:inputNumber>
+              </p:card>
+            </div>
+
+            <div class="field col-12 sm:col-6">
+              <p:card
+                style="text-align: center; height: 100%; text-align: center"
+              >
+                <p:button
+                  value="Save"
+                  style="font-size: 18px; padding: 8px 16px; margin-right: 5px"
+                ></p:button>
+                <p:button
+                  value="Presets"
+                  style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
+                ></p:button>
+              </p:card>
+            </div>
+          </div>
         </p:card>
       </ui:define>
     </ui:composition>
