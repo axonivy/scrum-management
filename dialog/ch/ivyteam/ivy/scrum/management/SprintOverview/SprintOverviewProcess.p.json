@@ -17,7 +17,7 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f6" }
+        { "id" : "f15", "to" : "f6" }
       ]
     }, {
       "id" : "f1",
@@ -53,16 +53,12 @@
           "code" : [
             "import java.util.Random;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "in.sprint.versionCode = \"test\";",
+            "Object lastSprint = ivy.repo.search(in.sprint.class)",
+            "    .execute()",
+            "    .getAll()",
+            "    .getLast();",
             "",
-            "in.sprint.versionCode = \"Diavolezza\";",
-            "in.sprint.sprintNumber = 236236152791;",
-            "",
-            "in.sprint.startDate = new Date(\"2026-08-07\");",
-            "",
-            "in.sprint.endDate = new Date(\"2026-08-29\");",
-            "",
-            "in.sprint.maxWorkingDays = 15;",
+            "out.sprint = lastSprint as ch.ivyteam.ivy.scrum.management.Sprint;",
             "",
             "int Repetitions = 20;",
             "int i = 0;",
@@ -80,7 +76,7 @@
         "at" : { "x" : 224, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f7", "to" : "f1", "color" : "default" }
+        { "id" : "f16", "to" : "f1" }
       ]
     }, {
       "id" : "f8",
@@ -142,7 +138,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 288, "y" : 280 }
+        "at" : { "x" : 224, "y" : 280 }
       },
       "connect" : [
         { "id" : "f14", "to" : "f13" }

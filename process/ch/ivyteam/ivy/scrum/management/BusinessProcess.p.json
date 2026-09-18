@@ -9,7 +9,11 @@
       "type" : "RequestStart",
       "name" : "SprintOverview",
       "config" : {
-        "signature" : "start"
+        "signature" : "start",
+        "request" : {
+          "name" : "Sprint Overview",
+          "description" : "An overview of current and past sprints"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
@@ -41,7 +45,11 @@
       "type" : "RequestStart",
       "name" : "NewSprint",
       "config" : {
-        "signature" : "start2"
+        "signature" : "start2",
+        "request" : {
+          "name" : "New Sprint",
+          "description" : "Create a new sprint that will also be  shown on the Sprint Overview"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 152 }
