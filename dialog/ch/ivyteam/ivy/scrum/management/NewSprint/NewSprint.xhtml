@@ -87,12 +87,14 @@
                     style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
                     process="@form"
                     update="messages"
-                    actionListener="#{logic.close}"
+                    actionListener="#{logic.closesave}"
                   />
-                  <p:button
-                    value="Presets"
+                  <p:commandButton
+                    value="Close"
                     style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
-                  ></p:button>
+                    process="@this"
+                    actionListener="#{logic.close}"
+                  ></p:commandButton>
                 </p:card>
               </div>
             </div>
