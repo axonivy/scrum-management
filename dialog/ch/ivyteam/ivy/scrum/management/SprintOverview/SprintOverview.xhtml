@@ -12,6 +12,17 @@
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
         <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
+          <p:commandButton
+            value="&lt;-"
+            style="
+              background-color: #FAFAFA !important;
+              border: 1px solid #a3cbd9 !important;
+              background-image: none !important;
+              border-radius: 4px !important;
+              color: black;
+            "
+            id="back"
+          />
           <h:outputText value="#{data.sprint.startDate}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
@@ -22,6 +33,17 @@
             <f:convertDateTime pattern="dd/MM/yyyy" />
           </h:outputText>
           <h:outputText value=" / Sprint Number: #{data.sprint.sprintNumber}" />
+          <p:commandButton
+            value="-&gt;"
+            style="
+              background-color: #FAFAFA !important;
+              border: 1px solid #a3cbd9 !important;
+              background-image: none !important;
+              border-radius: 4px !important;
+              color: black;
+            "
+            id="forward"
+          />
         </p:panel>
 
         <br />
@@ -124,6 +146,11 @@
             actionListener="#{logic.close}"
             value="Close"
             update="form"
+            style="background-color: #FAFAFA !important;
+              border: 1px solid #a3cbd9 !important;
+              background-image: none !important;
+              border-radius: 4px !important;
+              color: black;"
           />
         </div>
       </ui:define>
