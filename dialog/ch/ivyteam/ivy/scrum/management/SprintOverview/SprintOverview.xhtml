@@ -13,15 +13,16 @@
       <ui:define name="content">
         <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
           <p:commandButton
-            value="&lt;-"
             style="
-              background-color: #FAFAFA !important;
-              border: 1px solid #a3cbd9 !important;
+              background-color: #fafafa00 !important;
+              border: 1px solid #a3cbd900 !important;
               background-image: none !important;
               border-radius: 4px !important;
               color: black;
             "
             id="back"
+            icon="fa-regular fa-circle-left"
+            iconPos="middle"
           />
           <h:outputText value="#{data.sprint.startDate}">
             <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -34,15 +35,16 @@
           </h:outputText>
           <h:outputText value=" / Sprint Number: #{data.sprint.sprintNumber}" />
           <p:commandButton
-            value="-&gt;"
+            iconPos="middle"
             style="
-              background-color: #FAFAFA !important;
-              border: 1px solid #a3cbd9 !important;
+              background-color: #fafafa00 !important;
+              border: 1px solid #a3cbd900 !important;
               background-image: none !important;
               border-radius: 4px !important;
               color: black;
             "
             id="forward"
+            icon="fa-regular fa-circle-right"
           />
         </p:panel>
 
@@ -145,12 +147,31 @@
             id="proceed"
             actionListener="#{logic.close}"
             value="Close"
+            icon="fa-regular fa-square-minus"
+            iconPos="right"
             update="form"
-            style="background-color: #FAFAFA !important;
+            style="
+              background-color: #fafafa !important;
               border: 1px solid #a3cbd9 !important;
               background-image: none !important;
               border-radius: 4px !important;
-              color: black;"
+              color: black;
+            "
+          />
+          <p:commandButton
+            id="editopensprint"
+            actionListener="#{logic.edit}"
+            value="Edit"
+            update="form"
+            icon="fa-regular fa-pen-to-square"
+            iconPos="right"
+            style="
+              background-color: #fafafa !important;
+              border: 1px solid #a3cbd9 !important;
+              background-image: none !important;
+              border-radius: 4px !important;
+              color: black;
+            "
           />
         </div>
       </ui:define>

@@ -25,6 +25,7 @@
                       text-align: center;
                     "
                     value="#{data.sprint.versionCode}"
+                    
                   ></p:inputText>
                 </p:card>
               </div>
@@ -84,16 +85,39 @@
                 >
                   <p:commandButton
                     value="Save"
-                    style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
+                    icon="fa-regular fa-floppy-disk"
+                    iconPos="right"
+                    style="
+                      font-size: 18px;
+                      padding: 8px 16px;
+                      margin-left: 5px;
+                      background-color: #fafafa !important;
+                      border: 1px solid #a3cbd9 !important;
+                      background-image: none !important;
+                      border-radius: 4px !important;
+                      color: black;
+                    "
                     process="@form"
                     update="messages"
                     actionListener="#{logic.closesave}"
                   />
                   <p:commandButton
                     value="Close"
-                    style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
+                    style="
+                      font-size: 18px;
+                      padding: 8px 16px;
+                      margin-left: 5px;
+                      background-color: #fafafa !important;
+                      border: 1px solid #ffffff !important;
+                      background-image: none !important;
+                      border-radius: 4px !important;
+                      color: black;
+                      background-color: #a3cbd9 !important;
+                    "
                     process="@this"
                     actionListener="#{logic.close}"
+                    icon="fa-regular fa-square-minus"
+                    iconPos="right"
                   ></p:commandButton>
                 </p:card>
               </div>

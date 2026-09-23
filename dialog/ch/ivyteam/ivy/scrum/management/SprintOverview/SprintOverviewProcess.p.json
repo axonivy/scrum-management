@@ -151,7 +151,64 @@
       "id" : "f13",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 480, "y" : 280 }
+        "at" : { "x" : 352, "y" : 280 }
+      }
+    }, {
+      "id" : "f18",
+      "type" : "Script",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 392 },
+        "color" : "default"
+      },
+      "connect" : [
+        { "id" : "f21", "to" : "f19" }
+      ]
+    }, {
+      "id" : "f19",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 392 }
+      }
+    }, {
+      "id" : "f22",
+      "type" : "HtmlDialogEventStart",
+      "name" : "event",
+      "config" : {
+        "guid" : "1A0CE7E61CAD2C58"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 392 }
+      },
+      "connect" : [
+        { "id" : "f23", "to" : "f18" }
+      ]
+    }, {
+      "id" : "f24",
+      "type" : "HtmlDialogEventStart",
+      "name" : "edit",
+      "config" : {
+        "guid" : "1A0CE807F17EF5D0"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 496 }
+      },
+      "connect" : [
+        { "id" : "f27", "to" : "f25" }
+      ]
+    }, {
+      "id" : "f25",
+      "type" : "Script",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 496 }
+      },
+      "connect" : [
+        { "id" : "f29", "to" : "f28" }
+      ]
+    }, {
+      "id" : "f28",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 496 }
       }
     } ]
 }
