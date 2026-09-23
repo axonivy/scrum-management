@@ -9,9 +9,10 @@
 >
   <h:body>
     <ui:composition template="/layouts/frame-10.xhtml">
-      <ui:define name="title">Sprint Overview</ui:define>
+      <ui:define name="title">New Sprint</ui:define>
       <ui:define name="content">
         <h:form id="CreateSprintForm">
+          <p:messages id="messages" showDetail="true" />
           <p:card title="Create sprint">
             <div class="grid">
               <div class="field col-12">
@@ -32,9 +33,11 @@
                   <p:datePicker
                     id="startdate"
                     value="#{data.sprint.startDate}"
+                    pattern="dd/MM/yyyy"
                     showIcon="true"
                     showOnFocus="false"
-                  />
+                    ><f:convertDateTime pattern="dd/MM/yyyy"
+                  /></p:datePicker>
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
@@ -42,9 +45,11 @@
                   <p:datePicker
                     id="enddate"
                     value="#{data.sprint.endDate}"
+                    pattern="dd/MM/yyyy"
                     showIcon="true"
                     showOnFocus="false"
-                  />
+                    ><f:convertDateTime pattern="dd/MM/yyyy"
+                  /></p:datePicker>
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
@@ -79,8 +84,9 @@
                 >
                   <p:commandButton
                     value="Save"
-                    process="@form"
                     style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
+                    process="@form"
+                    update="messages"
                     actionListener="#{logic.close}"
                   />
                   <p:button
