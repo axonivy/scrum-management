@@ -11,46 +11,55 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
-        <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
-          <p:commandButton
-            style="
-              background-color: #fafafa00 !important;
-              border: 1px solid #a3cbd900 !important;
-              background-image: none !important;
-              border-radius: 4px !important;
-              color: black;
-            "
-            id="back"
-            icon="fa-regular fa-circle-left"
-            iconPos="middle"
-          />
-          <h:outputText value="#{data.sprint.startDate}">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-          </h:outputText>
-
-          <h:outputText value=" - " />
-
-          <h:outputText value="#{data.sprint.endDate}">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-          </h:outputText>
-          <h:outputText value=" / Sprint Number: #{data.sprint.sprintNumber}" />
-          <p:commandButton
-            iconPos="middle"
-            style="
-              background-color: #fafafa00 !important;
-              border: 1px solid #a3cbd900 !important;
-              background-image: none !important;
-              border-radius: 4px !important;
-              color: black;
-            "
-            id="forward"
-            icon="fa-regular fa-circle-right"
-          />
-        </p:panel>
-
-        <br />
-
         <h:form id="form">
+          <p:panel
+            header="#{data.sprint.versionCode}"
+            style="text-align: center"
+          >
+            <p:commandButton
+              style="
+                background-color: #fafafa00 !important;
+                border: 1px solid #a3cbd900 !important;
+                background-image: none !important;
+                border-radius: 4px !important;
+                color: black;
+              "
+              id="back"
+              icon="fa-regular fa-circle-left"
+              iconPos="middle"
+              actionListener="#{logic.sprintlast}"
+              update="@form"
+            />
+            <h:outputText value="#{data.sprint.startDate}">
+              <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:outputText>
+
+            <h:outputText value=" - " />
+
+            <h:outputText value="#{data.sprint.endDate}">
+              <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:outputText>
+            <h:outputText
+              value=" / Sprint Number: #{data.sprint.sprintNumber}"
+            />
+            <p:commandButton
+              iconPos="middle"
+              style="
+                background-color: #fafafa00 !important;
+                border: 1px solid #a3cbd900 !important;
+                background-image: none !important;
+                border-radius: 4px !important;
+                color: black;
+              "
+              id="forward"
+              icon="fa-regular fa-circle-right"
+              actionListener="#{logic.sprintnext}"
+              update="@form"
+            />
+          </p:panel>
+
+          <br />
+
           <p:dataTable
             value="#{data.sprint.members}"
             var="member"
@@ -106,7 +115,9 @@
               headerText="Points"
               title="Points/Day#{data.sprint.sprintPointsPerDay}"
             >
-              <h:outputText value="#{member.workingDays.doubleValue() * 0.4}">
+              <h:outputText
+                value="#{member.capacity / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay}"
+              >
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
             </p:column>
@@ -136,44 +147,44 @@
             process="@this"
             update="sprint-datatable"
           />
-        </h:form>
 
-        <br />
-        <div
-          class="command-btns"
-          style="position: fixed; bottom: 20px; right: 20px"
-        >
-          <p:commandButton
-            id="proceed"
-            actionListener="#{logic.close}"
-            value="Close"
-            icon="fa-regular fa-square-minus"
-            iconPos="right"
-            update="form"
-            style="
-              background-color: #fafafa !important;
-              border: 1px solid #a3cbd9 !important;
-              background-image: none !important;
-              border-radius: 4px !important;
-              color: black;
-            "
-          />
-          <p:commandButton
-            id="editopensprint"
-            actionListener="#{logic.edit}"
-            value="Edit"
-            update="form"
-            icon="fa-regular fa-pen-to-square"
-            iconPos="right"
-            style="
-              background-color: #fafafa !important;
-              border: 1px solid #a3cbd9 !important;
-              background-image: none !important;
-              border-radius: 4px !important;
-              color: black;
-            "
-          />
-        </div>
+          <br />
+          <div
+            class="command-btns"
+            style="position: fixed; bottom: 20px; right: 20px"
+          >
+            <p:commandButton
+              id="proceed"
+              actionListener="#{logic.close}"
+              value="Close"
+              icon="fa-regular fa-square-minus"
+              iconPos="right"
+              update="form"
+              style="
+                background-color: #fafafa !important;
+                border: 1px solid #a3cbd9 !important;
+                background-image: none !important;
+                border-radius: 4px !important;
+                color: black;
+              "
+            />
+            <p:commandButton
+              id="editopensprint"
+              actionListener="#{logic.edit}"
+              value="Edit"
+              update="form"
+              icon="fa-regular fa-pen-to-square"
+              iconPos="right"
+              style="
+                background-color: #fafafa !important;
+                border: 1px solid #a3cbd9 !important;
+                background-image: none !important;
+                border-radius: 4px !important;
+                color: black;
+              "
+            />
+          </div>
+        </h:form>
       </ui:define>
     </ui:composition>
   </h:body>

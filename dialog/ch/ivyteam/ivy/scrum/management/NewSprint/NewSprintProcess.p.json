@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-2.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-1.json",
   "id" : "1A066D569E6C3536",
   "kind" : "HTML_DIALOG",
   "config" : {
@@ -33,7 +33,22 @@
         "output" : {
           "code" : [
             "import java.lang.Thread;",
-            "ivy.repo.save(in.sprint);"
+            "",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "",
+            "Sprint newSprint = new Sprint();",
+            "",
+            "newSprint.sprintNumber = in.sprint.sprintNumber;",
+            "newSprint.startDate = in.sprint.startDate;",
+            "newSprint.endDate = in.sprint.endDate;",
+            "newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
+            "newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
+            "newSprint.versionCode = in.sprint.versionCode;",
+            "",
+            "",
+            "ivy.repo.save(newSprint);",
+            "",
+            "out.sprint = newSprint;"
           ]
         }
       },
@@ -71,12 +86,14 @@
         "output" : {
           "code" : [
             "java.util.List<Object> sprints = ivy.repo.search(in.sprint.class)",
+            "    .limit(10000)",
             "    .execute()",
             "    .getAll();",
             "if (!sprints.isEmpty()) {",
+            "    in.sprint.versionCode;",
             "    Object lastSprint = sprints.getLast();",
             "    out.sprint = lastSprint as ch.ivyteam.ivy.scrum.management.Sprint;",
-            "    in.sprint.sprintNumber++;",
+            "    in.sprint.sprintNumber ++;",
             "    out.sprint.startDate = out.sprint.startDate.add(new Duration(\"P21D\"));",
             "    out.sprint.endDate = out.sprint.endDate.add(new Duration(\"P21D\"));",
             "    in.sprint.maxWorkingDays = 12;",
