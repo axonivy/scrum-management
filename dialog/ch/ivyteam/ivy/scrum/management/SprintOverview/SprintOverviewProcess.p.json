@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-1.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
   "id" : "1A03D30BFCADA73D",
   "kind" : "HTML_DIALOG",
   "config" : {
@@ -36,7 +36,7 @@
         "at" : { "x" : 96, "y" : 160 }
       },
       "connect" : [
-        { "id" : "f5", "to" : "f4", "via" : [ { "x" : 96, "y" : 208 }, { "x" : 536, "y" : 208 } ] }
+        { "id" : "f44", "to" : "f4" }
       ]
     }, {
       "id" : "f4",
@@ -70,18 +70,11 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 416, "y" : 64 }
+        "at" : { "x" : 408, "y" : 64 }
       },
       "connect" : [
         { "id" : "f41", "to" : "f1" }
       ]
-    }, {
-      "id" : "f8",
-      "type" : "Script",
-      "name" : "Printing out variables (testing)",
-      "visual" : {
-        "at" : { "x" : 240, "y" : 160 }
-      }
     }, {
       "id" : "f10",
       "type" : "HtmlDialogMethodStart",
@@ -112,7 +105,6 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.SprintOverview.SprintOverviewData;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser; ",
             "in.totalpoints = 0; ",
             "for (SprintUser member : in.sprint.members) { ",
@@ -122,7 +114,8 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 280 }
+        "at" : { "x" : 296, "y" : 280 },
+        "description" : "Calculates the total Sprintpoints and puts it in the footer"
       },
       "connect" : [
         { "id" : "f14", "to" : "f13" }
@@ -136,13 +129,15 @@
     }, {
       "id" : "f18",
       "type" : "Script",
+      "name" : "Nextsprint",
       "config" : {
         "output" : {
           "code" : [
+            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "import java.util.Random;",
             "",
-            "",
-            "java.util.List<ch.ivyteam.ivy.scrum.management.Sprint> sprints = ivy.repo.search(ch.ivyteam.ivy.scrum.management.Sprint.class)",
+            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
             "    .limit(10000)",
             "    .execute()",
             "    .getAll();",
@@ -157,22 +152,37 @@
             "    ",
             "    out.sprintIndex = newIndex;",
             "    out.sprint = sprints.get(newIndex);",
+            "",
+            "    //Setup for users",
+            "    int Repetitions = 20;",
+            "    int i = 0;",
+            "    int max = in.sprint.maxWorkingDays;",
+            "    int min = in.sprint.maxWorkingDays / 2;",
+            "",
+            "    while (i < Repetitions) {",
+            "        in.sprint.members.add(new SprintUser());",
+            "        in.sprint.members.get(i).name = \"TestUser\" + i + 1;",
+            "        in.sprint.members.get(i).workingDays = new java.util.Random().nextInt(max-min+1) + min; ",
+            "        in.sprint.members.get(i).capacity = new java.util.Random().nextInt(51) + 50;",
+            "        i++;",
+            "}",
             "}"
           ]
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 392 },
+        "at" : { "x" : 296, "y" : 392 },
+        "description" : "Script for going one script forward",
         "color" : "default"
       },
       "connect" : [
-        { "id" : "f42", "to" : "f45" }
+        { "id" : "f43", "to" : "f19" }
       ]
     }, {
       "id" : "f19",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 576, "y" : 392 }
+        "at" : { "x" : 536, "y" : 392 }
       }
     }, {
       "id" : "f22",
@@ -204,14 +214,16 @@
     }, {
       "id" : "f25",
       "type" : "Script",
-      "name" : "<- Currentsprint",
+      "name" : "LastSprint",
       "config" : {
         "output" : {
           "code" : [
+            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "import java.util.Random;",
             "",
             "",
-            "java.util.List<ch.ivyteam.ivy.scrum.management.Sprint> sprints = ivy.repo.search(ch.ivyteam.ivy.scrum.management.Sprint.class)",
+            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
             "    .limit(10000)",
             "    .execute()",
             "    .getAll();",
@@ -225,22 +237,36 @@
             "    ",
             "    out.sprintIndex = newIndex;",
             "    out.sprint = sprints.get(newIndex);",
+            "",
+            "    int Repetitions = 20;",
+            "    int i = 0;",
+            "    int max = in.sprint.maxWorkingDays;",
+            "    int min = in.sprint.maxWorkingDays / 2;",
+            "",
+            "    while (i < Repetitions) {",
+            "        in.sprint.members.add(new SprintUser());",
+            "        in.sprint.members.get(i).name = \"TestUser\" + i + 1;",
+            "        in.sprint.members.get(i).workingDays = new java.util.Random().nextInt(max-min+1) + min; ",
+            "        in.sprint.members.get(i).capacity = new java.util.Random().nextInt(51) + 50;",
+            "        i++;",
+            "    }",
             "}"
           ]
         }
       },
       "visual" : {
-        "at" : { "x" : 256, "y" : 496 },
-        "size" : { "width" : 144, "height" : 62 }
+        "at" : { "x" : 296, "y" : 495 },
+        "size" : { "height" : 63 },
+        "description" : "Script for going one sprint back"
       },
       "connect" : [
-        { "id" : "f29", "to" : "f43" }
+        { "id" : "f42", "to" : "f28" }
       ]
     }, {
       "id" : "f28",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 576, "y" : 496 }
+        "at" : { "x" : 536, "y" : 496 }
       }
     }, {
       "id" : "f32",
@@ -258,8 +284,9 @@
     }, {
       "id" : "f33",
       "type" : "Script",
+      "name" : "Wip",
       "visual" : {
-        "at" : { "x" : 224, "y" : 592 }
+        "at" : { "x" : 296, "y" : 592 }
       },
       "connect" : [
         { "id" : "f36", "to" : "f34" }
@@ -281,7 +308,7 @@
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "",
             "",
-            "java.util.List<ch.ivyteam.ivy.scrum.management.Sprint> sprints = ivy.repo.search(ch.ivyteam.ivy.scrum.management.Sprint.class)",
+            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
             "    .limit(10000)",
             "    .execute()",
             "    .getAll();",
@@ -299,71 +326,11 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 216, "y" : 64 },
-        "size" : { "width" : 128, "height" : 62 }
+        "at" : { "x" : 224, "y" : 63 },
+        "size" : { "height" : 63 }
       },
       "connect" : [
         { "id" : "f40", "to" : "f6" }
-      ]
-    }, {
-      "id" : "f43",
-      "type" : "Script",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import java.util.Random;",
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "",
-            "int Repetitions = 20;",
-            "int i = 0;",
-            "int max = in.sprint.maxWorkingDays;",
-            "int min = in.sprint.maxWorkingDays / 2;",
-            "",
-            "while (i < Repetitions) {",
-            "  in.sprint.members.add(new SprintUser());",
-            "  in.sprint.members.get(i).name = \"TestUser\";",
-            "  in.sprint.members.get(i).workingDays = new java.util.Random().nextInt(max-min+1) + min; ",
-            "  in.sprint.members.get(i).capacity = new java.util.Random().nextInt(51) + 50;",
-            "  i++;",
-            "}"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 448, "y" : 496 }
-      },
-      "connect" : [
-        { "id" : "f44", "to" : "f28", "color" : "default" }
-      ]
-    }, {
-      "id" : "f45",
-      "type" : "Script",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import java.util.Random;",
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "",
-            "int Repetitions = 20;",
-            "int i = 0;",
-            "int max = in.sprint.maxWorkingDays;",
-            "int min = in.sprint.maxWorkingDays / 2;",
-            "",
-            "while (i < Repetitions) {",
-            "  in.sprint.members.add(new SprintUser());",
-            "  in.sprint.members.get(i).name = \"TestUser\";",
-            "  in.sprint.members.get(i).workingDays = new java.util.Random().nextInt(max-min+1) + min; ",
-            "  in.sprint.members.get(i).capacity = new java.util.Random().nextInt(51) + 50;",
-            "  i++;",
-            "}"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 448, "y" : 392 }
-      },
-      "connect" : [
-        { "id" : "f46", "to" : "f19", "color" : "default" }
       ]
     } ]
 }

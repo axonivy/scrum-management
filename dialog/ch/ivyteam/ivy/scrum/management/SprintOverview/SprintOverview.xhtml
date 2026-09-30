@@ -22,7 +22,7 @@
                 border: 1px solid #a3cbd900 !important;
                 background-image: none !important;
                 border-radius: 4px !important;
-                color: black;
+                color: rgb(163, 203, 217);
               "
               id="back"
               icon="fa-regular fa-circle-left"
@@ -49,7 +49,7 @@
                 border: 1px solid #a3cbd900 !important;
                 background-image: none !important;
                 border-radius: 4px !important;
-                color: black;
+                color: rgb(163, 203, 217);
               "
               id="forward"
               icon="fa-regular fa-circle-right"
@@ -112,11 +112,11 @@
             </p:column>
 
             <p:column
-              headerText="Points"
+              headerText="Points (#{data.sprint.sprintPointsPerDay})"
               title="Points/Day#{data.sprint.sprintPointsPerDay}"
             >
               <h:outputText
-                value="#{member.capacity / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay}"
+                value="#{member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
               >
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
