@@ -17,29 +17,26 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f1" }
+        { "id" : "f2", "to" : "f15" }
       ]
     }, {
       "id" : "f1",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 224, "y" : 64 }
+        "at" : { "x" : 352, "y" : 64 }
       }
     }, {
       "id" : "f6",
       "type" : "Script",
-      "name" : "Saving variables",
+      "name" : "Saving -> BusinessData",
       "config" : {
         "output" : {
-          "code" : [
-            "import java.lang.Thread;",
-            "",
-            "ivy.repo.save(in.sprint);"
-          ]
+          "code" : "ivy.repo.save(in.sprint);"
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 256 }
+        "at" : { "x" : 232, "y" : 256 },
+        "size" : { "width" : 120, "height" : 56 }
       },
       "connect" : [
         { "id" : "f14", "to" : "f12" }
@@ -47,7 +44,7 @@
     }, {
       "id" : "f8",
       "type" : "HtmlDialogEventStart",
-      "name" : "close",
+      "name" : "save",
       "config" : {
         "guid" : "1A0CD032614BBC30"
       },
@@ -62,6 +59,54 @@
       "type" : "HtmlDialogExit",
       "visual" : {
         "at" : { "x" : 352, "y" : 256 }
+      }
+    }, {
+      "id" : "f15",
+      "type" : "Script",
+      "name" : "Loads BusinessData -> Dataclass",
+      "config" : {
+        "output" : {
+          "code" : [
+            "java.util.List<Object> sprints = ivy.repo.search(in.sprint.class)",
+            "    .execute()",
+            "    .getAll();",
+            "if (!sprints.isEmpty()) {",
+            "    Object lastSprint = sprints.getLast();",
+            "    out.sprint = lastSprint as ch.ivyteam.ivy.scrum.management.Sprint;",
+            "    in.sprint.sprintNumber++;",
+            "    out.sprint.startDate = out.sprint.startDate.add(new Duration(\"P21D\"));",
+            "    out.sprint.endDate = out.sprint.endDate.add(new Duration(\"P21D\"));",
+            "    in.sprint.maxWorkingDays = 12;",
+            "",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 232, "y" : 64 },
+        "size" : { "width" : 120, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f16", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f17",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "1A0CD5E73949029E"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 392 }
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f18" }
+      ]
+    }, {
+      "id" : "f18",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 392 }
       }
     } ]
 }
