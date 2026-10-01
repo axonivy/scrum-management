@@ -11,50 +11,39 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
+        <style type="text/css">
+          .days-missing > td {
+            background-color: rgba(255, 0, 0, 0.5);
+          }
+
+          .rounded-table .ui-datatable-data > tr > td:first-child {
+            border-radius: 8px 0 0 8px;
+          }
+
+          .rounded-table .ui-datatable-data > tr > td:last-child {
+            border-radius: 0 8px 8px 0;
+          }
+        </style>
         <h:form id="form">
           <p:panel
             header="#{data.sprint.versionCode}"
-            style="text-align: center"
+            style="text-align: center; font-size: 30px"
           >
-            <p:commandButton
-              style="
-                background-color: #fafafa00 !important;
-                border: 1px solid #a3cbd900 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
-                color: rgb(163, 203, 217);
-              "
-              id="back"
-              icon="fa-regular fa-circle-left"
-              iconPos="middle"
-              actionListener="#{logic.sprintlast}"
-              update="@form"
-            />
-            <h:outputText value="#{data.sprint.startDate}">
+            <h:outputText
+              value="#{data.sprint.startDate}"
+              style="font-size: 50%"
+            >
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </h:outputText>
 
-            <h:outputText value=" - " />
+            <h:outputText value=" - " style="font-size: 50%" />
 
-            <h:outputText value="#{data.sprint.endDate}">
+            <h:outputText value="#{data.sprint.endDate}" style="font-size: 50%">
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </h:outputText>
             <h:outputText
               value=" / Sprint Number: #{data.sprint.sprintNumber}"
-            />
-            <p:commandButton
-              iconPos="middle"
-              style="
-                background-color: #fafafa00 !important;
-                border: 1px solid #a3cbd900 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
-                color: rgb(163, 203, 217);
-              "
-              id="forward"
-              icon="fa-regular fa-circle-right"
-              actionListener="#{logic.sprintnext}"
-              update="@form"
+              style="font-size: 50%"
             />
           </p:panel>
 
@@ -64,22 +53,55 @@
             value="#{data.sprint.members}"
             var="member"
             rowIndexVar="index"
-            stickyHeader="true"
+            stickyHeader="false"
             editable="true"
+            rowEditMode="lazy"
             rowKey="#{index}"
             id="sprint-datatable"
             scrollable="true"
-            scrollHeight="550"
+            allowUnsorting="true"
+            liveResize="true"
+            resizableColumns="true"
+            cellNavigation="true"
+            rowHover="true"
+            styleClass="rounded-table"
+            rowStyleClass="#{member.workingDays.intValue() lt 0 ? 'days-missing' : ''}"
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
             <p:column headerText="Name" title="Name of user">
-              <h:outputText value="#{member.name}" />
+              <div
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 8px;
+                "
+              >
+                <p:avatar
+                  icon="pi pi-user"
+                  shape="circle"
+                  style="
+                    width: 24px;
+                    height: 24px;
+                    font-size: 11px;
+                    flex-shrink: 0;
+                  "
+                />
+                <h:outputText value="#{member.name}" />
+              </div>
             </p:column>
-            <p:column headerText="Days" title="Days the user is working">
+            <p:column
+              headerText="Days"
+              title="Days the user is working"
+              sortBy="#{member.workingDays.doubleValue()}"
+            >
               <p:cellEditor>
                 <f:facet name="output">
-                  <h:outputText value="#{member.workingDays}" />
+                  <h:outputText
+                    value="#{member.workingDays}"
+                    rendered="#{member.workingDays.intValue() ge 0}"
+                  />
                 </f:facet>
                 <f:facet name="input">
                   <p:inputNumber
@@ -87,6 +109,7 @@
                     minValue="0"
                     maxValue="#{data.sprint.maxWorkingDays}"
                     decimalPlaces="1"
+                    emptyValue="empty"
                   />
                 </f:facet>
               </p:cellEditor>
@@ -94,6 +117,7 @@
             <p:column
               headerText="Capacity"
               title="Percentage user is working on sprint"
+              sortBy="#{member.capacity.doubleValue()}"
             >
               <p:cellEditor>
                 <f:facet name="output">
@@ -114,75 +138,98 @@
             <p:column
               headerText="Points (#{data.sprint.sprintPointsPerDay})"
               title="Points/Day#{data.sprint.sprintPointsPerDay}"
+              sortBy="#{member.workingDays.intValue() lt 0 ? 0.0 : member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
             >
               <h:outputText
-                value="#{member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
+                value="#{member.workingDays.intValue() lt 0 ? 0.0 : member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
               >
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
             </p:column>
-            <p:column style="width: 6rem">
+            <p:column style="width: 6rem" headerText="Edit">
               <p:rowEditor />
             </p:column>
-
-            <p:columnGroup type="footer">
-              <p:row>
-                <p:column colspan="3" />
-                <p:column>
-                  <f:facet name="footer">
-                    <h:outputText
-                      id="totalPoints"
-                      value="#{logic.calculateTotalPoints()}"
-                    >
-                      <f:convertNumber pattern="#0.0" />
-                    </h:outputText>
-                  </f:facet>
-                </p:column>
-                <p:column />
-              </p:row>
-            </p:columnGroup>
           </p:dataTable>
           <p:remoteCommand
             name="refreshSprintTable"
             process="@this"
-            update="sprint-datatable"
+            update="sprint-datatable totalpoints"
           />
 
           <br />
           <div
-            class="command-btns"
-            style="position: fixed; bottom: 20px; right: 20px"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              background: var(--surface-a);
+              border-top: 1px solid var(--surface-border);
+
+              padding: 12px 20px;
+              margin-top: 12px;
+
+              position: sticky;
+              bottom: 0;
+              z-index: 10;
+            "
           >
-            <p:commandButton
-              id="proceed"
-              actionListener="#{logic.close}"
-              value="Close"
-              icon="fa-regular fa-square-minus"
-              iconPos="right"
-              update="form"
-              style="
-                background-color: #fafafa !important;
-                border: 1px solid #a3cbd9 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
-                color: black;
-              "
-            />
-            <p:commandButton
-              id="editopensprint"
-              actionListener="#{logic.edit}"
-              value="Edit"
-              update="form"
-              icon="fa-regular fa-pen-to-square"
-              iconPos="right"
-              style="
-                background-color: #fafafa !important;
-                border: 1px solid #a3cbd9 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
-                color: black;
-              "
-            />
+            <div
+              class="command-btns"
+              style="display: flex; align-items: center; gap: 8px"
+            >
+              <p:commandButton
+                id="editopensprint"
+                actionListener="#{logic.edit}"
+                value="Edit"
+                update="form"
+                style="width: 100%"
+                styleClass="ui-button-raised ui-button-warning"
+              />
+              <p:commandButton
+                id="proceed"
+                actionListener="#{logic.close}"
+                value="Close"
+                update="form"
+                style="width: 100%"
+                styleClass="ui-button-raised ui-button-secondary"
+              />
+            </div>
+            <div>
+              <h:outputText
+                value="Total Points "
+                style="font-size: 100%; font-weight: 600"
+              >
+              </h:outputText>
+              <h:outputText
+                id="totalpoints"
+                value="#{logic.calculateTotalPoints()}"
+                style="font-size: 100%; font-weight: 600"
+              >
+                <f:convertNumber pattern="#0.0" />
+              </h:outputText>
+            </div>
+            <div
+              class="command-btns"
+              style="display: flex; align-items: center; gap: 8px"
+            >
+              <p:commandButton
+                styleClass="rounded-button ui-button-primary"
+                id="back"
+                icon="fa-solid fa-angle-left"
+                iconPos="middle"
+                actionListener="#{logic.sprintlast}"
+                update="@form"
+              />
+              <p:commandButton
+                iconPos="middle"
+                styleClass="rounded-button ui-button-primary"
+                id="forward"
+                icon="fa-solid fa-angle-right"
+                actionListener="#{logic.sprintnext}"
+                update="@form"
+              />
+            </div>
           </div>
         </h:form>
       </ui:define>

@@ -17,6 +17,18 @@
             <div class="grid">
               <div class="field col-12">
                 <p:card style="width: 100%">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 6px;
+                      margin-bottom: 16px;
+                    "
+                  >
+                    <i class="fa fa-person-skiing"></i>
+                    <span style="font-size: 18px"> Sprint Name</span>
+                  </div>
                   <p:inputText
                     style="
                       width: 100%;
@@ -29,7 +41,19 @@
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
-                <p:card title="Start Date" style="text-align: center">
+                <p:card style="text-align: center">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 6px;
+                      margin-bottom: 16px;
+                    "
+                  >
+                    <i class="pi pi-calendar-plus"></i>
+                    <span style="font-size: 18px"> Start Date</span>
+                  </div>
                   <p:datePicker
                     id="startdate"
                     value="#{data.sprint.startDate}"
@@ -41,7 +65,19 @@
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
-                <p:card title="End Date" style="text-align: center">
+                <p:card style="text-align: center">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 6px;
+                      margin-bottom: 16px;
+                    "
+                  >
+                    <i class="pi pi-calendar-minus"></i>
+                    <span style="font-size: 18px"> End Date</span>
+                  </div>
                   <p:datePicker
                     id="enddate"
                     value="#{data.sprint.endDate}"
@@ -53,7 +89,19 @@
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
-                <p:card title="Max Working days" style="text-align: center">
+                <p:card style="text-align: center">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 6px;
+                      margin-bottom: 16px;
+                    "
+                  >
+                    <i class="pi pi-clock"></i>
+                    <span style="font-size: 18px"> Max Working days</span>
+                  </div>
                   <p:inputNumber
                     value="#{data.sprint.maxWorkingDays}"
                     minValue="0"
@@ -63,7 +111,19 @@
               </div>
 
               <div class="field col-12 sm:col-6">
-                <p:card title="Story Points/Day" style="text-align: center">
+                <p:card style="text-align: center">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 6px;
+                      margin-bottom: 16px;
+                    "
+                  >
+                    <i class="pi pi-chart-bar"></i>
+                    <span style="font-size: 18px"> Story Points/Day</span>
+                  </div>
                   <p:inputNumber
                     value="#{data.sprint.sprintPointsPerDay}"
                     minValue="0"
@@ -73,7 +133,19 @@
               </div>
 
               <div class="field col-12 sm:col-6">
-                <p:card title="Sprint Number" style="text-align: center">
+                <p:card style="text-align: center">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 6px;
+                      margin-bottom: 16px;
+                    "
+                  >
+                    <i class="pi pi-hashtag"></i>
+                    <span style="font-size: 18px"> Sprint Number</span>
+                  </div>
                   <p:inputNumber value="#{data.sprint.sprintNumber}" />
                 </p:card>
               </div>
@@ -84,39 +156,20 @@
                 >
                   <p:commandButton
                     value="Save"
-                    icon="fa-regular fa-floppy-disk"
-                    iconPos="right"
-                    style="
-                      font-size: 18px;
-                      padding: 8px 16px;
-                      margin-left: 5px;
-                      background-color: #fafafa !important;
-                      border: 1px solid #a3cbd9 !important;
-                      background-image: none !important;
-                      border-radius: 4px !important;
-                      color: black;
-                    "
+                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
+                    styleClass="ui-button-raised ui-button-primary"
                     process="@form"
                     update="messages"
                     actionListener="#{logic.save}"
+                    icon="pi pi-save"
                   />
                   <p:commandButton
                     value="Close"
-                    style="
-                      font-size: 18px;
-                      padding: 8px 16px;
-                      margin-left: 5px;
-                      background-color: #fafafa !important;
-                      border: 1px solid #ffffff !important;
-                      background-image: none !important;
-                      border-radius: 4px !important;
-                      color: black;
-                      background-color: #a3cbd9 !important;
-                    "
+                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
+                    styleClass="ui-button-raised ui-button-secondary"
                     process="@this"
                     actionListener="#{logic.close}"
-                    icon="fa-regular fa-square-minus"
-                    iconPos="right"
+                    icon="pi pi-times"
                   ></p:commandButton>
                 </p:card>
               </div>
