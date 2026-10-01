@@ -7,9 +7,13 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "start",
+      "name" : "SprintOverview",
       "config" : {
-        "signature" : "start"
+        "signature" : "start",
+        "request" : {
+          "name" : "Sprint Overview",
+          "description" : "An overview of current and past sprints"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
@@ -36,5 +40,41 @@
       "connect" : [
         { "id" : "f4", "to" : "f1", "color" : "default" }
       ]
+    }, {
+      "id" : "f5",
+      "type" : "RequestStart",
+      "name" : "NewSprint",
+      "config" : {
+        "signature" : "start2",
+        "request" : {
+          "name" : "New Sprint",
+          "description" : "Create a new sprint that will also be  shown on the Sprint Overview"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "DialogCall",
+      "name" : "NewSprint",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f7" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 152 }
+      }
     } ]
 }

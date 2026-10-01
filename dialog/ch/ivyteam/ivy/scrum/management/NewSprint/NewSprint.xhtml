@@ -1,0 +1,106 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="jakarta.faces.core"
+  xmlns:h="jakarta.faces.html"
+  xmlns:ui="jakarta.faces.facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="primefaces"
+  xmlns:pe="primefaces.extensions"
+>
+  <h:body>
+    <ui:composition template="/layouts/frame-10.xhtml">
+      <ui:define name="title">New Sprint</ui:define>
+      <ui:define name="content">
+        <h:form id="CreateSprintForm">
+          <p:messages id="messages" showDetail="true" />
+          <p:card title="Create sprint">
+            <div class="grid">
+              <div class="field col-12">
+                <p:card style="width: 100%">
+                  <p:inputText
+                    style="
+                      width: 100%;
+                      height: 50px;
+                      font-size: 30px;
+                      text-align: center;
+                    "
+                    value="#{data.sprint.versionCode}"
+                  ></p:inputText>
+                </p:card>
+              </div>
+              <div class="field col-12 sm:col-6">
+                <p:card title="Start Date" style="text-align: center">
+                  <p:datePicker
+                    id="startdate"
+                    value="#{data.sprint.startDate}"
+                    pattern="dd/MM/yyyy"
+                    showIcon="true"
+                    showOnFocus="false"
+                    ><f:convertDateTime pattern="dd/MM/yyyy"
+                  /></p:datePicker>
+                </p:card>
+              </div>
+              <div class="field col-12 sm:col-6">
+                <p:card title="End Date" style="text-align: center">
+                  <p:datePicker
+                    id="enddate"
+                    value="#{data.sprint.endDate}"
+                    pattern="dd/MM/yyyy"
+                    showIcon="true"
+                    showOnFocus="false"
+                    ><f:convertDateTime pattern="dd/MM/yyyy"
+                  /></p:datePicker>
+                </p:card>
+              </div>
+              <div class="field col-12 sm:col-6">
+                <p:card title="Max Working days" style="text-align: center">
+                  <p:inputNumber
+                    value="#{data.sprint.maxWorkingDays}"
+                    minValue="0"
+                    decimalPlaces="1"
+                  />
+                </p:card>
+              </div>
+
+              <div class="field col-12 sm:col-6">
+                <p:card title="Story Points/Day" style="text-align: center">
+                  <p:inputNumber
+                    value="#{data.sprint.sprintPointsPerDay}"
+                    minValue="0"
+                    decimalPlaces="2"
+                  />
+                </p:card>
+              </div>
+
+              <div class="field col-12 sm:col-6">
+                <p:card title="Sprint Number" style="text-align: center">
+                  <p:inputNumber value="#{data.sprint.sprintNumber}" />
+                </p:card>
+              </div>
+
+              <div class="field col-12 sm:col-6">
+                <p:card
+                  style="text-align: center; height: 100%; text-align: center"
+                >
+                  <p:commandButton
+                    value="Save"
+                    style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
+                    process="@form"
+                    update="messages"
+                    actionListener="#{logic.save}"
+                  />
+                  <p:commandButton
+                    value="Close"
+                    style="font-size: 18px; padding: 8px 16px; margin-left: 5px"
+                    process="@this"
+                    actionListener="#{logic.close}"
+                  ></p:commandButton>
+                </p:card>
+              </div>
+            </div>
+          </p:card>
+        </h:form>
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>

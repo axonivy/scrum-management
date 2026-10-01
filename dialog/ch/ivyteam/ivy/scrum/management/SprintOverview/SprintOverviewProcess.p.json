@@ -17,7 +17,7 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f6" }
+        { "id" : "f15", "to" : "f6" }
       ]
     }, {
       "id" : "f1",
@@ -36,7 +36,7 @@
         "at" : { "x" : 96, "y" : 160 }
       },
       "connect" : [
-        { "id" : "f5", "to" : "f8" }
+        { "id" : "f17", "to" : "f4" }
       ]
     }, {
       "id" : "f4",
@@ -51,25 +51,27 @@
       "config" : {
         "output" : {
           "code" : [
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "import java.util.Random;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "in.sprint.versionCode = \"test\";",
-            "",
-            "in.sprint.versionCode = \"Diavolezza\";",
-            "in.sprint.sprintNumber = 236236152791;",
-            "",
-            "in.sprint.startDate = new Date(\"2026-08-07\");",
-            "",
-            "in.sprint.endDate = new Date(\"2026-08-29\");",
-            "",
-            "in.sprint.maxWorkingDays = 15;",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
+            "    .execute()",
+            "    .getAll();",
+            "if (!sprints.isEmpty()) {",
+            "    Sprint lastSprint = sprints.getLast() as Sprint;",
+            "    out.sprint = lastSprint;",
+            "}",
             "",
             "int Repetitions = 20;",
             "int i = 0;",
+            "int max = in.sprint.maxWorkingDays;",
+            "int min = in.sprint.maxWorkingDays / 2;",
+            "",
             "while (i < Repetitions) {",
             "  in.sprint.members.add(new SprintUser());",
             "  in.sprint.members.get(i).name = \"TestUser\";",
-            "  in.sprint.members.get(i).workingDays = new java.util.Random().nextInt(7) + 8; ",
+            "  in.sprint.members.get(i).workingDays = new java.util.Random().nextInt(max-min+1) + min; ",
             "  in.sprint.members.get(i).capacity = new java.util.Random().nextInt(51) + 50;",
             "  i++;",
             "}"
@@ -80,28 +82,7 @@
         "at" : { "x" : 224, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f7", "to" : "f1", "color" : "default" }
-      ]
-    }, {
-      "id" : "f8",
-      "type" : "Script",
-      "name" : "Printing out variables (testing)",
-      "config" : {
-        "output" : {
-          "code" : [
-            "ivy.log.info(in.sprint.members.get(0).name);",
-            "ivy.log.info(in.sprint.members.get(1).name);",
-            "ivy.log.info(in.sprint.members.get(2).name);",
-            "ivy.log.info(in.sprint.members.get(3).name);",
-            "ivy.log.info(in.sprint.members.get(4).name);"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 224, "y" : 160 }
-      },
-      "connect" : [
-        { "id" : "f9", "to" : "f4", "color" : "default" }
+        { "id" : "f16", "to" : "f1" }
       ]
     }, {
       "id" : "f10",
@@ -136,13 +117,13 @@
             "import ch.ivyteam.ivy.scrum.management.SprintUser; ",
             "in.totalpoints = 0; ",
             "for (SprintUser member : in.sprint.members) { ",
-            "   in.totalpoints = in.totalpoints + member.workingDays.doubleValue() * (member.capacity.doubleValue() / 100) * 0.4; ",
+            "   in.totalpoints = in.totalpoints + member.workingDays.doubleValue() * (member.capacity.doubleValue() / 100) * in.sprint.sprintPointsPerDay; ",
             "  }"
           ]
         }
       },
       "visual" : {
-        "at" : { "x" : 288, "y" : 280 }
+        "at" : { "x" : 224, "y" : 280 }
       },
       "connect" : [
         { "id" : "f14", "to" : "f13" }
