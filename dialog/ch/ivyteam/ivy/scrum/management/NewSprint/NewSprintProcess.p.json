@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-2.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
   "id" : "1A066D569E6C3536",
   "kind" : "HTML_DIALOG",
   "config" : {
@@ -28,16 +28,11 @@
     }, {
       "id" : "f6",
       "type" : "Script",
-      "name" : "Printing out values for testing",
+      "name" : "Saving variables",
       "config" : {
         "output" : {
           "code" : [
             "import java.lang.Thread;",
-            "ivy.log.info(in.sprint.versionCode);",
-            "ivy.log.info(in.sprint.sprintNumber);",
-            "ivy.log.info(in.sprint.sprintPointsPerDay);",
-            "ivy.log.info(in.sprint.startDate);",
-            "ivy.log.info(in.sprint.endDate);",
             "",
             "ivy.repo.save(in.sprint);"
           ]
