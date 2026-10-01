@@ -3,31 +3,24 @@
   "simpleName" : "Sprint",
   "namespace" : "ch.ivyteam.ivy.scrum.management",
   "fields" : [ {
-    "name" : "versionCode",
-    "modifiers" : [ ]
+    "name" : "versionCode"
   }, {
     "name" : "sprintNumber",
-    "type" : "Number",
-    "modifiers" : [ ]
+    "type" : "Number"
   }, {
     "name" : "startDate",
-    "type" : "Date",
-    "modifiers" : [ ]
+    "type" : "Date"
   }, {
     "name" : "endDate",
-    "type" : "Date",
-    "modifiers" : [ ]
+    "type" : "Date"
   }, {
     "name" : "members",
-    "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>",
-    "modifiers" : [ ]
+    "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>"
   }, {
     "name" : "maxWorkingDays",
-    "type" : "Number",
-    "modifiers" : [ ]
+    "type" : "Number"
   }, {
     "name" : "sprintPointsPerDay",
-    "type" : "Number",
-    "modifiers" : [ ]
+    "type" : "Number"
   } ]
 }

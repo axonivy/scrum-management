@@ -11,19 +11,22 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
+        <style type="text/css">
+            .commandbuttons-arrow {
+              background-color: #fafafa00 !important;
+              border: 1px solid #a3cbd900 !important;
+              background-image: none !important;
+              border-radius: 4px !important;
+              color: rgb(0, 0, 0);
+            }
+          </style>
         <h:form id="form">
           <p:panel
             header="#{data.sprint.versionCode}"
             style="text-align: center"
           >
             <p:commandButton
-              style="
-                background-color: #fafafa00 !important;
-                border: 1px solid #a3cbd900 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
-                color: rgb(163, 203, 217);
-              "
+              styleClass="commandbuttons-arrow"
               id="back"
               icon="fa-regular fa-circle-left"
               iconPos="middle"
@@ -44,13 +47,7 @@
             />
             <p:commandButton
               iconPos="middle"
-              style="
-                background-color: #fafafa00 !important;
-                border: 1px solid #a3cbd900 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
-                color: rgb(163, 203, 217);
-              "
+              styleClass="commandbuttons-arrow"
               id="forward"
               icon="fa-regular fa-circle-right"
               actionListener="#{logic.sprintnext}"
