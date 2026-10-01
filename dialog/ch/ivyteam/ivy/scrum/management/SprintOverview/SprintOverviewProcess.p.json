@@ -51,6 +51,7 @@
       "config" : {
         "output" : {
           "code" : [
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "import java.util.Random;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "",
