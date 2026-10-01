@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-2.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
   "id" : "1A03D30BFCADA73D",
   "kind" : "HTML_DIALOG",
   "config" : {
@@ -53,12 +53,13 @@
           "code" : [
             "import java.util.Random;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "java.util.List<Object> sprints = ivy.repo.search(in.sprint.class)",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
             "    .execute()",
             "    .getAll();",
             "if (!sprints.isEmpty()) {",
-            "    Object lastSprint = sprints.getLast();",
-            "    out.sprint = lastSprint as ch.ivyteam.ivy.scrum.management.Sprint;",
+            "    Sprint lastSprint = sprints.getLast() as Sprint;",
+            "    out.sprint = lastSprint;",
             "}",
             "",
             "int Repetitions = 20;",

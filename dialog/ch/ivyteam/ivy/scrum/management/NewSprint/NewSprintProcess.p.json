@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process-2.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
   "id" : "1A066D569E6C3536",
   "kind" : "HTML_DIALOG",
   "config" : {
@@ -31,10 +31,7 @@
       "name" : "Saving -> BusinessData",
       "config" : {
         "output" : {
-          "code" : [
-            "import java.lang.Thread;",
-            "ivy.repo.save(in.sprint);"
-          ]
+          "code" : "ivy.repo.save(in.sprint);"
         }
       },
       "visual" : {
@@ -47,7 +44,7 @@
     }, {
       "id" : "f8",
       "type" : "HtmlDialogEventStart",
-      "name" : "closesave",
+      "name" : "save",
       "config" : {
         "guid" : "1A0CD032614BBC30"
       },
