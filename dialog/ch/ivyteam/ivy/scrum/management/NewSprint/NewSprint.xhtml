@@ -84,39 +84,18 @@
                 >
                   <p:commandButton
                     value="Save"
-                    icon="fa-regular fa-floppy-disk"
-                    iconPos="right"
-                    style="
-                      font-size: 18px;
-                      padding: 8px 16px;
-                      margin-left: 5px;
-                      background-color: #fafafa !important;
-                      border: 1px solid #a3cbd9 !important;
-                      background-image: none !important;
-                      border-radius: 4px !important;
-                      color: black;
-                    "
+                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
+                    styleClass="ui-button-raised ui-button-primary"
                     process="@form"
                     update="messages"
                     actionListener="#{logic.save}"
                   />
                   <p:commandButton
                     value="Close"
-                    style="
-                      font-size: 18px;
-                      padding: 8px 16px;
-                      margin-left: 5px;
-                      background-color: #fafafa !important;
-                      border: 1px solid #ffffff !important;
-                      background-image: none !important;
-                      border-radius: 4px !important;
-                      color: black;
-                      background-color: #a3cbd9 !important;
-                    "
+                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
+                    styleClass="ui-button-raised ui-button-secondary"
                     process="@this"
                     actionListener="#{logic.close}"
-                    icon="fa-regular fa-square-minus"
-                    iconPos="right"
                   ></p:commandButton>
                 </p:card>
               </div>
