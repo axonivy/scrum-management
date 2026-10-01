@@ -36,7 +36,7 @@
         "at" : { "x" : 96, "y" : 160 }
       },
       "connect" : [
-        { "id" : "f5", "to" : "f8" }
+        { "id" : "f17", "to" : "f4" }
       ]
     }, {
       "id" : "f4",
@@ -51,6 +51,7 @@
       "config" : {
         "output" : {
           "code" : [
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "import java.util.Random;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
@@ -82,27 +83,6 @@
       },
       "connect" : [
         { "id" : "f16", "to" : "f1" }
-      ]
-    }, {
-      "id" : "f8",
-      "type" : "Script",
-      "name" : "Printing out variables (testing)",
-      "config" : {
-        "output" : {
-          "code" : [
-            "ivy.log.info(in.sprint.members.get(0).name);",
-            "ivy.log.info(in.sprint.members.get(1).name);",
-            "ivy.log.info(in.sprint.members.get(2).name);",
-            "ivy.log.info(in.sprint.members.get(3).name);",
-            "ivy.log.info(in.sprint.members.get(4).name);"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 224, "y" : 160 }
-      },
-      "connect" : [
-        { "id" : "f9", "to" : "f4", "color" : "default" }
       ]
     }, {
       "id" : "f10",
