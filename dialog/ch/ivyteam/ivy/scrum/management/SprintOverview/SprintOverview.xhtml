@@ -11,20 +11,20 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
-        <style type="text/css">
-            
-          </style>
+        <style type="text/css"></style>
         <h:form id="form">
           <p:panel
             header="#{data.sprint.versionCode}"
             style="text-align: center"
           >
             <p:commandButton
-              style="background-color: #fafafa00 !important;
-              border: 1px solid #a3cbd900 !important;
-              background-image: none !important;
-              border-radius: 4px !important;
-              color: rgb(0, 0, 0);"
+              style="
+                background-color: #fafafa00;
+                border: 1px solid #a3cbd900;
+                background-image: none;
+                border-radius: 4px;
+                color: rgb(0, 0, 0);
+              "
               id="back"
               icon="fa-regular fa-circle-left"
               iconPos="middle"
@@ -45,11 +45,13 @@
             />
             <p:commandButton
               iconPos="middle"
-              style="background-color: #fafafa00 !important;
-              border: 1px solid #a3cbd900 !important;
-              background-image: none !important;
-              border-radius: 4px !important;
-              color: rgb(0, 0, 0);"
+              style="
+                background-color: #fafafa00;
+                border: 1px solid #a3cbd900;
+                background-image: none;
+                border-radius: 4px;
+                color: rgb(0, 0, 0);
+              "
               id="forward"
               icon="fa-regular fa-circle-right"
               actionListener="#{logic.sprintnext}"
@@ -160,10 +162,10 @@
               iconPos="right"
               update="form"
               style="
-                background-color: #fafafa !important;
-                border: 1px solid #a3cbd9 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
+                background-color: #fafafa;
+                border: 1px solid #a3cbd9;
+                background-image: none;
+                border-radius: 4px;
                 color: black;
               "
             />
@@ -175,10 +177,10 @@
               icon="fa-regular fa-pen-to-square"
               iconPos="right"
               style="
-                background-color: #fafafa !important;
-                border: 1px solid #a3cbd9 !important;
-                background-image: none !important;
-                border-radius: 4px !important;
+                background-color: #fafafa;
+                border: 1px solid #a3cbd9;
+                background-image: none;
+                border-radius: 4px;
                 color: black;
               "
             />
