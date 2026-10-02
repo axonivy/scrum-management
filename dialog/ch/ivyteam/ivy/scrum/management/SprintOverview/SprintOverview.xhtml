@@ -11,22 +11,56 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
-        <p:panel header="#{data.sprint.versionCode}" style="text-align: center">
-          <h:outputText value="#{data.sprint.startDate}">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-          </h:outputText>
-
-          <h:outputText value=" - " />
-
-          <h:outputText value="#{data.sprint.endDate}">
-            <f:convertDateTime pattern="dd/MM/yyyy" />
-          </h:outputText>
-          <h:outputText value=" / Sprint Number: #{data.sprint.sprintNumber}" />
-        </p:panel>
-
-        <br />
-
+        <style type="text/css"></style>
         <h:form id="form">
+          <p:panel
+            header="#{data.sprint.versionCode}"
+            style="text-align: center"
+          >
+            <p:commandButton
+              style="
+                background-color: #fafafa00;
+                border: 1px solid #a3cbd900;
+                background-image: none;
+                border-radius: 4px;
+                color: rgb(0, 0, 0);
+              "
+              id="back"
+              icon="fa-regular fa-circle-left"
+              iconPos="middle"
+              actionListener="#{logic.sprintlast}"
+              update="@form"
+            />
+            <h:outputText value="#{data.sprint.startDate}">
+              <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:outputText>
+
+            <h:outputText value=" - " />
+
+            <h:outputText value="#{data.sprint.endDate}">
+              <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:outputText>
+            <h:outputText
+              value=" / Sprint Number: #{data.sprint.sprintNumber}"
+            />
+            <p:commandButton
+              iconPos="middle"
+              style="
+                background-color: #fafafa00;
+                border: 1px solid #a3cbd900;
+                background-image: none;
+                border-radius: 4px;
+                color: rgb(0, 0, 0);
+              "
+              id="forward"
+              icon="fa-regular fa-circle-right"
+              actionListener="#{logic.sprintnext}"
+              update="@form"
+            />
+          </p:panel>
+
+          <br />
+
           <p:dataTable
             value="#{data.sprint.members}"
             var="member"
@@ -79,10 +113,12 @@
             </p:column>
 
             <p:column
-              headerText="Points"
+              headerText="Points (#{data.sprint.sprintPointsPerDay})"
               title="Points/Day#{data.sprint.sprintPointsPerDay}"
             >
-              <h:outputText value="#{member.workingDays.doubleValue() * 0.4}">
+              <h:outputText
+                value="#{member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
+              >
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
             </p:column>
@@ -112,20 +148,44 @@
             process="@this"
             update="sprint-datatable"
           />
-        </h:form>
 
-        <br />
-        <div
-          class="command-btns"
-          style="position: fixed; bottom: 20px; right: 20px"
-        >
-          <p:commandButton
-            id="proceed"
-            actionListener="#{logic.close}"
-            value="Close"
-            update="form"
-          />
-        </div>
+          <br />
+          <div
+            class="command-btns"
+            style="position: fixed; bottom: 20px; right: 20px"
+          >
+            <p:commandButton
+              id="proceed"
+              actionListener="#{logic.close}"
+              value="Close"
+              icon="fa-regular fa-square-minus"
+              iconPos="right"
+              update="form"
+              style="
+                background-color: #fafafa;
+                border: 1px solid #a3cbd9;
+                background-image: none;
+                border-radius: 4px;
+                color: black;
+              "
+            />
+            <p:commandButton
+              id="editopensprint"
+              actionListener="#{logic.edit}"
+              value="Edit"
+              update="form"
+              icon="fa-regular fa-pen-to-square"
+              iconPos="right"
+              style="
+                background-color: #fafafa;
+                border: 1px solid #a3cbd9;
+                background-image: none;
+                border-radius: 4px;
+                color: black;
+              "
+            />
+          </div>
+        </h:form>
       </ui:define>
     </ui:composition>
   </h:body>

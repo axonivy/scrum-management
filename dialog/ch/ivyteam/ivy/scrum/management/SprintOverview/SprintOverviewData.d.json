@@ -10,5 +10,9 @@
     "name" : "totalPoints",
     "type" : "Number",
     "modifiers" : [ ]
+  }, {
+    "name" : "sprintIndex",
+    "type" : "Number",
+    "modifiers" : [ ]
   } ]
 }

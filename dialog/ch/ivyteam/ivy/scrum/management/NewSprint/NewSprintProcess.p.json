@@ -2,6 +2,7 @@
   "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
   "id" : "1A066D569E6C3536",
   "kind" : "HTML_DIALOG",
+  "description" : "Business data processes",
   "config" : {
     "data" : "ch.ivyteam.ivy.scrum.management.NewSprint.NewSprintData"
   },
@@ -31,11 +32,27 @@
       "name" : "Saving -> BusinessData",
       "config" : {
         "output" : {
-          "code" : "ivy.repo.save(in.sprint);"
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "",
+            "Sprint newSprint = new Sprint();",
+            "",
+            "newSprint.sprintNumber = in.sprint.sprintNumber;",
+            "newSprint.startDate = in.sprint.startDate;",
+            "newSprint.endDate = in.sprint.endDate;",
+            "newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
+            "newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
+            "newSprint.versionCode = in.sprint.versionCode;",
+            "",
+            "",
+            "ivy.repo.save(newSprint);",
+            "",
+            "out.sprint = newSprint;"
+          ]
         }
       },
       "visual" : {
-        "at" : { "x" : 232, "y" : 256 },
+        "at" : { "x" : 232, "y" : 168 },
         "size" : { "width" : 120, "height" : 56 }
       },
       "connect" : [
@@ -49,7 +66,8 @@
         "guid" : "1A0CD032614BBC30"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 256 }
+        "at" : { "x" : 96, "y" : 168 },
+        "description" : "Saves the dataclasses in business data class and closes it shortly after"
       },
       "connect" : [
         { "id" : "f13", "to" : "f6" }
@@ -58,7 +76,7 @@
       "id" : "f12",
       "type" : "HtmlDialogExit",
       "visual" : {
-        "at" : { "x" : 352, "y" : 256 }
+        "at" : { "x" : 352, "y" : 168 }
       }
     }, {
       "id" : "f15",
@@ -67,13 +85,16 @@
       "config" : {
         "output" : {
           "code" : [
-            "java.util.List<Object> sprints = ivy.repo.search(in.sprint.class)",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
+            "    .limit(10000)",
             "    .execute()",
             "    .getAll();",
             "if (!sprints.isEmpty()) {",
+            "    in.sprint.versionCode;",
             "    Object lastSprint = sprints.getLast();",
             "    out.sprint = lastSprint as ch.ivyteam.ivy.scrum.management.Sprint;",
-            "    in.sprint.sprintNumber++;",
+            "    in.sprint.sprintNumber ++;",
             "    out.sprint.startDate = out.sprint.startDate.add(new Duration(\"P21D\"));",
             "    out.sprint.endDate = out.sprint.endDate.add(new Duration(\"P21D\"));",
             "    in.sprint.maxWorkingDays = 12;",
@@ -84,7 +105,8 @@
       },
       "visual" : {
         "at" : { "x" : 232, "y" : 64 },
-        "size" : { "width" : 120, "height" : 62 }
+        "size" : { "width" : 120, "height" : 62 },
+        "description" : "Loads up all the data from BusinessData thats needed for the default Values"
       },
       "connect" : [
         { "id" : "f16", "to" : "f1", "color" : "default" }
@@ -97,7 +119,7 @@
         "guid" : "1A0CD5E73949029E"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 392 }
+        "at" : { "x" : 96, "y" : 264 }
       },
       "connect" : [
         { "id" : "f19", "to" : "f18" }
@@ -106,7 +128,7 @@
       "id" : "f18",
       "type" : "HtmlDialogExit",
       "visual" : {
-        "at" : { "x" : 352, "y" : 392 }
+        "at" : { "x" : 352, "y" : 264 }
       }
     } ]
 }
