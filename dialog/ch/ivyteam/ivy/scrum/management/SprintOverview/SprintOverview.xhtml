@@ -40,7 +40,7 @@
             value="#{data.sprint.members}"
             var="member"
             rowIndexVar="index"
-            stickyHeader="true"
+            stickyHeader="false"
             editable="true"
             rowKey="#{index}"
             id="sprint-datatable"
@@ -54,12 +54,31 @@
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
             <p:column headerText="Name" title="Name of user">
-              <h:outputText value="#{member.name}" />
+              <div
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 8px;
+                "
+              >
+                <p:avatar
+                  icon="pi pi-user"
+                  shape="circle"
+                  style="
+                    width: 24px;
+                    height: 24px;
+                    font-size: 11px;
+                    flex-shrink: 0;
+                  "
+                />
+                <h:outputText value="#{member.name}" />
+              </div>
             </p:column>
             <p:column
               headerText="Days"
               title="Days the user is working"
-              sortBy="#{member.workingDays}"
+              sortBy="#{member.workingDays.doubleValue()}"
             >
               <p:cellEditor>
                 <f:facet name="output">
@@ -78,7 +97,7 @@
             <p:column
               headerText="Capacity"
               title="Percentage user is working on sprint"
-              sortBy="#{member.capacity}"
+              sortBy="#{member.capacity.doubleValue()}"
             >
               <p:cellEditor>
                 <f:facet name="output">
@@ -107,7 +126,7 @@
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
             </p:column>
-            <p:column style="width: 6rem">
+            <p:column style="width: 6rem" headerText="Edit">
               <p:rowEditor />
             </p:column>
           </p:dataTable>
@@ -157,12 +176,15 @@
               />
             </div>
             <div>
-              <h:outputText value="Total Points " style="font-size: 100%">
+              <h:outputText
+                value="Total Points "
+                style="font-size: 100%; font-weight: 600"
+              >
               </h:outputText>
               <h:outputText
                 id="totalpoints"
                 value="#{logic.calculateTotalPoints()}"
-                style="font-size: 100%"
+                style="font-size: 100%; font-weight: 600"
               >
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
