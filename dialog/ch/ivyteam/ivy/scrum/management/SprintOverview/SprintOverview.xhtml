@@ -12,13 +12,7 @@
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
         <style type="text/css">
-            .commandbuttons-arrow {
-              background-color: #fafafa00 !important;
-              border: 1px solid #a3cbd900 !important;
-              background-image: none !important;
-              border-radius: 4px !important;
-              color: rgb(0, 0, 0);
-            }
+            
           </style>
         <h:form id="form">
           <p:panel
@@ -26,7 +20,11 @@
             style="text-align: center"
           >
             <p:commandButton
-              styleClass="commandbuttons-arrow"
+              style="background-color: #fafafa00 !important;
+              border: 1px solid #a3cbd900 !important;
+              background-image: none !important;
+              border-radius: 4px !important;
+              color: rgb(0, 0, 0);"
               id="back"
               icon="fa-regular fa-circle-left"
               iconPos="middle"
@@ -47,7 +45,11 @@
             />
             <p:commandButton
               iconPos="middle"
-              styleClass="commandbuttons-arrow"
+              style="background-color: #fafafa00 !important;
+              border: 1px solid #a3cbd900 !important;
+              background-image: none !important;
+              border-radius: 4px !important;
+              color: rgb(0, 0, 0);"
               id="forward"
               icon="fa-regular fa-circle-right"
               actionListener="#{logic.sprintnext}"
