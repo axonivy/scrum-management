@@ -11,6 +11,11 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">Sprint Overview</ui:define>
       <ui:define name="content">
+        <style type="text/css">
+          .days-missing > td {
+            background-color: rgba(255, 0, 0, 0.15) !important;
+          }
+        </style>
         <h:form id="form">
           <p:panel
             header="#{data.sprint.versionCode}"
@@ -42,6 +47,7 @@
             rowIndexVar="index"
             stickyHeader="false"
             editable="true"
+            rowEditMode="lazy"
             rowKey="#{index}"
             id="sprint-datatable"
             scrollable="true"
@@ -50,6 +56,7 @@
             resizableColumns="true"
             cellNavigation="true"
             rowHover="true"
+            rowStyleClass="#{member.workingDays.intValue() lt 0 ? 'days-missing' : ''}"
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
@@ -82,7 +89,10 @@
             >
               <p:cellEditor>
                 <f:facet name="output">
-                  <h:outputText value="#{member.workingDays}" />
+                  <h:outputText
+                    value="#{member.workingDays}"
+                    rendered="#{member.workingDays.intValue() ge 0}"
+                  />
                 </f:facet>
                 <f:facet name="input">
                   <p:inputNumber
@@ -90,6 +100,7 @@
                     minValue="0"
                     maxValue="#{data.sprint.maxWorkingDays}"
                     decimalPlaces="1"
+                    emptyValue="empty"
                   />
                 </f:facet>
               </p:cellEditor>
@@ -118,10 +129,10 @@
             <p:column
               headerText="Points (#{data.sprint.sprintPointsPerDay})"
               title="Points/Day#{data.sprint.sprintPointsPerDay}"
-              sortBy="#{member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
+              sortBy="#{member.workingDays.intValue() lt 0 ? 0.0 : member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
             >
               <h:outputText
-                value="#{member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
+                value="#{member.workingDays.intValue() lt 0 ? 0.0 : member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
               >
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
@@ -133,7 +144,7 @@
           <p:remoteCommand
             name="refreshSprintTable"
             process="@this"
-            update="sprint-datatable"
+            update="sprint-datatable totalpoints"
           />
 
           <br />
