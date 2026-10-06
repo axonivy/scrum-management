@@ -9,22 +9,30 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "HtmlDialogStart",
-      "name" : "start()",
+      "name" : "start(String)",
       "config" : {
         "signature" : "start",
+        "input" : {
+          "params" : [
+            { "name" : "sprintId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.sprintId" : "param.sprintId"
+          }
+        },
         "guid" : "1A066D569E736DB6"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f15" }
+        { "id" : "f2", "to" : "f20" }
       ]
     }, {
       "id" : "f1",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 64 }
+        "at" : { "x" : 520, "y" : 64 }
       }
     }, {
       "id" : "f6",
@@ -35,19 +43,54 @@
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "",
-            "Sprint newSprint = new Sprint();",
+            "if (in.sprintId != null && !in.sprintId.isBlank()) {",
+            "  // Saves as existing sprint",
             "",
-            "newSprint.sprintNumber = in.sprint.sprintNumber;",
-            "newSprint.startDate = in.sprint.startDate;",
-            "newSprint.endDate = in.sprint.endDate;",
-            "newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
-            "newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
-            "newSprint.versionCode = in.sprint.versionCode;",
+            "  Sprint existingSprint = ivy.repo.find(in.sprintId, Sprint.class) as Sprint;",
             "",
+            "  existingSprint.sprintNumber = in.sprint.sprintNumber;",
+            "  existingSprint.startDate = in.sprint.startDate;",
+            "  existingSprint.endDate = in.sprint.endDate;",
+            "  existingSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
+            "  existingSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
+            "  existingSprint.versionCode = in.sprint.versionCode;",
             "",
-            "ivy.repo.save(newSprint);",
+            "  ivy.repo.save(existingSprint);",
             "",
-            "out.sprint = newSprint;"
+            "  out.sprint = existingSprint;",
+            "",
+            "} ",
+            "",
+            "else {",
+            "  // Saves as new sprint",
+            "",
+            "  java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
+            "    .limit(10000)",
+            "    .execute()",
+            "    .getAll();",
+            "  int nextSortIndex = 0;",
+            "",
+            "  for (Sprint sprint : sprints) {",
+            "    if (sprint.sortIndex != null && sprint.sortIndex >= nextSortIndex) {",
+            "      nextSortIndex = sprint.sortIndex + 1;",
+            "    }",
+            "  }",
+            "",
+            "  Sprint newSprint = new Sprint();",
+            "  newSprint.sortIndex = nextSortIndex;",
+            "",
+            "  newSprint.sprintNumber = in.sprint.sprintNumber;",
+            "  newSprint.startDate = in.sprint.startDate;",
+            "  newSprint.endDate = in.sprint.endDate;",
+            "  newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
+            "  newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
+            "  newSprint.versionCode = in.sprint.versionCode;",
+            "",
+            "  ivy.repo.save(newSprint);",
+            "",
+            "  out.sprint = newSprint;",
+            "",
+            "}"
           ]
         }
       },
@@ -86,25 +129,51 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "    .limit(10000)",
-            "    .execute()",
-            "    .getAll();",
-            "if (!sprints.isEmpty()) {",
-            "    in.sprint.versionCode;",
-            "    Object lastSprint = sprints.getLast();",
-            "    out.sprint = lastSprint as ch.ivyteam.ivy.scrum.management.Sprint;",
-            "    in.sprint.sprintNumber ++;",
-            "    out.sprint.startDate = out.sprint.startDate.add(new Duration(\"P21D\"));",
-            "    out.sprint.endDate = out.sprint.endDate.add(new Duration(\"P21D\"));",
-            "    in.sprint.maxWorkingDays = 12;",
             "",
+            "if (in.sprintId != null && !in.sprintId.isBlank()) {",
+            "    ",
+            "    Object existingSprint = ivy.repo.find(in.sprintId, Sprint.class);",
+            "    out.sprint = existingSprint as Sprint;",
+            "",
+            "}",
+            "",
+            "else {",
+            "",
+            "    java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
+            "        .limit(10000)",
+            "        .execute()",
+            "        .getAll();",
+            "",
+            "    for (int i = 0; i < sprints.size() - 1; i++) {",
+            "        for (int j = i + 1; j < sprints.size(); j++) {",
+            "            if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
+            "                Sprint temp = sprints.get(i);",
+            "                sprints.set(i, sprints.get(j));",
+            "                sprints.set(j, temp);",
+            "            }",
+            "        }",
+            "    }",
+            "    ",
+            "if (!sprints.isEmpty()) {",
+            "",
+            "    Sprint lastSprint = sprints.getLast() as Sprint;",
+            "    Sprint nextSprint = new Sprint();",
+            "    nextSprint.sprintNumber = lastSprint.sprintNumber + 1;",
+            "    nextSprint.startDate = lastSprint.startDate.add(new Duration(\"P21D\"));",
+            "    nextSprint.endDate = lastSprint.endDate.add(new Duration(\"P21D\"));",
+            "    nextSprint.versionCode = lastSprint.versionCode;",
+            "    nextSprint.sprintPointsPerDay = lastSprint.sprintPointsPerDay;",
+            "    nextSprint.maxWorkingDays = 12;",
+            "",
+            "    out.sprint = nextSprint;",
+            "",
+            "}",
             "}"
           ]
         }
       },
       "visual" : {
-        "at" : { "x" : 232, "y" : 64 },
+        "at" : { "x" : 384, "y" : 64 },
         "size" : { "width" : 120, "height" : 62 },
         "description" : "Loads up all the data from BusinessData thats needed for the default Values"
       },
@@ -130,5 +199,83 @@
       "visual" : {
         "at" : { "x" : 352, "y" : 264 }
       }
+    }, {
+      "id" : "f20",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : "ivy.log.info(\"DEBUG sprintId = \" + in.sprintId);"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f21", "to" : "f15", "color" : "default" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "calculateMaxWorkingDays",
+      "config" : {
+        "signature" : "calculateMaxWorkingDays",
+        "guid" : "1A11143F9DBCD818"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 352 },
+        "labelOffset" : { "x" : 3, "y" : 35 }
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f25" }
+      ]
+    }, {
+      "id" : "f23",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 352 }
+      }
+    }, {
+      "id" : "f25",
+      "type" : "Script",
+      "name" : "Calculate",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.util.Calendar;",
+            "",
+            "int maxworkingdays = 0;",
+            "",
+            "if (in.sprint.startDate != null && in.sprint.endDate != null) {",
+            "",
+            "    Calendar currentDate = Calendar.getInstance();",
+            "    currentDate.setTime(in.sprint.startDate);",
+            "",
+            "    Calendar endDate = Calendar.getInstance();",
+            "    endDate.setTime(in.sprint.endDate);",
+            "",
+            "    while (!currentDate.after(endDate)) {",
+            "",
+            "        int day = currentDate.get(Calendar.DAY_OF_WEEK);",
+            "",
+            "        if (day != Calendar.SATURDAY && day != Calendar.SUNDAY) {",
+            "            maxworkingdays++;",
+            "        }",
+            "",
+            "        currentDate.add(Calendar.DAY_OF_MONTH, 1);",
+            "    }",
+            "    maxworkingdays--;",
+            "",
+            "    in.sprint.maxWorkingDays = maxworkingdays;",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 352 },
+        "description" : "Calculates the max working days excludes review day and weekends (saturday, sunday)"
+      },
+      "connect" : [
+        { "id" : "f26", "to" : "f23", "color" : "default" }
+      ]
     } ]
 }

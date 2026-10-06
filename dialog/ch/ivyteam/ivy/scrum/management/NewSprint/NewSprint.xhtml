@@ -60,8 +60,14 @@
                     pattern="dd/MM/yyyy"
                     showIcon="true"
                     showOnFocus="false"
-                    ><f:convertDateTime pattern="dd/MM/yyyy"
-                  /></p:datePicker>
+                    ><f:convertDateTime pattern="dd/MM/yyyy" />
+                    <p:ajax
+                      event="dateSelect"
+                      listener="#{logic.calculateMaxWorkingDays()}"
+                      process="@this"
+                      update="maxWorkingDays"
+                    />
+                  </p:datePicker>
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
@@ -84,8 +90,14 @@
                     pattern="dd/MM/yyyy"
                     showIcon="true"
                     showOnFocus="false"
-                    ><f:convertDateTime pattern="dd/MM/yyyy"
-                  /></p:datePicker>
+                    ><f:convertDateTime pattern="dd/MM/yyyy" />
+                    <p:ajax
+                      event="dateSelect"
+                      listener="#{logic.calculateMaxWorkingDays()}"
+                      process="@this"
+                      update="maxWorkingDays"
+                    />
+                  </p:datePicker>
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
@@ -106,6 +118,7 @@
                     value="#{data.sprint.maxWorkingDays}"
                     minValue="0"
                     decimalPlaces="1"
+                    id="maxWorkingDays"
                   />
                 </p:card>
               </div>

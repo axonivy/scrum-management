@@ -46,6 +46,14 @@
       "name" : "NewSprint",
       "config" : {
         "signature" : "start2",
+        "input" : {
+          "params" : [
+            { "name" : "sprintId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.sprintId" : "param.sprintId"
+          }
+        },
         "request" : {
           "name" : "New Sprint",
           "description" : "Create a new sprint that will also be  shown on the Sprint Overview"
@@ -62,7 +70,18 @@
       "type" : "DialogCall",
       "name" : "NewSprint",
       "config" : {
-        "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start()"
+        "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start(String)",
+        "call" : {
+          "map" : {
+            "param.sprintId" : "in.sprintId"
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.sprintId" : "in.sprintId"
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 152 }

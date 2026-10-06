@@ -178,14 +178,13 @@
               class="command-btns"
               style="display: flex; align-items: center; gap: 8px"
             >
-              <p:commandButton
+              <p:link
                 id="editopensprint"
-                actionListener="#{logic.edit}"
                 value="Edit"
-                update="form"
-                style="width: 100%"
-                styleClass="ui-button-raised ui-button-warning"
+                href="#{ivy.html.startref('1A01A21D2B2203C2/start2.ivp')}?sprintId=#{ivy.repo.getId(data.sprint)}"
+                styleClass="ui-button-raised ui-button-secondary"
               />
+
               <p:commandButton
                 id="proceed"
                 actionListener="#{logic.close}"
