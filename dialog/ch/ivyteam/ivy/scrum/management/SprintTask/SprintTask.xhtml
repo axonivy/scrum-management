@@ -1,0 +1,201 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="jakarta.faces.core"
+  xmlns:h="jakarta.faces.html"
+  xmlns:ui="jakarta.faces.facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="primefaces"
+  xmlns:pe="primefaces.extensions"
+>
+  <h:body>
+    <ui:composition template="/layouts/frame-10.xhtml">
+      <ui:define name="title">SprintTask</ui:define>
+      <ui:define name="content">
+        <style type="text/css">
+          .sprint-calender td:not(.ui-state-disabled) a:not(.ui-state-active) {
+            background-color: rgba(0, 255, 47, 0.35) !important;
+          }
+          .sprint-calender td:not(.ui-state-disabled) a.ui-state-active {
+            background-color: rgba(228, 0, 0, 0.35) !important;
+          }
+        </style>
+        <h:form id="dateSelect">
+          <p:card>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+              "
+            >
+              <h:outputText
+                value="#{data.sprint.versionCode}"
+                style="font-size: 25px; font-weight: 550; display: block"
+              />
+              <div style="display: flex; gap: 45px; margin-top: 12px">
+                <div>
+                  <h:outputText
+                    value="StartDate: "
+                    style="display: block; color: var(--surface-600)"
+                  />
+                  <h:outputText
+                    value="#{data.sprint.startDate}"
+                    style="display: block"
+                  />
+                </div>
+                <div>
+                  <h:outputText
+                    value="EndDate: "
+                    style="display: block; color: var(--surface-600)"
+                  />
+                  <h:outputText
+                    value="#{data.sprint.endDate}"
+                    style="display: block"
+                  />
+                </div>
+                <div>
+                  <h:outputText
+                    value="Sprint Number: "
+                    style="display: block; color: var(--surface-600)"
+                  />
+                  <h:outputText
+                    value="Sprint #{data.sprint.sprintNumber}"
+                    style="display: block"
+                  />
+                </div>
+              </div>
+            </div>
+          </p:card>
+
+          <p:card style="margin-top: 10px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                gap: 6px;
+                margin-bottom: 16px;
+              "
+            >
+              <i class="pi pi-clock"></i>
+              <span style="font-size: 18px; font-weight: 550"> Capacity</span>
+            </div>
+            <p:inputNumber
+              value="#{data.member.capacity}"
+              minValue="0"
+              decimalPlaces="1"
+              symbol=" %"
+              symbolPosition="s"
+              id="maxWorkingDays"
+              maxValue="100"
+            />
+            <span style="float: right; color: var(--surface-600)">Percentage of your working capacity</span>
+          </p:card>
+          <p:card style="margin-top: 10px">
+            <span
+              style="
+                font-size: 18px;
+                display: block;
+                margin-bottom: 10px;
+                font-weight: 550;
+              "
+              >Select the days you are absent</span
+            >
+            <p:datePicker
+              value="#{data.absenceDays}"
+              selectionMode="multiple"
+              inline="true"
+              enabledDates="#{data.workingDates}"
+              panelStyleClass="sprint-calender"
+              style="width: 100%"
+            >
+              <p:ajax event="dateSelect" process="@form" update="@form" />
+            </p:datePicker>
+            <div
+              style="
+                display: flex;
+                gap: 45px;
+                margin-top: 12px;
+                justify-content: space-between;
+              "
+            >
+              <div>
+                <h:outputText
+                  value="Max working days"
+                  style="display: block; color: var(--surface-600)"
+                />
+                <h:outputText
+                  value="#{data.sprint.maxWorkingDays}"
+                  style="display: block"
+                />
+              </div>
+
+              <div>
+                <h:outputText
+                  value="Selected absence days"
+                  style="display: block; color: var(--surface-600)"
+                />
+                <h:outputText
+                  value="#{empty data.absenceDays ? 0 : data.absenceDays.size()}"
+                  style="display: block"
+                />
+              </div>
+              <div>
+                <h:outputText
+                  value="Working days "
+                  style="display: block; color: var(--surface-600)"
+                />
+                <h:outputText
+                  value="#{data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())}"
+                  style="display: block"
+                />
+              </div>
+            </div>
+            <div style="margin-top: 20px; color: var(--surface-400)">
+              <h:outputText value="Review, Saturday and Sunday (Excluded)" />
+            </div>
+            <div style="margin-top: 5px; color: var(--surface-400)">
+              <span><i class="pi pi-circle-fill" style="color: rgb(0, 255, 47, 0.35); font-size: 10px;"></i> Avialable</span>
+              <span><i class="pi pi-circle-fill" style="color: rgb(228, 0, 0, 0.35); font-size: 10px; margin-left: 10px;"></i> Absent</span>
+              <span><i class="pi pi-circle-fill" style="color: rgb(112, 112, 112); font-size: 10px; margin-left: 10px;"></i> Unavailable</span>
+            </div>
+          </p:card>
+          <p:card style="margin-top: 10px">
+            <span
+              style="
+                font-size: 18px;
+                display: block;
+                margin-bottom: 10px;
+                font-weight: 550;
+              "
+              >Points preview</span
+            >
+            <div>
+              <h:outputText
+                value="Estimated Sprint Points"
+                style="display: block"
+              />
+              <h:outputText
+                value="#{(data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())) * data.sprint.sprintPointsPerDay.doubleValue()}"
+                style="display: block; margin-top: 5px; font-size: 24px; font-weight: 500;"
+                ><f:convertNumber pattern="0.0"
+              /></h:outputText>
+            </div>
+            <div>
+              <p:commandButton
+                style="
+                  margin-top: 20px;
+                  background-color: var(--primary-dark-color);
+                  width: 100%;
+                "
+                value="Save"
+                styleClass="ui-button-raised ui-button-primary"
+                actionListener="#{logic.savetask()}"
+              />
+            </div>
+          </p:card>
+        </h:form>
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>

@@ -75,12 +75,6 @@
           "map" : {
             "param.sprintId" : "in.sprintId"
           }
-        },
-        "output" : {
-          "map" : {
-            "out" : "in",
-            "out.sprintId" : "in.sprintId"
-          }
         }
       },
       "visual" : {
@@ -94,6 +88,70 @@
       "type" : "TaskEnd",
       "visual" : {
         "at" : { "x" : 352, "y" : 152 }
+      }
+    }, {
+      "id" : "f10",
+      "type" : "RequestStart",
+      "name" : "SprintTask",
+      "config" : {
+        "signature" : "SprintT",
+        "input" : {
+          "params" : [
+            { "name" : "sprintId", "type" : "String", "desc" : "" },
+            { "name" : "userId", "type" : "String", "desc" : "" },
+            { "name" : "userName", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.sprintId" : "param.sprintId",
+            "out.userId" : "param.userId",
+            "out.userName" : "param.userName"
+          }
+        },
+        "triggerable" : true,
+        "task" : {
+          "name" : "UserTask",
+          "description" : "A task that every user gets when a new sprit is created",
+          "responsible" : {
+            "type" : "USER_FROM_ATTRIBUTE",
+            "script" : "param.userName"
+          },
+          "priority" : {
+            "level" : "HIGH"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 232 },
+        "labelOffset" : { "x" : 17, "y" : 33 }
+      },
+      "connect" : [
+        { "id" : "f13", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "DialogCall",
+      "name" : "UserTask",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.scrum.management.SprintTask:start(String,String)",
+        "call" : {
+          "map" : {
+            "param.sprintId" : "in.sprintId",
+            "param.userId" : "in.userId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 232 },
+        "description" : "A task that every user gets when a new sprit is created"
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f12" }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 232 }
       }
     } ]
 }

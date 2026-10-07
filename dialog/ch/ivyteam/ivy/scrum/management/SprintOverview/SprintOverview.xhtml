@@ -67,7 +67,11 @@
             styleClass="rounded-table"
             rowStyleClass="#{member.workingDays.intValue() lt 0 ? 'days-missing' : ''}"
           >
-            <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
+            <p:ajax
+              event="rowEdit"
+              oncomplete="refreshSprintTable()"
+              listener="#{logic.saveUserData()}"
+            />
 
             <p:column headerText="Name" title="Name of user">
               <div

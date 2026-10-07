@@ -1,0 +1,203 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
+  "id" : "1A115A008526215D",
+  "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "ch.ivyteam.ivy.scrum.management.SprintTask.SprintTaskData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start(String,String)",
+      "config" : {
+        "signature" : "start",
+        "input" : {
+          "params" : [
+            { "name" : "sprintId", "type" : "String", "desc" : "" },
+            { "name" : "userId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.sprintId" : "param.sprintId",
+            "out.userId" : "param.userId"
+          }
+        },
+        "guid" : "1A115A008526A371"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f17", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 480, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "1A115A0085217928"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f4" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "Script",
+      "name" : "Load data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "",
+            "out.sprintId = in.sprintId;",
+            "out.userId = in.userId;",
+            "",
+            "out.sprint = ivy.repo.find(in.sprintId, Sprint.class) as Sprint;",
+            "",
+            "  for (SprintUser sprintMember : out.sprint.members) {",
+            "    if (sprintMember.userId.equals(in.userId)) {",
+            "      out.member = sprintMember;",
+            "      break;",
+            "    }",
+            "  }"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 64 },
+        "description" : "Loads data for the user that is assigned to this task"
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f16" }
+      ]
+    }, {
+      "id" : "f9",
+      "type" : "Script",
+      "name" : "Save",
+      "config" : {
+        "output" : {
+          "code" : [
+            "in.member.workingDays =",
+            "  in.sprint.maxWorkingDays.intValue() - (in.absenceDays == null ? 0 : in.absenceDays.size());",
+            "ivy.repo.save(in.sprint);",
+            "",
+            "out.sprint = in.sprint;",
+            "out.member = in.member;"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 248 },
+        "description" : "Saves the data from the new sprint"
+      },
+      "connect" : [
+        { "id" : "f13", "to" : "f12" }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 248 }
+      }
+    }, {
+      "id" : "f14",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "savetask()",
+      "config" : {
+        "signature" : "savetask",
+        "guid" : "1A116A3A1336FB40"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 248 }
+      },
+      "connect" : [
+        { "id" : "f15", "to" : "f9" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "Script",
+      "name" : "Calculate workingdays",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.time.LocalDate;",
+            "import java.util.Calendar;",
+            "",
+            "out.workingDates = new java.util.ArrayList<LocalDate>();",
+            "out.disabledDates = new java.util.ArrayList<LocalDate>();",
+            "",
+            "if (in.sprint.startDate != null && in.sprint.endDate != null) {",
+            "",
+            "    Calendar currentDate = Calendar.getInstance();",
+            "    currentDate.setTime(in.sprint.startDate);",
+            "",
+            "    Calendar endDate = Calendar.getInstance();",
+            "    endDate.setTime(in.sprint.endDate);",
+            "    Calendar lastWednesday = Calendar.getInstance();",
+            "    lastWednesday.setTime(in.sprint.endDate);",
+            "    ",
+            "    while (lastWednesday.get(Calendar.DAY_OF_WEEK) != Calendar.WEDNESDAY) {",
+            "        lastWednesday.add(Calendar.DAY_OF_MONTH, -1);",
+            "    }",
+            "    out.pickerStartDate = LocalDate.of(",
+            "        currentDate.get(Calendar.YEAR),",
+            "        currentDate.get(Calendar.MONTH) + 1,",
+            "        currentDate.get(Calendar.DAY_OF_MONTH)",
+            "    );",
+            "",
+            "    out.pickerEndDate = LocalDate.of(",
+            "        endDate.get(Calendar.YEAR),",
+            "        endDate.get(Calendar.MONTH) + 1,",
+            "        endDate.get(Calendar.DAY_OF_MONTH)",
+            "    );",
+            "",
+            "    while (!currentDate.after(endDate)) {",
+            "",
+            "        int day = currentDate.get(Calendar.DAY_OF_WEEK);",
+            "",
+            "        LocalDate date = LocalDate.of(",
+            "            currentDate.get(Calendar.YEAR),",
+            "            currentDate.get(Calendar.MONTH) + 1,",
+            "            currentDate.get(Calendar.DAY_OF_MONTH)",
+            "        );",
+            "",
+            "        boolean isLastWednesday =",
+            "            currentDate.get(Calendar.YEAR) == lastWednesday.get(Calendar.YEAR)",
+            "            && currentDate.get(Calendar.DAY_OF_YEAR) == lastWednesday.get(Calendar.DAY_OF_YEAR);",
+            "",
+            "            if (day != Calendar.SATURDAY && day != Calendar.SUNDAY && !isLastWednesday) {",
+            "                out.workingDates.add(date);",
+            "            } else {",
+            "                out.disabledDates.add(date);",
+            "            }",
+            "",
+            "        currentDate.add(Calendar.DAY_OF_MONTH, 1);",
+            "    }",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 376, "y" : 64 },
+        "description" : "Calculates all working days in the sprint automatically and prints them out for the datepicker"
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f1" }
+      ]
+    } ]
+}
