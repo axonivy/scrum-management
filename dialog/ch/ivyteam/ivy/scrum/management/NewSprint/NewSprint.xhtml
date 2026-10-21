@@ -156,8 +156,16 @@
                 >
                   <p:commandButton
                     value="Save"
-                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
-                    styleClass="ui-button-raised ui-button-primary"
+                    icon="fa-regular fa-floppy-disk"
+                    iconPos="right"
+                    style="
+                      font-size: 18px;
+                      padding: 8px 16px;
+                      margin-left: 5px;
+
+                      border-radius: 4px;
+                      color: black;
+                    "
                     process="@form"
                     update="messages"
                     actionListener="#{logic.save}"
@@ -165,8 +173,17 @@
                   />
                   <p:commandButton
                     value="Close"
-                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
-                    styleClass="ui-button-raised ui-button-secondary"
+                    style="
+                      font-size: 18px;
+                      padding: 8px 16px;
+                      margin-left: 5px;
+                      background-color: #fafafa;
+                      border: 1px solid #ffffff;
+                      background-image: none;
+                      border-radius: 4px;
+                      color: black;
+                      background-color: #a3cbd9;
+                    "
                     process="@this"
                     actionListener="#{logic.close}"
                     icon="pi pi-times"
