@@ -1,5 +1,8 @@
 {
   "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
   "simpleName" : "BusinessProcess",
-  "namespace" : "ch.ivyteam.ivy.scrum.management"
+  "namespace" : "ch.ivyteam.ivy.scrum.management",
+  "fields" : [ {
+    "name" : "sprintId"
+  } ]
 }

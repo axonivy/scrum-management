@@ -6,5 +6,8 @@
     "name" : "sprint",
     "type" : "ch.ivyteam.ivy.scrum.management.Sprint",
     "modifiers" : [ ]
+  }, {
+    "name" : "sprintId",
+    "modifiers" : [ ]
   } ]
 }

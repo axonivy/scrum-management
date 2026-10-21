@@ -147,6 +147,15 @@
             "    .execute()",
             "    .getAll();",
             "",
+            "    for (int i = 0; i < sprints.size() - 1; i++) {",
+            "    for (int j = i + 1; j < sprints.size(); j++) {",
+            "        if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
+            "            Sprint temp = sprints.get(i);",
+            "            sprints.set(i, sprints.get(j));",
+            "            sprints.set(j, temp);",
+            "            }",
+            "        }",
+            "    }",
             "",
             "out.sprint = in.sprint;",
             "out.sprintIndex = in.sprintIndex;",
@@ -233,6 +242,16 @@
             "    .execute()",
             "    .getAll();",
             "",
+            "    for (int i = 0; i < sprints.size() - 1; i++) {",
+            "    for (int j = i + 1; j < sprints.size(); j++) {",
+            "        if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
+            "            Sprint temp = sprints.get(i);",
+            "            sprints.set(i, sprints.get(j));",
+            "            sprints.set(j, temp);",
+            "            }",
+            "        }",
+            "    }",
+            "",
             "out.sprint = in.sprint;",
             "out.sprintIndex = in.sprintIndex;",
             "",
@@ -275,35 +294,6 @@
         "at" : { "x" : 536, "y" : 496 }
       }
     }, {
-      "id" : "f32",
-      "type" : "HtmlDialogEventStart",
-      "name" : "edit",
-      "config" : {
-        "guid" : "1A0D2E97CDE8F3D3"
-      },
-      "visual" : {
-        "at" : { "x" : 96, "y" : 592 }
-      },
-      "connect" : [
-        { "id" : "f35", "to" : "f33" }
-      ]
-    }, {
-      "id" : "f33",
-      "type" : "Script",
-      "name" : "Wip",
-      "visual" : {
-        "at" : { "x" : 296, "y" : 592 }
-      },
-      "connect" : [
-        { "id" : "f36", "to" : "f34" }
-      ]
-    }, {
-      "id" : "f34",
-      "type" : "HtmlDialogEnd",
-      "visual" : {
-        "at" : { "x" : 536, "y" : 592 }
-      }
-    }, {
       "id" : "f38",
       "type" : "Script",
       "name" : "Initializing Businessdata",
@@ -318,6 +308,16 @@
             "    .limit(10000)",
             "    .execute()",
             "    .getAll();",
+            "",
+            "    for (int i = 0; i < sprints.size() - 1; i++) {",
+            "    for (int j = i + 1; j < sprints.size(); j++) {",
+            "        if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
+            "            Sprint temp = sprints.get(i);",
+            "            sprints.set(i, sprints.get(j));",
+            "            sprints.set(j, temp);",
+            "            }",
+            "        }",
+            "    }",
             "",
             "ivy.log.info(!sprints.isEmpty());",
             "if (!sprints.isEmpty()) {",

@@ -22,5 +22,8 @@
   }, {
     "name" : "sprintPointsPerDay",
     "type" : "Number"
+  }, {
+    "name" : "sortIndex",
+    "type" : "Number"
   } ]
 }

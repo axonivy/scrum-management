@@ -60,8 +60,14 @@
                     pattern="dd/MM/yyyy"
                     showIcon="true"
                     showOnFocus="false"
-                    ><f:convertDateTime pattern="dd/MM/yyyy"
-                  /></p:datePicker>
+                    ><f:convertDateTime pattern="dd/MM/yyyy" />
+                    <p:ajax
+                      event="dateSelect"
+                      listener="#{logic.calculateMaxWorkingDays()}"
+                      process="@this"
+                      update="maxWorkingDays"
+                    />
+                  </p:datePicker>
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
@@ -84,8 +90,14 @@
                     pattern="dd/MM/yyyy"
                     showIcon="true"
                     showOnFocus="false"
-                    ><f:convertDateTime pattern="dd/MM/yyyy"
-                  /></p:datePicker>
+                    ><f:convertDateTime pattern="dd/MM/yyyy" />
+                    <p:ajax
+                      event="dateSelect"
+                      listener="#{logic.calculateMaxWorkingDays()}"
+                      process="@this"
+                      update="maxWorkingDays"
+                    />
+                  </p:datePicker>
                 </p:card>
               </div>
               <div class="field col-12 sm:col-6">
@@ -106,6 +118,7 @@
                     value="#{data.sprint.maxWorkingDays}"
                     minValue="0"
                     decimalPlaces="1"
+                    id="maxWorkingDays"
                   />
                 </p:card>
               </div>
@@ -156,16 +169,8 @@
                 >
                   <p:commandButton
                     value="Save"
-                    icon="fa-regular fa-floppy-disk"
-                    iconPos="right"
-                    style="
-                      font-size: 18px;
-                      padding: 8px 16px;
-                      margin-left: 5px;
-
-                      border-radius: 4px;
-                      color: black;
-                    "
+                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
+                    styleClass="ui-button-raised ui-button-primary"
                     process="@form"
                     update="messages"
                     actionListener="#{logic.save}"
@@ -173,17 +178,8 @@
                   />
                   <p:commandButton
                     value="Close"
-                    style="
-                      font-size: 18px;
-                      padding: 8px 16px;
-                      margin-left: 5px;
-                      background-color: #fafafa;
-                      border: 1px solid #ffffff;
-                      background-image: none;
-                      border-radius: 4px;
-                      color: black;
-                      background-color: #a3cbd9;
-                    "
+                    style="font-size: 100%; padding: 8px 16px; margin-left: 5px"
+                    styleClass="ui-button-raised ui-button-secondary"
                     process="@this"
                     actionListener="#{logic.close}"
                     icon="pi pi-times"
