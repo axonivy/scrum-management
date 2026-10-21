@@ -15,7 +15,7 @@
         <h:form id="form">
           <p:panel
             header="#{data.sprint.versionCode}"
-            style="text-align: center"
+            style="text-align: center; font-size: 30px"
           >
             <p:commandButton
               style="
@@ -35,9 +35,9 @@
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </h:outputText>
 
-            <h:outputText value=" - " />
+            <h:outputText value=" - " style="font-size: 50%" />
 
-            <h:outputText value="#{data.sprint.endDate}">
+            <h:outputText value="#{data.sprint.endDate}" style="font-size: 50%">
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </h:outputText>
             <h:outputText
@@ -65,19 +65,46 @@
             value="#{data.sprint.members}"
             var="member"
             rowIndexVar="index"
-            stickyHeader="true"
+            stickyHeader="false"
             editable="true"
             rowKey="#{index}"
             id="sprint-datatable"
             scrollable="true"
-            scrollHeight="550"
+            allowUnsorting="true"
+            liveResize="true"
+            resizableColumns="true"
+            cellNavigation="true"
+            rowHover="true"
           >
             <p:ajax event="rowEdit" oncomplete="refreshSprintTable()" />
 
             <p:column headerText="Name" title="Name of user">
-              <h:outputText value="#{member.name}" />
+              <div
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 8px;
+                "
+              >
+                <p:avatar
+                  icon="pi pi-user"
+                  shape="circle"
+                  style="
+                    width: 24px;
+                    height: 24px;
+                    font-size: 11px;
+                    flex-shrink: 0;
+                  "
+                />
+                <h:outputText value="#{member.name}" />
+              </div>
             </p:column>
-            <p:column headerText="Days" title="Days the user is working">
+            <p:column
+              headerText="Days"
+              title="Days the user is working"
+              sortBy="#{member.workingDays.doubleValue()}"
+            >
               <p:cellEditor>
                 <f:facet name="output">
                   <h:outputText value="#{member.workingDays}" />
@@ -95,6 +122,7 @@
             <p:column
               headerText="Capacity"
               title="Percentage user is working on sprint"
+              sortBy="#{member.capacity.doubleValue()}"
             >
               <p:cellEditor>
                 <f:facet name="output">
@@ -115,6 +143,7 @@
             <p:column
               headerText="Points (#{data.sprint.sprintPointsPerDay})"
               title="Points/Day#{data.sprint.sprintPointsPerDay}"
+              sortBy="#{member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
             >
               <h:outputText
                 value="#{member.capacity.doubleValue() / 100 * member.workingDays.doubleValue() * data.sprint.sprintPointsPerDay.doubleValue()}"
@@ -122,26 +151,9 @@
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
             </p:column>
-            <p:column style="width: 6rem">
+            <p:column style="width: 6rem" headerText="Edit">
               <p:rowEditor />
             </p:column>
-
-            <p:columnGroup type="footer">
-              <p:row>
-                <p:column colspan="3" />
-                <p:column>
-                  <f:facet name="footer">
-                    <h:outputText
-                      id="totalPoints"
-                      value="#{logic.calculateTotalPoints()}"
-                    >
-                      <f:convertNumber pattern="#0.0" />
-                    </h:outputText>
-                  </f:facet>
-                </p:column>
-                <p:column />
-              </p:row>
-            </p:columnGroup>
           </p:dataTable>
           <p:remoteCommand
             name="refreshSprintTable"
@@ -151,8 +163,21 @@
 
           <br />
           <div
-            class="command-btns"
-            style="position: fixed; bottom: 20px; right: 20px"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              background: var(--surface-a);
+              border-top: 1px solid var(--surface-border);
+
+              padding: 12px 20px;
+              margin-top: 12px;
+
+              position: sticky;
+              bottom: 0;
+              z-index: 10;
+            "
           >
             <p:commandButton
               id="proceed"
