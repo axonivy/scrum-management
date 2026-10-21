@@ -318,12 +318,9 @@
             "ivy.log.info(!sprints.isEmpty());",
             "if (!sprints.isEmpty()) {",
             "    int lastIndex = sprints.size() - 1;",
-            "    ivy.log.info(lastIndex);",
             "    in.sprintIndex = lastIndex;",
             "    in.sprint = sprints.get(lastIndex);",
-            "}",
-            "ivy.log.info(\"SprintSize\");",
-            "ivy.log.info(sprints.size());"
+            "}"
           ]
         }
       },
