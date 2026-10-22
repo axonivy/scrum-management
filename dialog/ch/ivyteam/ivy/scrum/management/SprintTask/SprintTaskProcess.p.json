@@ -70,6 +70,7 @@
             "out.sprint = ivy.repo.find(in.sprintId, Sprint.class) as Sprint;",
             "",
             "  for (SprintUser sprintMember : out.sprint.members) {",
+            "    ",
             "    if (sprintMember.userId.equals(in.userId)) {",
             "      out.member = sprintMember;",
             "      break;",

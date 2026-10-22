@@ -13,5 +13,9 @@
     "name" : "taskIndex",
     "type" : "Number",
     "modifiers" : [ ]
+  }, {
+    "name" : "save",
+    "type" : "Boolean",
+    "modifiers" : [ ]
   } ]
 }

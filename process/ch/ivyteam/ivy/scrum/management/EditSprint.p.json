@@ -1,0 +1,186 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
+  "id" : "1A15DE1798FD9F28",
+  "config" : {
+    "data" : "ch.ivyteam.ivy.scrum.management.EditSprintData"
+  },
+  "elements" : [ {
+      "id" : "f2",
+      "type" : "Script",
+      "name" : "Loads BusinessData -> Dataclass",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "",
+            "if (in.sprintId != null && !in.sprintId.isBlank()) {",
+            "    ",
+            "    Object existingSprint = ivy.repo.find(in.sprintId, Sprint.class);",
+            "    out.sprint = existingSprint as Sprint;",
+            "",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 720, "y" : 528 },
+        "size" : { "width" : 120, "height" : 62 },
+        "description" : "Loads up all the data from BusinessData thats needed for the default Values"
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f29" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "Script",
+      "name" : "Saving -> BusinessData",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.security.IUser;",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+            "",
+            "if (in.sprintId != null && !in.sprintId.isBlank()) {",
+            "  // Saves as existing sprint",
+            "",
+            "  Sprint existingSprint = ivy.repo.find(in.sprintId, Sprint.class) as Sprint;",
+            "",
+            "  existingSprint.sprintNumber = in.sprint.sprintNumber;",
+            "  existingSprint.startDate = in.sprint.startDate;",
+            "  existingSprint.endDate = in.sprint.endDate;",
+            "  existingSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
+            "  existingSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
+            "  existingSprint.versionCode = in.sprint.versionCode;",
+            "",
+            "  ivy.repo.save(existingSprint);",
+            "",
+            "  out.sprint = existingSprint;",
+            "",
+            "} ",
+            "",
+            "else {",
+            "  // Saves as new sprint",
+            "",
+            "  java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
+            "    .limit(10000)",
+            "    .execute()",
+            "    .getAll();",
+            "  int nextSortIndex = 0;",
+            "",
+            "  for (Sprint sprint : sprints) {",
+            "    if (sprint.sortIndex != null && sprint.sortIndex >= nextSortIndex) {",
+            "      nextSortIndex = sprint.sortIndex + 1;",
+            "    }",
+            "  }",
+            "",
+            "  Sprint newSprint = new Sprint();",
+            "  newSprint.sortIndex = nextSortIndex;",
+            "",
+            "  newSprint.sprintNumber = in.sprint.sprintNumber;",
+            "  newSprint.startDate = in.sprint.startDate;",
+            "  newSprint.endDate = in.sprint.endDate;",
+            "  newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
+            "  newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
+            "  newSprint.versionCode = in.sprint.versionCode;",
+            "",
+            "  //Inputs users from users.yaml",
+            "",
+            "  for (IUser user : ivy.security.users().paged()) {",
+            "",
+            "    SprintUser member = new SprintUser();",
+            "",
+            "    member.userId = user.getSecurityMemberId();",
+            "    member.userName = user.getName();",
+            "    member.name = user.getFullName();",
+            "    member.workingDays = -1;",
+            "    member.capacity = 0;",
+            "    newSprint.members.add(member);",
+            "  }",
+            "    ivy.repo.save(newSprint);",
+            "",
+            "    out.sprintId = ivy.repo.getId(newSprint);",
+            "    out.taskIndex = 0;",
+            "    ",
+            "    out.sprint = newSprint;",
+            "",
+            "",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1136, "y" : 528 },
+        "size" : { "width" : 120, "height" : 56 }
+      },
+      "connect" : [
+        { "id" : "f31", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f18",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f20" : "in.save",
+          "f24" : "!in.save"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1008, "y" : 528 }
+      },
+      "connect" : [
+        { "id" : "f20", "to" : "f5" },
+        { "id" : "f24", "to" : "f21" }
+      ]
+    }, {
+      "id" : "f21",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1008, "y" : 592 }
+      }
+    }, {
+      "id" : "f22",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1248, "y" : 528 }
+      }
+    }, {
+      "id" : "f27",
+      "type" : "RequestStart",
+      "name" : "EditSprint",
+      "config" : {
+        "signature" : "EditSprin"
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 528 }
+      },
+      "connect" : [
+        { "id" : "f28", "to" : "f2" }
+      ]
+    }, {
+      "id" : "f29",
+      "type" : "DialogCall",
+      "name" : "NewSprint",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start(ch.ivyteam.ivy.scrum.management.Sprint)",
+        "call" : {
+          "map" : {
+            "param.sprint" : "in.sprint"
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.save" : "result.save",
+            "out.sprint" : "in.sprint"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 880, "y" : 528 }
+      },
+      "connect" : [
+        { "id" : "f30", "to" : "f18", "color" : "default" }
+      ]
+    } ]
+}

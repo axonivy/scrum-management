@@ -41,55 +41,6 @@
         { "id" : "f4", "to" : "f1", "color" : "default" }
       ]
     }, {
-      "id" : "f5",
-      "type" : "RequestStart",
-      "name" : "NewSprint",
-      "config" : {
-        "signature" : "start2",
-        "input" : {
-          "params" : [
-            { "name" : "sprintId", "type" : "String", "desc" : "" }
-          ],
-          "map" : {
-            "out.sprintId" : "param.sprintId"
-          }
-        },
-        "request" : {
-          "name" : "New Sprint",
-          "description" : "Create a new sprint that will also be  shown on the Sprint Overview"
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 96, "y" : 152 }
-      },
-      "connect" : [
-        { "id" : "f8", "to" : "f6" }
-      ]
-    }, {
-      "id" : "f6",
-      "type" : "DialogCall",
-      "name" : "NewSprint",
-      "config" : {
-        "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start(String)",
-        "call" : {
-          "map" : {
-            "param.sprintId" : "in.sprintId"
-          }
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 224, "y" : 152 }
-      },
-      "connect" : [
-        { "id" : "f9", "to" : "f7" }
-      ]
-    }, {
-      "id" : "f7",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 352, "y" : 152 }
-      }
-    }, {
       "id" : "f10",
       "type" : "RequestStart",
       "name" : "SprintTask",
@@ -107,9 +58,6 @@
             "out.userName" : "param.userName"
           }
         },
-        "request" : {
-          "isVisibleOnStartList" : false
-        },
         "triggerable" : true,
         "task" : {
           "name" : "UserTask",
@@ -124,7 +72,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 232 },
+        "at" : { "x" : 96, "y" : 200 },
         "labelOffset" : { "x" : 17, "y" : 33 }
       },
       "connect" : [
@@ -144,7 +92,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 232 },
+        "at" : { "x" : 224, "y" : 200 },
         "description" : "A task that every user gets when a new sprit is created"
       },
       "connect" : [
@@ -154,7 +102,7 @@
       "id" : "f12",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 232 }
+        "at" : { "x" : 352, "y" : 200 }
       }
     } ]
 }
