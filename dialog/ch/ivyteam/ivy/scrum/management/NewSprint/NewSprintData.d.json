@@ -9,5 +9,9 @@
   }, {
     "name" : "sprintId",
     "modifiers" : [ ]
+  }, {
+    "name" : "taskIndex",
+    "type" : "Number",
+    "modifiers" : [ ]
   } ]
 }

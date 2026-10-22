@@ -1,0 +1,40 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "SprintTaskData",
+  "namespace" : "ch.ivyteam.ivy.scrum.management.SprintTask",
+  "fields" : [ {
+    "name" : "sprint",
+    "type" : "ch.ivyteam.ivy.scrum.management.Sprint",
+    "modifiers" : [ ]
+  }, {
+    "name" : "sprintId",
+    "modifiers" : [ ]
+  }, {
+    "name" : "userId",
+    "modifiers" : [ ]
+  }, {
+    "name" : "member",
+    "type" : "ch.ivyteam.ivy.scrum.management.SprintUser",
+    "modifiers" : [ ]
+  }, {
+    "name" : "absenceDays",
+    "type" : "List<java.time.LocalDate>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "workingDates",
+    "type" : "List<java.time.LocalDate>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "disabledDates",
+    "type" : "List<java.time.LocalDate>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "pickerStartDate",
+    "type" : "java.time.LocalDate",
+    "modifiers" : [ ]
+  }, {
+    "name" : "pickerEndDate",
+    "type" : "java.time.LocalDate",
+    "modifiers" : [ ]
+  } ]
+}

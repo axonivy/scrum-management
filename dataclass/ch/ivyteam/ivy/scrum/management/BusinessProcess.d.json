@@ -4,5 +4,9 @@
   "namespace" : "ch.ivyteam.ivy.scrum.management",
   "fields" : [ {
     "name" : "sprintId"
+  }, {
+    "name" : "userId"
+  }, {
+    "name" : "userName"
   } ]
 }

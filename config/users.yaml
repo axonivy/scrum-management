@@ -1,2 +1,33 @@
 # yaml-language-server: $schema=https://json-schema.axonivy.com/14.0/config/users.json
-Users: []
+Users:
+  - Name: Alexander
+    FullName: Alexander Suter
+  - Name: Alissa
+    FullName: Alissa Villiger
+  - Name: "Bruno "
+    FullName: Bruno Brütler
+  - Name: Christian
+    FullName: Christian Strebel
+  - Name: Colin
+    Password: "123"
+    FullName: Colin Graf
+  - Name: "Dominik "
+    FullName: Dominik Arnold
+  - Name: Elio
+    FullName: Elio Di Puma
+  - Name: Fabian
+    FullName: Fabian Heuberger
+  - Name: Jacek
+    FullName: Jacek Lajdecki
+  - Name: Louis
+    FullName: Louis Müller
+  - Name: Lukas G
+    FullName: Lukas Giger
+  - Name: Lukas L
+    FullName: Lukas Lieb
+  - Name: Reguel
+    FullName: Reguel Wermelinger
+  - Name: Reto
+    FullName: Reto Weiss
+  - Name: "Tobias "
+    FullName: Tobias Gretler
