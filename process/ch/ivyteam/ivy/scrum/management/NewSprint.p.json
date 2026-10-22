@@ -139,8 +139,6 @@
             "    .getAll();",
             "  int nextSortIndex = 0;",
             "",
-            "  ivy.log.info(in.sprint);",
-            "",
             "  for (Sprint sprint : sprints) {",
             "    if (sprint.sortIndex != null && sprint.sortIndex >= nextSortIndex) {",
             "      nextSortIndex = sprint.sortIndex + 1;",

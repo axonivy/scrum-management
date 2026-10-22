@@ -198,10 +198,7 @@
         "output" : {
           "code" : [
             "out.save = true;",
-            "out.sprint = in.sprint;",
-            "",
-            "ivy.log.info(in.sprint);",
-            "ivy.log.info(out.sprint);"
+            "out.sprint = in.sprint;"
           ]
         }
       },
