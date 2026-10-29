@@ -8,11 +8,11 @@
     "modifiers" : [ ]
   }, {
     "name" : "totalPoints",
-    "type" : "Number",
+    "type" : "java.lang.Double",
     "modifiers" : [ ]
   }, {
     "name" : "sprintIndex",
-    "type" : "Number",
+    "type" : "java.lang.Integer",
     "modifiers" : [ ]
   } ]
 }

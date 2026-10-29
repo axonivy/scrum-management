@@ -14,7 +14,7 @@
         "guid" : "1A03D30BFCB15B14"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 64 }
+        "at" : { "x" : 104, "y" : 64 }
       },
       "connect" : [
         { "id" : "f39", "to" : "f38" }
@@ -74,15 +74,10 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.SprintUser; ",
-            "in.totalpoints = 0; ",
-            "for (SprintUser member : in.sprint.members) { ",
-            "   ",
-            "   if (member.workingDays.intValue() >= 0) {",
-            "      in.totalpoints = in.totalpoints + member.workingDays.doubleValue() * (member.capacity.doubleValue() / 100) * in.sprint.sprintPointsPerDay;",
-            "   }",
-            "    ",
-            "  }"
+            "",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.TotalPoints;",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "out.totalPoints = TotalPoints.calculateTotalPoints(in.sprint);"
           ]
         }
       },
@@ -106,36 +101,12 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import java.util.Random;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
             "",
-            "List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "    .limit(10000)",
-            "    .execute()",
-            "    .getAll();",
-            "",
-            "    for (int i = 0; i < sprints.size() - 1; i++) {",
-            "    for (int j = i + 1; j < sprints.size(); j++) {",
-            "        if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
-            "            Sprint temp = sprints.get(i);",
-            "            sprints.set(i, sprints.get(j));",
-            "            sprints.set(j, temp);",
-            "            }",
-            "        }",
-            "    }",
-            "",
-            "out.sprint = in.sprint;",
-            "out.sprintIndex = in.sprintIndex;",
-            "",
-            "",
-            "if (!sprints.isEmpty() && in.sprintIndex < sprints.size() -1) {",
-            "    int newIndex = in.sprintIndex +1;",
-            "    ",
-            "    out.sprintIndex = newIndex;",
-            "    out.sprint = sprints.get(newIndex);",
-            "    ",
-            "}"
+            "NextSprint.Result result = NextSprint.nextSprint(in.sprint , in.sprintIndex);",
+            "out.sprint = result.sprint();",
+            "out.sprintIndex = result.sprintIndex();"
           ]
         }
       },
@@ -187,37 +158,13 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LastSprint;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import java.util.Random;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
             "",
-            "",
-            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "    .limit(10000)",
-            "    .execute()",
-            "    .getAll();",
-            "",
-            "    for (int i = 0; i < sprints.size() - 1; i++) {",
-            "    for (int j = i + 1; j < sprints.size(); j++) {",
-            "        if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
-            "            Sprint temp = sprints.get(i);",
-            "            sprints.set(i, sprints.get(j));",
-            "            sprints.set(j, temp);",
-            "            }",
-            "        }",
-            "    }",
-            "",
-            "out.sprint = in.sprint;",
-            "out.sprintIndex = in.sprintIndex;",
-            "",
-            "",
-            "if (!sprints.isEmpty() && in.sprintIndex > 0) {",
-            "    int newIndex = in.sprintIndex -1;",
-            "    ",
-            "    out.sprintIndex = newIndex;",
-            "    out.sprint = sprints.get(newIndex);",
-            "    ",
-            "}"
+            "NextSprint.Result result = LastSprint.lastSprint(in.sprint , in.sprintIndex);",
+            "out.sprint = result.sprint();",
+            "out.sprintIndex = result.sprintIndex();"
           ]
         }
       },
@@ -242,30 +189,13 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.InitializingBusinessdata;",
             "",
+            "NextSprint.Result result = InitializingBusinessdata.SortingBusinessdata(in.sprint , in.sprintIndex);",
             "",
-            "java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "    .limit(10000)",
-            "    .execute()",
-            "    .getAll();",
-            "",
-            "    for (int i = 0; i < sprints.size() - 1; i++) {",
-            "    for (int j = i + 1; j < sprints.size(); j++) {",
-            "        if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
-            "            Sprint temp = sprints.get(i);",
-            "            sprints.set(i, sprints.get(j));",
-            "            sprints.set(j, temp);",
-            "            }",
-            "        }",
-            "    }",
-            "",
-            "if (!sprints.isEmpty()) {",
-            "    int lastIndex = sprints.size() - 1;",
-            "    in.sprintIndex = lastIndex;",
-            "    in.sprint = sprints.get(lastIndex);",
-            "}"
+            "out.sprint = result.sprint();",
+            "out.sprintIndex = result.sprintIndex();"
           ]
         }
       },
@@ -303,8 +233,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "ivy.repo.save(in.sprint);",
-            "out.sprint = in.sprint;"
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SaveUserData;",
+            "SaveUserData.saveUserData(in.sprint);"
           ]
         }
       },

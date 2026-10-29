@@ -39,6 +39,11 @@
       "name" : "Dialog",
       "config" : {
         "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start(ch.ivyteam.ivy.scrum.management.Sprint)",
+        "call" : {
+          "map" : {
+            "param.sprint" : "in.sprint"
+          }
+        },
         "output" : {
           "map" : {
             "out" : "in",
@@ -60,9 +65,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.sprint.SprintUtil;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.create.CreateSprint;",
             "",
-            "out.sprint = SprintUtil.newSprint();"
+            "out.sprint = CreateSprint.newSprint();"
           ]
         }
       },
@@ -98,54 +103,15 @@
     }, {
       "id" : "f18",
       "type" : "Script",
-      "name" : "Saving -> BusinessData",
+      "name" : "Saving in BusinessData",
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.security.IUser;",
-            "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "  java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "    .limit(10000)",
-            "    .execute()",
-            "    .getAll();",
-            "  int nextSortIndex = 0;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.create.SavingBusinessData;",
             "",
-            "  for (Sprint sprint : sprints) {",
-            "    if (sprint.sortIndex != null && sprint.sortIndex >= nextSortIndex) {",
-            "      nextSortIndex = sprint.sortIndex + 1;",
-            "    }",
-            "  }",
-            "",
-            "  Sprint newSprint = new Sprint();",
-            "  newSprint.sortIndex = nextSortIndex;",
-            "",
-            "  newSprint.sprintNumber = in.sprint.sprintNumber;",
-            "  newSprint.startDate = in.sprint.startDate;",
-            "  newSprint.endDate = in.sprint.endDate;",
-            "  newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
-            "  newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
-            "  newSprint.versionCode = in.sprint.versionCode;",
-            "",
-            "  //Inputs users from users.yaml",
-            "",
-            "  for (IUser user : ivy.security.users().paged()) {",
-            "",
-            "    SprintUser member = new SprintUser();",
-            "",
-            "    member.userId = user.getSecurityMemberId();",
-            "    member.userName = user.getName();",
-            "    member.name = user.getFullName();",
-            "    member.workingDays = -1;",
-            "    member.capacity = 0;",
-            "    newSprint.members.add(member);",
-            "  }",
-            "    ivy.repo.save(newSprint);",
-            "",
-            "    out.sprintId = ivy.repo.getId(newSprint);",
-            "    out.taskIndex = 0;",
-            "    ",
-            "    out.sprint = newSprint;"
+            "out.sprint = SavingBusinessData.savedSprint(in.sprint);",
+            "out.sprintId = ivy.repo.getId(out.sprint);",
+            "out.taskIndex = 0;"
           ]
         }
       },

@@ -1,4 +1,4 @@
-package ch.ivyteam.ivy.scrum.management.sprint;
+package ch.ivyteam.ivy.scrum.management.sprint.create;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scripting.objects.Duration;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 
-public class SprintUtil {
+public class CreateSprint {
   public static Sprint newSprint() {
     List<Sprint> sprints = Ivy.repo().search(Sprint.class)
         .limit(10000)
@@ -31,7 +31,6 @@ public class SprintUtil {
       nextSprint.setEndDate(lastSprint.getEndDate().add(new Duration("P21D")));
       nextSprint.setVersionCode(lastSprint.getVersionCode());
       nextSprint.setSprintPointsPerDay(lastSprint.getSprintPointsPerDay());
-      nextSprint.setMaxWorkingDays(12);
 
     }
     return nextSprint;
