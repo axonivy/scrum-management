@@ -1,7 +1,5 @@
 package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 
-import java.util.List;
-
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 
@@ -9,7 +7,7 @@ public class NextSprint {
   public record Result(Sprint sprint, Integer sprintIndex) {}
   public static Result nextSprint(Sprint sprint, Integer sprintIndex) {
 
-    List<Sprint> sprints = Ivy.repo().search(Sprint.class)
+    java.util.List<Sprint> sprints = Ivy.repo().search(Sprint.class)
         .limit(10000)
         .execute()
         .getAll();

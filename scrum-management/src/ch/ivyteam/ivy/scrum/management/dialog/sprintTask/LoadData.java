@@ -12,7 +12,7 @@ public class LoadData {
       }
 
     }
-    throw new IllegalArgumentException("There is no sprint neither a Sprint member");
+    throw new IllegalStateException("There is no sprint neither a Sprint member");
   }
 
   public static Sprint GetSprint(String sprintId) {
