@@ -22,14 +22,8 @@ public class SavingBusinessData {
       }
     }
 
-    Sprint newSprint = new Sprint();
+    Sprint newSprint = sprint;
     newSprint.setSortIndex(nextSortIndex);
-    newSprint.setSprintNumber(sprint.getSprintNumber());
-    newSprint.setStartDate(sprint.getStartDate());
-    newSprint.setEndDate(sprint.getEndDate());
-    newSprint.setMaxWorkingDays(sprint.getMaxWorkingDays());
-    newSprint.setSprintPointsPerDay(sprint.getSprintPointsPerDay());
-    newSprint.setVersionCode(sprint.getVersionCode());
 
     // Inputs users from users.yaml
     newSprint.setMembers(ch.ivyteam.ivy.scripting.objects.List.create(SprintUser.class));
