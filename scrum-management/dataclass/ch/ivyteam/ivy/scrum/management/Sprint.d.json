@@ -9,10 +9,10 @@
     "type" : "Number"
   }, {
     "name" : "startDate",
-    "type" : "Date"
+    "type" : "java.util.Date"
   }, {
     "name" : "endDate",
-    "type" : "Date"
+    "type" : "java.util.Date"
   }, {
     "name" : "members",
     "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>"
