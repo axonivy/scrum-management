@@ -12,10 +12,10 @@ public class CalculateMaxWorkingDays {
     if (sprint.getStartDate() != null && sprint.getEndDate() != null) {
 
       Calendar currentDate = Calendar.getInstance();
-      currentDate.setTime(sprint.getStartDate().toJavaDate());
+      currentDate.setTime(sprint.getStartDate());
 
       Calendar endDate = Calendar.getInstance();
-      endDate.setTime(sprint.getEndDate().toJavaDate());
+      endDate.setTime(sprint.getEndDate());
 
       while (!currentDate.after(endDate)) {
 
