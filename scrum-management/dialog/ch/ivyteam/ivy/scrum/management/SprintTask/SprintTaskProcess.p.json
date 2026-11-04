@@ -27,7 +27,7 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f17", "to" : "f6" }
+        { "id" : "f17", "to" : "S0", "via" : [ { "x" : 96, "y" : 128 }, { "x" : 288, "y" : 128 } ] }
       ]
     }, {
       "id" : "f1",
@@ -54,32 +54,6 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 160 }
       }
-    }, {
-      "id" : "f6",
-      "type" : "Script",
-      "name" : "Load data",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.LoadData;",
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "",
-            "out.sprintId = in.sprintId;",
-            "out.userId = in.userId;",
-            "",
-            "out.sprint = LoadData.GetSprint(in.sprintId);",
-            "out.member = LoadData.GetSprintUser(out.sprint, in.userId);"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 200, "y" : 64 },
-        "description" : "Loads data for the user that is assigned to this task"
-      },
-      "connect" : [
-        { "id" : "f18", "to" : "f16" }
-      ]
     }, {
       "id" : "f9",
       "type" : "Script",
@@ -120,23 +94,79 @@
         { "id" : "f15", "to" : "f9" }
       ]
     }, {
-      "id" : "f16",
-      "type" : "Script",
-      "name" : "Calculate workingdays",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.CalculateWorkingDays;",
-            "out.workingDates = CalculateWorkingDays.WorkingDates(in.sprint);"
+      "id" : "S0",
+      "type" : "EmbeddedProcess",
+      "name" : "Loads and Calculates Data",
+      "elements" : [ {
+          "id" : "S0-g0",
+          "type" : "EmbeddedStart",
+          "name" : "in",
+          "visual" : {
+            "at" : { "x" : 240, "y" : 126 }
+          },
+          "parentConnector" : "f17",
+          "connect" : [
+            { "id" : "S0-f6", "to" : "S0-f2" }
           ]
-        }
-      },
+        }, {
+          "id" : "S0-g1",
+          "type" : "EmbeddedEnd",
+          "name" : "out",
+          "visual" : {
+            "at" : { "x" : 416, "y" : 62 }
+          },
+          "parentConnector" : "f20"
+        }, {
+          "id" : "S0-f2",
+          "type" : "Script",
+          "name" : "Load data",
+          "config" : {
+            "output" : {
+              "code" : [
+                "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.LoadData;",
+                "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+                "import ch.ivyteam.ivy.scrum.management.Sprint;",
+                "",
+                "out.sprintId = in.sprintId;",
+                "out.userId = in.userId;",
+                "",
+                "out.sprint = LoadData.GetSprint(in.sprintId);",
+                "out.member = LoadData.GetSprintUser(out.sprint, in.userId);"
+              ]
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 152, "y" : 62 },
+            "description" : "Loads data for the user that is assigned to this task"
+          },
+          "connect" : [
+            { "id" : "S0-f3", "to" : "S0-f4" }
+          ]
+        }, {
+          "id" : "S0-f4",
+          "type" : "Script",
+          "name" : "Calculate workingdays",
+          "config" : {
+            "output" : {
+              "code" : [
+                "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.CalculateWorkingDays;",
+                "out.workingDates = CalculateWorkingDays.WorkingDates(in.sprint);"
+              ]
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 328, "y" : 62 },
+            "description" : "Calculates all working days in the sprint automatically and prints them out for the datepicker"
+          },
+          "connect" : [
+            { "id" : "S0-f5", "to" : "S0-g1" }
+          ]
+        } ],
       "visual" : {
-        "at" : { "x" : 376, "y" : 64 },
-        "description" : "Calculates all working days in the sprint automatically and prints them out for the datepicker"
+        "at" : { "x" : 288, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f19", "to" : "f1" }
+        { "id" : "f20", "to" : "f1" }
       ]
     } ]
 }
