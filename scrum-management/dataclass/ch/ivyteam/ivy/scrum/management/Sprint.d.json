@@ -21,7 +21,7 @@
     "type" : "java.lang.Float"
   }, {
     "name" : "sprintPointsPerDay",
-    "type" : "Number"
+    "type" : "java.lang.Double"
   }, {
     "name" : "sortIndex",
     "type" : "java.lang.Integer"
