@@ -1,0 +1,229 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/process.json",
+  "id" : "1A15DCADF0A5B4C4",
+  "config" : {
+    "data" : "ch.ivyteam.ivy.scrum.management.NewSprintData"
+  },
+  "elements" : [ {
+      "id" : "f3",
+      "type" : "RequestStart",
+      "name" : "NewSprint",
+      "config" : {
+        "signature" : "start2",
+        "input" : {
+          "params" : [
+            { "name" : "sprintId", "type" : "String", "desc" : "" }
+          ],
+          "map" : { }
+        },
+        "request" : {
+          "name" : "New Sprint",
+          "description" : "Create a new sprint that will also be  shown on the Sprint Overview"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 120, "y" : 136 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 984, "y" : 136 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "DialogCall",
+      "name" : "Dialog",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.scrum.management.NewSprint:start(ch.ivyteam.ivy.scrum.management.Sprint)",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.save" : "result.save",
+            "out.sprint" : "result.sprint"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 136 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f12" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "Script",
+      "name" : "Create Sprint",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "",
+            "    java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
+            "        .limit(10000)",
+            "        .execute()",
+            "        .getAll();",
+            "",
+            "    for (int i = 0; i < sprints.size() - 1; i++) {",
+            "        for (int j = i + 1; j < sprints.size(); j++) {",
+            "            if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
+            "                Sprint temp = sprints.get(i);",
+            "                sprints.set(i, sprints.get(j));",
+            "                sprints.set(j, temp);",
+            "            }",
+            "        }",
+            "    }",
+            "    ",
+            "if (!sprints.isEmpty()) {",
+            "",
+            "    Sprint lastSprint = sprints.getLast() as Sprint;",
+            "    Sprint nextSprint = new Sprint();",
+            "    nextSprint.sprintNumber = lastSprint.sprintNumber + 1;",
+            "    nextSprint.startDate = lastSprint.startDate.add(new Duration(\"P21D\"));",
+            "    nextSprint.endDate = lastSprint.endDate.add(new Duration(\"P21D\"));",
+            "    nextSprint.versionCode = lastSprint.versionCode;",
+            "    nextSprint.sprintPointsPerDay = lastSprint.sprintPointsPerDay;",
+            "    nextSprint.maxWorkingDays = 12;",
+            "",
+            "    out.sprint = nextSprint;",
+            "",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 136 },
+        "description" : "Create a new sprint and get old values"
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f6", "color" : "default" }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f29" : "in.save",
+          "f15" : "!in.save"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 136 }
+      },
+      "connect" : [
+        { "id" : "f15", "to" : "f14" },
+        { "id" : "f29", "to" : "f18" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 512, "y" : 208 }
+      }
+    }, {
+      "id" : "f18",
+      "type" : "Script",
+      "name" : "Saving -> BusinessData",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.security.IUser;",
+            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
+            "  java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
+            "    .limit(10000)",
+            "    .execute()",
+            "    .getAll();",
+            "  int nextSortIndex = 0;",
+            "",
+            "  for (Sprint sprint : sprints) {",
+            "    if (sprint.sortIndex != null && sprint.sortIndex >= nextSortIndex) {",
+            "      nextSortIndex = sprint.sortIndex + 1;",
+            "    }",
+            "  }",
+            "",
+            "  Sprint newSprint = new Sprint();",
+            "  newSprint.sortIndex = nextSortIndex;",
+            "",
+            "  newSprint.sprintNumber = in.sprint.sprintNumber;",
+            "  newSprint.startDate = in.sprint.startDate;",
+            "  newSprint.endDate = in.sprint.endDate;",
+            "  newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
+            "  newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
+            "  newSprint.versionCode = in.sprint.versionCode;",
+            "",
+            "  //Inputs users from users.yaml",
+            "",
+            "  for (IUser user : ivy.security.users().paged()) {",
+            "",
+            "    SprintUser member = new SprintUser();",
+            "",
+            "    member.userId = user.getSecurityMemberId();",
+            "    member.userName = user.getName();",
+            "    member.name = user.getFullName();",
+            "    member.workingDays = -1;",
+            "    member.capacity = 0;",
+            "    newSprint.members.add(member);",
+            "  }",
+            "    ivy.repo.save(newSprint);",
+            "",
+            "    out.sprintId = ivy.repo.getId(newSprint);",
+            "    out.taskIndex = 0;",
+            "    ",
+            "    out.sprint = newSprint;"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 640, "y" : 136 },
+        "size" : { "width" : 120, "height" : 56 },
+        "description" : "Saving Sprint in BusinessData and setting things up"
+      },
+      "connect" : [
+        { "id" : "f30", "to" : "f31" }
+      ]
+    }, {
+      "id" : "f31",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f34" : "in.taskIndex.intValue() < in.sprint.members.size()",
+          "f32" : "in.taskIndex.intValue() >= in.sprint.members.size()"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 824, "y" : 136 }
+      },
+      "connect" : [
+        { "id" : "f32", "to" : "f5", "color" : "default" },
+        { "id" : "f34", "to" : "f33" }
+      ]
+    }, {
+      "id" : "f33",
+      "type" : "TriggerCall",
+      "name" : "Task for Users",
+      "config" : {
+        "processCall" : "ch/ivyteam/ivy/scrum/management/BusinessProcess:SprintT(String,String,String)",
+        "call" : {
+          "map" : {
+            "param.sprintId" : "in.sprintId",
+            "param.userId" : "param.userId = in.sprint.members.get(in.taskIndex.intValue()).userId",
+            "param.userName" : "param.userName = in.sprint.members.get(in.taskIndex.intValue()).userName"
+          }
+        },
+        "output" : {
+          "code" : "out.taskIndex = in.taskIndex.intValue() + 1;"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 824, "y" : 272 },
+        "description" : "Loops trough every user and makes every user a task"
+      },
+      "connect" : [
+        { "id" : "f35", "to" : "f31", "via" : [ { "x" : 912, "y" : 272 }, { "x" : 912, "y" : 144 } ] }
+      ]
+    } ]
+}

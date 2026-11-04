@@ -261,7 +261,6 @@
             "        }",
             "    }",
             "",
-            "ivy.log.info(!sprints.isEmpty());",
             "if (!sprints.isEmpty()) {",
             "    int lastIndex = sprints.size() - 1;",
             "    in.sprintIndex = lastIndex;",

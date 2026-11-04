@@ -1,0 +1,20 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "NewSprintData",
+  "namespace" : "ch.ivyteam.ivy.scrum.management",
+  "fields" : [ {
+    "name" : "sprint",
+    "type" : "ch.ivyteam.ivy.scrum.management.Sprint"
+  }, {
+    "name" : "save",
+    "type" : "Boolean"
+  }, {
+    "name" : "sprintId"
+  }, {
+    "name" : "taskIndex",
+    "type" : "Number"
+  }, {
+    "name" : "members",
+    "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>"
+  } ]
+}

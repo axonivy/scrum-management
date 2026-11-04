@@ -9,15 +9,25 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "HtmlDialogStart",
-      "name" : "start(String)",
+      "name" : "start(Sprint)",
       "config" : {
         "signature" : "start",
         "input" : {
           "params" : [
-            { "name" : "sprintId", "type" : "String", "desc" : "" }
+            { "name" : "sprint", "type" : "ch.ivyteam.ivy.scrum.management.Sprint", "desc" : "" }
           ],
           "map" : {
-            "out.sprintId" : "param.sprintId"
+            "out.sprint" : "param.sprint"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "save", "type" : "Boolean", "desc" : "" },
+            { "name" : "sprint", "type" : "ch.ivyteam.ivy.scrum.management.Sprint", "desc" : "" }
+          ],
+          "map" : {
+            "result.save" : "in.save",
+            "result.sprint" : "in.sprint"
           }
         },
         "guid" : "1A066D569E736DB6"
@@ -26,7 +36,7 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f29", "to" : "f15" }
+        { "id" : "f52", "to" : "f1" }
       ]
     }, {
       "id" : "f1",
@@ -34,92 +44,6 @@
       "visual" : {
         "at" : { "x" : 352, "y" : 64 }
       }
-    }, {
-      "id" : "f6",
-      "type" : "Script",
-      "name" : "Saving -> BusinessData",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.security.IUser;",
-            "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.SprintUser;",
-            "",
-            "if (in.sprintId != null && !in.sprintId.isBlank()) {",
-            "  // Saves as existing sprint",
-            "",
-            "  Sprint existingSprint = ivy.repo.find(in.sprintId, Sprint.class) as Sprint;",
-            "",
-            "  existingSprint.sprintNumber = in.sprint.sprintNumber;",
-            "  existingSprint.startDate = in.sprint.startDate;",
-            "  existingSprint.endDate = in.sprint.endDate;",
-            "  existingSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
-            "  existingSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
-            "  existingSprint.versionCode = in.sprint.versionCode;",
-            "",
-            "  ivy.repo.save(existingSprint);",
-            "",
-            "  out.sprint = existingSprint;",
-            "",
-            "} ",
-            "",
-            "else {",
-            "  // Saves as new sprint",
-            "",
-            "  java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "    .limit(10000)",
-            "    .execute()",
-            "    .getAll();",
-            "  int nextSortIndex = 0;",
-            "",
-            "  for (Sprint sprint : sprints) {",
-            "    if (sprint.sortIndex != null && sprint.sortIndex >= nextSortIndex) {",
-            "      nextSortIndex = sprint.sortIndex + 1;",
-            "    }",
-            "  }",
-            "",
-            "  Sprint newSprint = new Sprint();",
-            "  newSprint.sortIndex = nextSortIndex;",
-            "",
-            "  newSprint.sprintNumber = in.sprint.sprintNumber;",
-            "  newSprint.startDate = in.sprint.startDate;",
-            "  newSprint.endDate = in.sprint.endDate;",
-            "  newSprint.maxWorkingDays = in.sprint.maxWorkingDays;",
-            "  newSprint.sprintPointsPerDay = in.sprint.sprintPointsPerDay;",
-            "  newSprint.versionCode = in.sprint.versionCode;",
-            "",
-            "  //Inputs users from users.yaml",
-            "",
-            "  for (IUser user : ivy.security.users().paged()) {",
-            "",
-            "    SprintUser member = new SprintUser();",
-            "",
-            "    member.userId = user.getSecurityMemberId();",
-            "    member.userName = user.getName();",
-            "    member.name = user.getFullName();",
-            "    member.workingDays = -1;",
-            "    member.capacity = 0;",
-            "    newSprint.members.add(member);",
-            "  }",
-            "    ivy.repo.save(newSprint);",
-            "",
-            "    out.sprintId = ivy.repo.getId(newSprint);",
-            "    out.taskIndex = 0;",
-            "    ",
-            "    out.sprint = newSprint;",
-            "",
-            "",
-            "}"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 192, "y" : 168 },
-        "size" : { "width" : 120, "height" : 56 }
-      },
-      "connect" : [
-        { "id" : "f38", "to" : "f31" }
-      ]
     }, {
       "id" : "f8",
       "type" : "HtmlDialogEventStart",
@@ -132,14 +56,8 @@
         "description" : "Saves the dataclasses in business data class and closes it shortly after"
       },
       "connect" : [
-        { "id" : "f37", "to" : "f6" }
+        { "id" : "f47", "to" : "f48" }
       ]
-    }, {
-      "id" : "f12",
-      "type" : "HtmlDialogExit",
-      "visual" : {
-        "at" : { "x" : 448, "y" : 168 }
-      }
     }, {
       "id" : "f15",
       "type" : "Script",
@@ -192,13 +110,10 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 64 },
+        "at" : { "x" : 616, "y" : 936 },
         "size" : { "width" : 120, "height" : 62 },
         "description" : "Loads up all the data from BusinessData thats needed for the default Values"
-      },
-      "connect" : [
-        { "id" : "f16", "to" : "f1", "color" : "default" }
-      ]
+      }
     }, {
       "id" : "f17",
       "type" : "HtmlDialogEventStart",
@@ -207,17 +122,11 @@
         "guid" : "1A0CD5E73949029E"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 464 }
+        "at" : { "x" : 96, "y" : 272 }
       },
       "connect" : [
-        { "id" : "f19", "to" : "f18" }
+        { "id" : "f44", "to" : "f50" }
       ]
-    }, {
-      "id" : "f18",
-      "type" : "HtmlDialogExit",
-      "visual" : {
-        "at" : { "x" : 352, "y" : 464 }
-      }
     }, {
       "id" : "f22",
       "type" : "HtmlDialogMethodStart",
@@ -227,7 +136,7 @@
         "guid" : "1A11143F9DBCD818"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 552 },
+        "at" : { "x" : 96, "y" : 384 },
         "labelOffset" : { "x" : 3, "y" : 35 }
       },
       "connect" : [
@@ -237,7 +146,7 @@
       "id" : "f23",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 552 }
+        "at" : { "x" : 352, "y" : 384 }
       }
     }, {
       "id" : "f25",
@@ -276,68 +185,54 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 552 },
+        "at" : { "x" : 224, "y" : 384 },
         "description" : "Calculates the max working days excludes review day and weekends (saturday, sunday)"
       },
       "connect" : [
         { "id" : "f26", "to" : "f23", "color" : "default" }
       ]
     }, {
-      "id" : "f31",
-      "type" : "Alternative",
-      "name" : "Is there still users",
+      "id" : "f48",
+      "type" : "Script",
       "config" : {
-        "conditions" : {
-          "f34" : "in.taskIndex.intValue() < in.sprint.members.size()",
-          "f39" : "in.taskIndex.intValue() >= in.sprint.members.size()"
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 320, "y" : 168 },
-        "description" : "checks if there is still users left over who dont have a task yet"
-      },
-      "connect" : [
-        { "id" : "f34", "to" : "f41" },
-        { "id" : "f39", "to" : "f12" }
-      ]
-    }, {
-      "id" : "f33",
-      "type" : "TriggerCall",
-      "name" : "task for user",
-      "config" : {
-        "processCall" : "ch/ivyteam/ivy/scrum/management/BusinessProcess:SprintT(String,String,String)",
-        "call" : {
-          "map" : {
-            "param.sprintId" : "in.sprintId",
-            "param.userId" : "in.sprint.members.get(in.taskIndex.intValue()).userId",
-            "param.userName" : "in.sprint.members.get(in.taskIndex.intValue()).userName"
-          }
-        },
         "output" : {
-          "code" : "out.taskIndex = in.taskIndex.intValue() + 1;"
+          "code" : [
+            "out.save = true;",
+            "out.sprint = in.sprint;"
+          ]
         }
       },
       "visual" : {
-        "at" : { "x" : 320, "y" : 360 },
-        "description" : "makes a task with the correct datas for each users that exists"
+        "at" : { "x" : 224, "y" : 168 }
       },
       "connect" : [
-        { "id" : "f40", "to" : "f31", "via" : [ { "x" : 320, "y" : 264 }, { "x" : 400, "y" : 264 }, { "x" : 400, "y" : 176 } ] }
+        { "id" : "f55", "to" : "f57" }
       ]
     }, {
-      "id" : "f35",
-      "type" : "HtmlDialogExit",
+      "id" : "f50",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : "out.save = false;"
+        }
+      },
       "visual" : {
-        "at" : { "x" : 448, "y" : 264 }
+        "at" : { "x" : 224, "y" : 272 }
+      },
+      "connect" : [
+        { "id" : "f56", "to" : "f53" }
+      ]
+    }, {
+      "id" : "f53",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 272 }
       }
     }, {
-      "id" : "f41",
-      "type" : "Alternative",
+      "id" : "f57",
+      "type" : "HtmlDialogExit",
       "visual" : {
-        "at" : { "x" : 320, "y" : 264 }
-      },
-      "connect" : [
-        { "id" : "f42", "to" : "f33", "color" : "default" }
-      ]
+        "at" : { "x" : 360, "y" : 168 }
+      }
     } ]
 }
