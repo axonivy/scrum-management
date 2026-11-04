@@ -13,10 +13,12 @@ public class SavingBusinessData {
         .execute()
         .getAll();
     int nextSortIndex = 0;
+    Sprint previousSprint = null;
 
     for (Sprint existingSprint : sprints) {
       if (existingSprint.getSortIndex() != null && existingSprint.getSortIndex() >= nextSortIndex) {
         nextSortIndex = existingSprint.getSortIndex() + 1;
+        previousSprint = existingSprint;
       }
     }
 
@@ -40,6 +42,13 @@ public class SavingBusinessData {
       member.setName(user.getFullName());
       member.setWorkingDays(-1);
       member.setCapacity(0);
+      if (previousSprint != null) {
+        for (SprintUser old : previousSprint.getMembers()) {
+          if (old.getUserId().equals(member.getUserId())) {
+            member.setCapacity(old.getCapacity());
+          }
+        }
+      }
       newSprint.getMembers().add(member);
     }
     Ivy.repo().save(newSprint);
