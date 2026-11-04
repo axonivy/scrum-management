@@ -4,14 +4,13 @@ Users:
     FullName: Alexander Suter
   - Name: Alissa
     FullName: Alissa Villiger
-  - Name: "Bruno "
+  - Name: Bruno
     FullName: Bruno Brütler
   - Name: Christian
     FullName: Christian Strebel
   - Name: Colin
-    Password: "123"
     FullName: Colin Graf
-  - Name: "Dominik "
+  - Name: Dominik
     FullName: Dominik Arnold
   - Name: Elio
     FullName: Elio Di Puma
@@ -29,5 +28,5 @@ Users:
     FullName: Reguel Wermelinger
   - Name: Reto
     FullName: Reto Weiss
-  - Name: "Tobias "
+  - Name: Tobias
     FullName: Tobias Gretler
