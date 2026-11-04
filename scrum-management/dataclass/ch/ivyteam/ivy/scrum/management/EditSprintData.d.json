@@ -10,8 +10,5 @@
   }, {
     "name" : "sprint",
     "type" : "ch.ivyteam.ivy.scrum.management.Sprint"
-  }, {
-    "name" : "taskIndex",
-    "type" : "Number"
   } ]
 }
