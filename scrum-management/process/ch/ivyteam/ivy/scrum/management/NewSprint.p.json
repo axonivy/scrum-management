@@ -60,37 +60,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.Sprint;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.SprintUtil;",
             "",
-            "    java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "        .limit(10000)",
-            "        .execute()",
-            "        .getAll();",
-            "",
-            "    for (int i = 0; i < sprints.size() - 1; i++) {",
-            "        for (int j = i + 1; j < sprints.size(); j++) {",
-            "            if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
-            "                Sprint temp = sprints.get(i);",
-            "                sprints.set(i, sprints.get(j));",
-            "                sprints.set(j, temp);",
-            "            }",
-            "        }",
-            "    }",
-            "    ",
-            "if (!sprints.isEmpty()) {",
-            "",
-            "    Sprint lastSprint = sprints.getLast() as Sprint;",
-            "    Sprint nextSprint = new Sprint();",
-            "    nextSprint.sprintNumber = lastSprint.sprintNumber + 1;",
-            "    nextSprint.startDate = lastSprint.startDate.add(new Duration(\"P21D\"));",
-            "    nextSprint.endDate = lastSprint.endDate.add(new Duration(\"P21D\"));",
-            "    nextSprint.versionCode = lastSprint.versionCode;",
-            "    nextSprint.sprintPointsPerDay = lastSprint.sprintPointsPerDay;",
-            "    nextSprint.maxWorkingDays = 12;",
-            "",
-            "    out.sprint = nextSprint;",
-            "",
-            "}"
+            "out.sprint = SprintUtil.newSprint();"
           ]
         }
       },
