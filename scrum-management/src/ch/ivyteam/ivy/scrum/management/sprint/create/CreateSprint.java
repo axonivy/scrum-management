@@ -20,7 +20,7 @@ public class CreateSprint {
     Sprint nextSprint = new Sprint();
     if (!sprints.isEmpty()) {
       Sprint lastSprint = sprints.getLast();
-      nextSprint.setSprintNumber(lastSprint.getSprintNumber().longValue() + 1);
+      nextSprint.setSprintNumber(lastSprint.getSprintNumber().doubleValue() + 1);
       nextSprint.setStartDate(DateUtils.addDays(lastSprint.getStartDate(), 21));
       nextSprint.setEndDate(DateUtils.addDays(lastSprint.getEndDate(), 21));
       nextSprint.setVersionCode(lastSprint.getVersionCode());
