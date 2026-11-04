@@ -13,7 +13,7 @@
       <ui:define name="content">
         <style type="text/css">
           .sprint-calender td:not(.ui-state-disabled) a:not(.ui-state-active) {
-            background-color: rgba(0, 255, 47, 0.35) !important;
+            background-color: rgba(0, 255, 47, 0.35);
           }
           .sprint-calender td:not(.ui-state-disabled) a.ui-state-active {
             background-color: rgba(228, 0, 0, 0.35) !important;
@@ -89,7 +89,9 @@
               id="maxWorkingDays"
               maxValue="100"
             />
-            <span style="float: right; color: var(--surface-600)">Percentage of your working capacity</span>
+            <span style="float: right; color: var(--surface-600)"
+              >Percentage of your working capacity</span
+            >
           </p:card>
           <p:card style="margin-top: 10px">
             <span
@@ -155,9 +157,35 @@
               <h:outputText value="Review, Saturday and Sunday (Excluded)" />
             </div>
             <div style="margin-top: 5px; color: var(--surface-400)">
-              <span><i class="pi pi-circle-fill" style="color: rgb(0, 255, 47, 0.35); font-size: 10px;"></i> Avialable</span>
-              <span><i class="pi pi-circle-fill" style="color: rgb(228, 0, 0, 0.35); font-size: 10px; margin-left: 10px;"></i> Absent</span>
-              <span><i class="pi pi-circle-fill" style="color: rgb(112, 112, 112); font-size: 10px; margin-left: 10px;"></i> Unavailable</span>
+              <span
+                ><i
+                  class="pi pi-circle-fill"
+                  style="color: rgb(0, 255, 47, 0.35); font-size: 10px"
+                ></i>
+                Avialable</span
+              >
+              <span
+                ><i
+                  class="pi pi-circle-fill"
+                  style="
+                    color: rgb(228, 0, 0, 0.35);
+                    font-size: 10px;
+                    margin-left: 10px;
+                  "
+                ></i>
+                Absent</span
+              >
+              <span
+                ><i
+                  class="pi pi-circle-fill"
+                  style="
+                    color: rgb(112, 112, 112);
+                    font-size: 10px;
+                    margin-left: 10px;
+                  "
+                ></i>
+                Unavailable</span
+              >
             </div>
           </p:card>
           <p:card style="margin-top: 10px">
@@ -177,7 +205,12 @@
               />
               <h:outputText
                 value="#{(data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())) * data.sprint.sprintPointsPerDay.doubleValue()}"
-                style="display: block; margin-top: 5px; font-size: 24px; font-weight: 500;"
+                style="
+                  display: block;
+                  margin-top: 5px;
+                  font-size: 24px;
+                  font-weight: 500;
+                "
                 ><f:convertNumber pattern="0.0"
               /></h:outputText>
             </div>
