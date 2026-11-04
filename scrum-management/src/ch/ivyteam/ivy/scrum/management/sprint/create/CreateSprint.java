@@ -1,10 +1,12 @@
 package ch.ivyteam.ivy.scrum.management.sprint.create;
 
 import java.util.List;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
+
+import org.apache.commons.lang3.time.DateUtils;
+
 import ch.ivyteam.ivy.environment.Ivy;
-import ch.ivyteam.ivy.scripting.objects.Duration;
 import ch.ivyteam.ivy.scrum.management.Sprint;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class CreateSprint {
   public static Sprint newSprint() {
@@ -19,8 +21,8 @@ public class CreateSprint {
     if (!sprints.isEmpty()) {
       Sprint lastSprint = sprints.getLast();
       nextSprint.setSprintNumber(lastSprint.getSprintNumber().longValue() + 1);
-      nextSprint.setStartDate(lastSprint.getStartDate().add(new Duration("P21D")));
-      nextSprint.setEndDate(lastSprint.getEndDate().add(new Duration("P21D")));
+      nextSprint.setStartDate(DateUtils.addDays(lastSprint.getStartDate(), 21));
+      nextSprint.setEndDate(DateUtils.addDays(lastSprint.getEndDate(), 21));
       nextSprint.setVersionCode(lastSprint.getVersionCode());
       nextSprint.setSprintPointsPerDay(lastSprint.getSprintPointsPerDay());
 
