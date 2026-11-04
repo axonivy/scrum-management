@@ -1,12 +1,13 @@
 package ch.ivyteam.ivy.scrum.management.dialog.newSprint;
 
 import java.util.Calendar;
+
 import ch.ivyteam.ivy.scrum.management.Sprint;
 
 public class CalculateMaxWorkingDays {
-  public static Integer calculateMaxWorkingDays(Sprint sprint) {
+  public static float calculateMaxWorkingDays(Sprint sprint) {
 
-    int maxworkingdays = 0;
+    Float maxworkingdays = (float) 0;
 
     if (sprint.getStartDate() != null && sprint.getEndDate() != null) {
 
