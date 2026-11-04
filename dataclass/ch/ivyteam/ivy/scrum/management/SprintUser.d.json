@@ -10,5 +10,9 @@
   }, {
     "name" : "capacity",
     "type" : "Number"
+  }, {
+    "name" : "userId"
+  }, {
+    "name" : "userName"
   } ]
 }
