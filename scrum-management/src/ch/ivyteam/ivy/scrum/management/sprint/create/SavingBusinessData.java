@@ -16,7 +16,7 @@ public class SavingBusinessData {
     Sprint previousSprint = null;
 
     for (Sprint existingSprint : sprints) {
-      if (existingSprint.getSortIndex() != null && existingSprint.getSortIndex() >= nextSortIndex) {
+      if (existingSprint.getSortIndex() >= nextSortIndex) {
         nextSortIndex = existingSprint.getSortIndex() + 1;
         previousSprint = existingSprint;
       }
