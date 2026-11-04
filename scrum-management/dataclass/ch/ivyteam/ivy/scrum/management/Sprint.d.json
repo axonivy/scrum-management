@@ -6,7 +6,7 @@
     "name" : "versionCode"
   }, {
     "name" : "sprintNumber",
-    "type" : "Number"
+    "type" : "java.lang.Double"
   }, {
     "name" : "startDate",
     "type" : "java.util.Date"
