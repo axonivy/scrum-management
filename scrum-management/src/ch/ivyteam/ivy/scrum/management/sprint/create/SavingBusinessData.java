@@ -22,9 +22,8 @@ public class SavingBusinessData {
       }
     }
 
-    Sprint newSprint = new Sprint();
+    Sprint newSprint = sprint;
     newSprint.setSortIndex(nextSortIndex);
-    newSprint = sprint;
 
     // Inputs users from users.yaml
     newSprint.setMembers(ch.ivyteam.ivy.scripting.objects.List.create(SprintUser.class));
