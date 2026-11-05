@@ -1,19 +1,14 @@
 package ch.ivyteam.ivy.scrum.management.sprint.create;
 
-import java.util.List;
-
 import org.apache.commons.lang3.time.DateUtils;
 
-import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class CreateSprint {
   public static Sprint newSprint() {
-    List<Sprint> sprints = Ivy.repo().search(Sprint.class)
-        .limit(10000)
-        .execute()
-        .getAll();
+    java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
     sprints = sprintSorting.sortSprints(sprints);
 

@@ -1,16 +1,13 @@
 package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 
-import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class LastSprint {
   public static NextSprint.Result lastSprint(Sprint sprint, Integer sprintIndex) {
 
-    java.util.List<Sprint> sprints = Ivy.repo().search(Sprint.class)
-        .limit(10000)
-        .execute()
-        .getAll();
+    java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
     sprints = sprintSorting.sortSprints(sprints);
 
