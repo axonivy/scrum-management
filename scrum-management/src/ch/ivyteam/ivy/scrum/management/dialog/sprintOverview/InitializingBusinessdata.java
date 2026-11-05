@@ -5,7 +5,7 @@ import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class InitializingBusinessdata {
-  public static NextSprint.Result SortingBusinessdata(Sprint sprint, Integer sprintIndex) {
+  public static ChangeSprint.Result SortingBusinessdata(Sprint sprint, Integer sprintIndex) {
 
     java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
@@ -16,6 +16,6 @@ public class InitializingBusinessdata {
       sprintIndex = lastIndex;
       sprint = sprints.get(lastIndex);
     }
-    return new NextSprint.Result(sprint, sprintIndex);
+    return new ChangeSprint.Result(sprint, sprintIndex);
   }
 }
