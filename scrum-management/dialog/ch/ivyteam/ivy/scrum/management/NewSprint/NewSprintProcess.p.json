@@ -59,62 +59,6 @@
         { "id" : "f47", "to" : "f48" }
       ]
     }, {
-      "id" : "f15",
-      "type" : "Script",
-      "name" : "Loads BusinessData -> Dataclass",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "",
-            "if (in.sprintId != null && !in.sprintId.isBlank()) {",
-            "    ",
-            "    Object existingSprint = ivy.repo.find(in.sprintId, Sprint.class);",
-            "    out.sprint = existingSprint as Sprint;",
-            "",
-            "}",
-            "",
-            "else {",
-            "",
-            "    java.util.List<Sprint> sprints = ivy.repo.search(Sprint.class)",
-            "        .limit(10000)",
-            "        .execute()",
-            "        .getAll();",
-            "",
-            "    for (int i = 0; i < sprints.size() - 1; i++) {",
-            "        for (int j = i + 1; j < sprints.size(); j++) {",
-            "            if (sprints.get(i).sortIndex > sprints.get(j).sortIndex) {",
-            "                Sprint temp = sprints.get(i);",
-            "                sprints.set(i, sprints.get(j));",
-            "                sprints.set(j, temp);",
-            "            }",
-            "        }",
-            "    }",
-            "    ",
-            "if (!sprints.isEmpty()) {",
-            "",
-            "    Sprint lastSprint = sprints.getLast() as Sprint;",
-            "    Sprint nextSprint = new Sprint();",
-            "    nextSprint.sprintNumber = lastSprint.sprintNumber + 1;",
-            "    nextSprint.startDate = lastSprint.startDate.add(new Duration(\"P21D\"));",
-            "    nextSprint.endDate = lastSprint.endDate.add(new Duration(\"P21D\"));",
-            "    nextSprint.versionCode = lastSprint.versionCode;",
-            "    nextSprint.sprintPointsPerDay = lastSprint.sprintPointsPerDay;",
-            "    nextSprint.maxWorkingDays = 12;",
-            "",
-            "    out.sprint = nextSprint;",
-            "",
-            "}",
-            "}"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 616, "y" : 936 },
-        "size" : { "width" : 120, "height" : 62 },
-        "description" : "Loads up all the data from BusinessData thats needed for the default Values"
-      }
-    }, {
       "id" : "f17",
       "type" : "HtmlDialogEventStart",
       "name" : "close",
