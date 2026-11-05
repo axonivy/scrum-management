@@ -12,7 +12,7 @@ public class LastSprint {
         .execute()
         .getAll();
 
-    sprints = sprintSorting.sortSprints(sprints);
+    sprintSorting.sortSprints(sprints);
 
     if (!sprints.isEmpty() && sprintIndex > 0) {
       int newIndex = sprintIndex - 1;

@@ -1,10 +1,11 @@
 package ch.ivyteam.ivy.scrum.management.sprint.create;
 
 import java.util.List;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
+
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scripting.objects.Duration;
 import ch.ivyteam.ivy.scrum.management.Sprint;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class CreateSprint {
   public static Sprint newSprint() {
@@ -13,7 +14,7 @@ public class CreateSprint {
         .execute()
         .getAll();
 
-    sprints = sprintSorting.sortSprints(sprints);
+    sprintSorting.sortSprints(sprints);
 
     Sprint nextSprint = new Sprint();
     if (!sprints.isEmpty()) {

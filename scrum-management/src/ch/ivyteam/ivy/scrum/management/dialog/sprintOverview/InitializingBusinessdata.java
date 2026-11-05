@@ -12,7 +12,7 @@ public class InitializingBusinessdata {
         .execute()
         .getAll();
 
-    sprints = sprintSorting.sortSprints(sprints);
+    sprintSorting.sortSprints(sprints);
 
     if (!sprints.isEmpty()) {
       int lastIndex = sprints.size() - 1;

@@ -13,7 +13,8 @@ public class NextSprint {
         .execute()
         .getAll();
 
-    sprints = sprintSorting.sortSprints(sprints);
+    sprintSorting.sortSprints(sprints);
+
     if (!sprints.isEmpty() && sprintIndex < sprints.size() - 1) {
       int newIndex = sprintIndex + 1;
 
