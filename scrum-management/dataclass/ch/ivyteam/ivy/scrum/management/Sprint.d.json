@@ -18,12 +18,12 @@
     "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>"
   }, {
     "name" : "maxWorkingDays",
-    "type" : "Number"
+    "type" : "java.lang.Integer"
   }, {
     "name" : "sprintPointsPerDay",
     "type" : "Number"
   }, {
     "name" : "sortIndex",
-    "type" : "Number"
+    "type" : "java.lang.Integer"
   } ]
 }

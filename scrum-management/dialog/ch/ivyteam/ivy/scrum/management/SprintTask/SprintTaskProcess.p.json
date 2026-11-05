@@ -61,21 +61,15 @@
       "config" : {
         "output" : {
           "code" : [
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.LoadData;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "",
             "out.sprintId = in.sprintId;",
             "out.userId = in.userId;",
             "",
-            "out.sprint = ivy.repo.find(in.sprintId, Sprint.class) as Sprint;",
-            "",
-            "  for (SprintUser sprintMember : out.sprint.members) {",
-            "    ",
-            "    if (sprintMember.userId.equals(in.userId)) {",
-            "      out.member = sprintMember;",
-            "      break;",
-            "    }",
-            "  }"
+            "out.sprint = LoadData.GetSprint(in.sprintId);",
+            "out.member = LoadData.GetSprintUser(out.sprint, in.userId);"
           ]
         }
       },
@@ -93,12 +87,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "in.member.workingDays =",
-            "  in.sprint.maxWorkingDays.intValue() - (in.absenceDays == null ? 0 : in.absenceDays.size());",
-            "ivy.repo.save(in.sprint);",
-            "",
-            "out.sprint = in.sprint;",
-            "out.member = in.member;"
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.SaveTask;",
+            "SaveTask.SaveUserEntry(in.sprint , in.member , in.absenceDays);"
           ]
         }
       },
@@ -136,60 +126,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "import java.time.LocalDate;",
-            "import java.util.Calendar;",
-            "",
-            "out.workingDates = new java.util.ArrayList<LocalDate>();",
-            "out.disabledDates = new java.util.ArrayList<LocalDate>();",
-            "",
-            "if (in.sprint.startDate != null && in.sprint.endDate != null) {",
-            "",
-            "    Calendar currentDate = Calendar.getInstance();",
-            "    currentDate.setTime(in.sprint.startDate);",
-            "",
-            "    Calendar endDate = Calendar.getInstance();",
-            "    endDate.setTime(in.sprint.endDate);",
-            "    Calendar lastWednesday = Calendar.getInstance();",
-            "    lastWednesday.setTime(in.sprint.endDate);",
-            "    ",
-            "    while (lastWednesday.get(Calendar.DAY_OF_WEEK) != Calendar.WEDNESDAY) {",
-            "        lastWednesday.add(Calendar.DAY_OF_MONTH, -1);",
-            "    }",
-            "    out.pickerStartDate = LocalDate.of(",
-            "        currentDate.get(Calendar.YEAR),",
-            "        currentDate.get(Calendar.MONTH) + 1,",
-            "        currentDate.get(Calendar.DAY_OF_MONTH)",
-            "    );",
-            "",
-            "    out.pickerEndDate = LocalDate.of(",
-            "        endDate.get(Calendar.YEAR),",
-            "        endDate.get(Calendar.MONTH) + 1,",
-            "        endDate.get(Calendar.DAY_OF_MONTH)",
-            "    );",
-            "",
-            "    while (!currentDate.after(endDate)) {",
-            "",
-            "        int day = currentDate.get(Calendar.DAY_OF_WEEK);",
-            "",
-            "        LocalDate date = LocalDate.of(",
-            "            currentDate.get(Calendar.YEAR),",
-            "            currentDate.get(Calendar.MONTH) + 1,",
-            "            currentDate.get(Calendar.DAY_OF_MONTH)",
-            "        );",
-            "",
-            "        boolean isLastWednesday =",
-            "            currentDate.get(Calendar.YEAR) == lastWednesday.get(Calendar.YEAR)",
-            "            && currentDate.get(Calendar.DAY_OF_YEAR) == lastWednesday.get(Calendar.DAY_OF_YEAR);",
-            "",
-            "            if (day != Calendar.SATURDAY && day != Calendar.SUNDAY && !isLastWednesday) {",
-            "                out.workingDates.add(date);",
-            "            } else {",
-            "                out.disabledDates.add(date);",
-            "            }",
-            "",
-            "        currentDate.add(Calendar.DAY_OF_MONTH, 1);",
-            "    }",
-            "}"
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.CalculateWorkingDays;",
+            "out.workingDates = CalculateWorkingDays.WorkingDates(in.sprint);"
           ]
         }
       },

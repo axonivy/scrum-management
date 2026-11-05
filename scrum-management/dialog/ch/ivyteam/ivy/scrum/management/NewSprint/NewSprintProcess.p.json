@@ -42,7 +42,7 @@
       "id" : "f1",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 64 }
+        "at" : { "x" : 360, "y" : 64 }
       }
     }, {
       "id" : "f8",
@@ -146,41 +146,17 @@
       "id" : "f23",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 384 }
+        "at" : { "x" : 360, "y" : 384 }
       }
     }, {
       "id" : "f25",
       "type" : "Script",
-      "name" : "Calculate",
+      "name" : "CalculateMaxWorkingDays",
       "config" : {
         "output" : {
           "code" : [
-            "import java.util.Calendar;",
-            "",
-            "int maxworkingdays = 0;",
-            "",
-            "if (in.sprint.startDate != null && in.sprint.endDate != null) {",
-            "",
-            "    Calendar currentDate = Calendar.getInstance();",
-            "    currentDate.setTime(in.sprint.startDate);",
-            "",
-            "    Calendar endDate = Calendar.getInstance();",
-            "    endDate.setTime(in.sprint.endDate);",
-            "",
-            "    while (!currentDate.after(endDate)) {",
-            "",
-            "        int day = currentDate.get(Calendar.DAY_OF_WEEK);",
-            "",
-            "        if (day != Calendar.SATURDAY && day != Calendar.SUNDAY) {",
-            "            maxworkingdays++;",
-            "        }",
-            "",
-            "        currentDate.add(Calendar.DAY_OF_MONTH, 1);",
-            "    }",
-            "    maxworkingdays--;",
-            "",
-            "    in.sprint.maxWorkingDays = maxworkingdays;",
-            "}"
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.CalculateMaxWorkingDays;",
+            "out.sprint.maxWorkingDays = CalculateMaxWorkingDays.calculateMaxWorkingDays(in.sprint);"
           ]
         }
       },
@@ -194,11 +170,12 @@
     }, {
       "id" : "f48",
       "type" : "Script",
+      "name" : "SetsSaveTrue",
       "config" : {
         "output" : {
           "code" : [
-            "out.save = true;",
-            "out.sprint = in.sprint;"
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.SetsSaveTrue;",
+            "out.save = SetsSaveTrue.setsSaveTrue(in.save);"
           ]
         }
       },
@@ -211,28 +188,33 @@
     }, {
       "id" : "f50",
       "type" : "Script",
+      "name" : "SetsSaveFalse",
       "config" : {
         "output" : {
-          "code" : "out.save = false;"
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.SetsSaveFalse;",
+            "out.save = SetsSaveFalse.setsSaveFalse(in.save);"
+          ]
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 272 }
+        "at" : { "x" : 224, "y" : 272 },
+        "description" : "SetsSaveFalse"
       },
       "connect" : [
-        { "id" : "f56", "to" : "f53" }
+        { "id" : "f59", "to" : "f58" }
       ]
-    }, {
-      "id" : "f53",
-      "type" : "HtmlDialogEnd",
-      "visual" : {
-        "at" : { "x" : 352, "y" : 272 }
-      }
     }, {
       "id" : "f57",
       "type" : "HtmlDialogExit",
       "visual" : {
         "at" : { "x" : 360, "y" : 168 }
+      }
+    }, {
+      "id" : "f58",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 360, "y" : 272 }
       }
     } ]
 }
