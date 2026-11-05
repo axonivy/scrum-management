@@ -16,7 +16,7 @@ public class SavingBusinessData {
     Sprint previousSprint = null;
 
     for (Sprint existingSprint : sprints) {
-      if (existingSprint.getSortIndex() >= nextSortIndex) {
+      if (existingSprint.getSortIndex() != null && existingSprint.getSortIndex() >= nextSortIndex) {
         nextSortIndex = existingSprint.getSortIndex() + 1;
         previousSprint = existingSprint;
       }
@@ -24,12 +24,7 @@ public class SavingBusinessData {
 
     Sprint newSprint = new Sprint();
     newSprint.setSortIndex(nextSortIndex);
-    newSprint.setSprintNumber(sprint.getSprintNumber());
-    newSprint.setStartDate(sprint.getStartDate());
-    newSprint.setEndDate(sprint.getEndDate());
-    newSprint.setMaxWorkingDays(sprint.getMaxWorkingDays());
-    newSprint.setSprintPointsPerDay(sprint.getSprintPointsPerDay());
-    newSprint.setVersionCode(sprint.getVersionCode());
+    newSprint = sprint;
 
     // Inputs users from users.yaml
     newSprint.setMembers(ch.ivyteam.ivy.scripting.objects.List.create(SprintUser.class));
