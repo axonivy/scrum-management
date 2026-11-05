@@ -22,7 +22,6 @@ public class SavingBusinessData {
 
     Sprint newSprint = new Sprint();
     newSprint.setSortIndex(nextSortIndex);
-
     newSprint.setSprintNumber(sprint.getSprintNumber());
     newSprint.setStartDate(sprint.getStartDate());
     newSprint.setEndDate(sprint.getEndDate());
