@@ -21,13 +21,11 @@ public class SavingBusinessData {
         previousSprint = existingSprint;
       }
     }
-
-    Sprint newSprint = new Sprint();
-    newSprint.setSortIndex(nextSortIndex);
-    newSprint = sprint;
+    
+    sprint.setSortIndex(nextSortIndex);
 
     // Inputs users from users.yaml
-    newSprint.setMembers(ch.ivyteam.ivy.scripting.objects.List.create(SprintUser.class));
+    sprint.setMembers(ch.ivyteam.ivy.scripting.objects.List.create(SprintUser.class));
     for (IUser user : Ivy.security().users().paged()) {
 
       SprintUser member = new SprintUser();
@@ -44,11 +42,11 @@ public class SavingBusinessData {
           }
         }
       }
-      newSprint.getMembers().add(member);
+      sprint.getMembers().add(member);
     }
-    Ivy.repo().save(newSprint);
+    Ivy.repo().save(sprint);
 
-    return newSprint;
+    return sprint;
 
   }
 
