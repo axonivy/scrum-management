@@ -188,10 +188,10 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.ChangeSprint;",
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.InitializingBusinessdata;",
             "",
-            "NextSprint.Result result = InitializingBusinessdata.SortingBusinessdata(in.sprint , in.sprintIndex);",
+            "ChangeSprint.Result result = InitializingBusinessdata.SortingBusinessdata(in.sprint , in.sprintIndex);",
             "",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
