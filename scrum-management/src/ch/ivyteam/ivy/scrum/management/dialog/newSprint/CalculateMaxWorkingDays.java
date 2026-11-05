@@ -7,7 +7,7 @@ import ch.ivyteam.ivy.scrum.management.Sprint;
 public class CalculateMaxWorkingDays {
   public static float calculateMaxWorkingDays(Sprint sprint) {
 
-    Float maxworkingdays = (float) 0;
+    Float maxworkingdays = 0f;
 
     if (sprint.getStartDate() != null && sprint.getEndDate() != null) {
 
