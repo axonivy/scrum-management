@@ -102,9 +102,9 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.ChangeSprint;",
             "",
-            "NextSprint.Result result = NextSprint.nextSprint(in.sprint , in.sprintIndex);",
+            "ChangeSprint.Result result = ChangeSprint.nextSprint(in.sprint , in.sprintIndex);",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
           ]
@@ -158,11 +158,10 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LastSprint;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.ChangeSprint;",
             "",
-            "NextSprint.Result result = LastSprint.lastSprint(in.sprint , in.sprintIndex);",
+            "ChangeSprint.Result result = ChangeSprint.lastSprint(in.sprint , in.sprintIndex);",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
           ]
