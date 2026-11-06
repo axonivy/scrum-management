@@ -33,7 +33,7 @@ public class SavingBusinessData {
       member.setUserId(user.getSecurityMemberId());
       member.setUserName(user.getName());
       member.setName(user.getFullName());
-      member.setWorkingDays(-1);
+      member.setWorkingDays(-1.0);
       member.setCapacity(0);
       if (previousSprint != null) {
         for (SprintUser old : previousSprint.getMembers()) {
