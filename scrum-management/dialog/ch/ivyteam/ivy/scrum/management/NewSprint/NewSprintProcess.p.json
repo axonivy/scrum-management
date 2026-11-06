@@ -36,7 +36,7 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f52", "to" : "f1" }
+        { "id" : "f52", "to" : "f60" }
       ]
     }, {
       "id" : "f1",
@@ -160,5 +160,24 @@
       "visual" : {
         "at" : { "x" : 360, "y" : 272 }
       }
+    }, {
+      "id" : "f60",
+      "type" : "Script",
+      "name" : "CalculateMaxWorkingDays",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.CalculateMaxWorkingDays;",
+            "out.sprint.maxWorkingDays = CalculateMaxWorkingDays.calculateMaxWorkingDays(in.sprint);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "description" : "Calculates the max working days excludes review day and weekends (saturday, sunday)"
+      },
+      "connect" : [
+        { "id" : "f61", "to" : "f1", "color" : "default" }
+      ]
     } ]
 }
