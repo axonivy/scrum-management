@@ -1,17 +1,16 @@
 package ch.ivyteam.ivy.scrum.management.sprint.create;
 
+import java.util.List;
+
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
 import ch.ivyteam.ivy.security.IUser;
-
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 public class SavingBusinessData {
   public static Sprint savedSprint(Sprint sprint) {
 
-    java.util.List<Sprint> sprints = Ivy.repo().search(Sprint.class)
-        .limit(10000)
-        .execute()
-        .getAll();
+    List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
     int nextSortIndex = 0;
     Sprint previousSprint = null;
 

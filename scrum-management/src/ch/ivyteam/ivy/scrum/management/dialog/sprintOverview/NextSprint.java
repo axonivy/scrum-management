@@ -1,18 +1,16 @@
 package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 
-import ch.ivyteam.ivy.environment.Ivy;
+import java.util.List;
+
 import ch.ivyteam.ivy.scrum.management.Sprint;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class NextSprint {
   public record Result(Sprint sprint, Integer sprintIndex) {}
   public static Result nextSprint(Sprint sprint, Integer sprintIndex) {
 
-    java.util.List<Sprint> sprints = Ivy.repo().search(Sprint.class)
-        .limit(10000)
-        .execute()
-        .getAll();
-
+    List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
     sprints = sprintSorting.sortSprints(sprints);
     if (!sprints.isEmpty() && sprintIndex < sprints.size() - 1) {
       int newIndex = sprintIndex + 1;
