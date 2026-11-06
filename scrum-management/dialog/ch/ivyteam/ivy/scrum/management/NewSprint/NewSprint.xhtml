@@ -11,15 +11,8 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">New Sprint</ui:define>
       <ui:define name="content">
-        <style type="text/css">
-          .small-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 16px;
-          }
-        </style>
+        <h:outputStylesheet name="layouts/NewSprint.css" />
+        <style type="text/css"></style>
         <h:form id="CreateSprintForm">
           <p:messages id="messages" showDetail="true" />
           <p:card title="Create sprint">
@@ -143,20 +136,20 @@
                 >
                   <p:commandButton
                     value="Save"
-                    style="padding: 8px 16px; margin-left: 5px"
                     styleClass="ui-button-raised ui-button-primary"
                     process="@form"
                     update="messages"
                     actionListener="#{logic.save}"
                     icon="pi pi-save"
+                    style="padding: 8px 16px; margin-left: 5px"
                   />
                   <p:commandButton
                     value="Close"
-                    style="padding: 8px 16px; margin-left: 5px"
                     styleClass="ui-button-raised ui-button-secondary"
                     process="@this"
                     actionListener="#{logic.close}"
                     icon="pi pi-times"
+                    style="padding: 8px 16px; margin-left: 5px"
                   ></p:commandButton>
                 </p:card>
               </div>
