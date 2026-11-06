@@ -1,5 +1,7 @@
 package ch.ivyteam.ivy.scrum.management.sprint.create;
 
+import java.util.List;
+
 import org.apache.commons.lang3.time.DateUtils;
 
 import ch.ivyteam.ivy.scrum.management.Sprint;
@@ -8,7 +10,7 @@ import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class CreateSprint {
   public static Sprint newSprint() {
-    java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
+    List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
     sprints = sprintSorting.sortSprints(sprints);
 
