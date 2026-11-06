@@ -11,17 +11,20 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">SprintTask</ui:define>
       <ui:define name="content">
-        <style type="text/css">
-          .sprint-calender td:not(.ui-state-disabled) a:not(.ui-state-active) {
-            background-color: rgba(0, 255, 47, 0.35);
-          }
-          .sprint-calender
-            td:not(.ui-state-disabled)
-            a.ui-state-active.ui-state-active {
-            background-color: rgba(228, 0, 0, 0.35);
-          }
-        </style>
-        <h:form id="dateSelect">
+        <h:form>
+          <style type="text/css">
+            .sprint-calender
+              td:not(.ui-state-disabled)
+              a:not(.ui-state-active) {
+              background-color: rgba(0, 255, 47, 0.35);
+            }
+            .sprint-calender
+              td:not(.ui-state-disabled)
+              a.ui-state-active.ui-state-active {
+              background-color: rgba(228, 0, 0, 0.35);
+            }
+          </style>
+
           <p:card>
             <div
               style="
@@ -82,6 +85,7 @@
               <i class="pi pi-clock"></i>
               <span style="font-size: 18px; font-weight: 550"> Capacity</span>
             </div>
+
             <p:inputNumber
               value="#{data.member.capacity}"
               minValue="0"
@@ -90,7 +94,14 @@
               symbolPosition="s"
               id="maxWorkingDays"
               maxValue="100"
-            />
+            >
+              <p:ajax
+                event="change"
+                process="@this"
+                update="sprintPointsPreview , selectedAbsenceDays , workingDays"
+              />
+            </p:inputNumber>
+
             <span style="float: right; color: var(--surface-600)"
               >Percentage of your working capacity</span
             >
@@ -113,7 +124,11 @@
               panelStyleClass="sprint-calender"
               style="width: 100%"
             >
-              <p:ajax event="dateSelect" process="@form" update="@form" />
+              <p:ajax
+                event="dateSelect"
+                process="@this"
+                update="sprintPointsPreview , selectedAbsenceDays , workingDays"
+              />
             </p:datePicker>
             <div
               style="
@@ -142,6 +157,7 @@
                 <h:outputText
                   value="#{empty data.absenceDays ? 0 : data.absenceDays.size()}"
                   style="display: block"
+                  id="selectedAbsenceDays"
                 />
               </div>
               <div>
@@ -152,6 +168,7 @@
                 <h:outputText
                   value="#{data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())}"
                   style="display: block"
+                  id="workingDays"
                 />
               </div>
             </div>
@@ -206,13 +223,14 @@
                 style="display: block"
               />
               <h:outputText
-                value="#{(data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())) * data.sprint.sprintPointsPerDay.doubleValue()}"
+                value="#{(data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())) * data.sprint.sprintPointsPerDay.doubleValue() * (data.member.capacity / 100)}"
                 style="
                   display: block;
                   margin-top: 5px;
                   font-size: 24px;
                   font-weight: 500;
                 "
+                id="sprintPointsPreview"
                 ><f:convertNumber pattern="0.0"
               /></h:outputText>
             </div>
