@@ -1,5 +1,7 @@
 package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 
+import java.util.List;
+
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
@@ -7,7 +9,7 @@ import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 public class InitializingBusinessdata {
   public static NextSprint.Result SortingBusinessdata(Sprint sprint, Integer sprintIndex) {
 
-    java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
+    List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
     sprintSorting.sortSprints(sprints);
 

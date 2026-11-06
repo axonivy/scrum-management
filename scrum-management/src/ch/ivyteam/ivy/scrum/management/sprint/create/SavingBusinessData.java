@@ -1,5 +1,7 @@
 package ch.ivyteam.ivy.scrum.management.sprint.create;
 
+import java.util.List;
+
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
@@ -8,7 +10,7 @@ import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 public class SavingBusinessData {
   public static Sprint savedSprint(Sprint sprint) {
 
-    java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
+    List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
     int nextSortIndex = 0;
     Sprint previousSprint = null;
 
