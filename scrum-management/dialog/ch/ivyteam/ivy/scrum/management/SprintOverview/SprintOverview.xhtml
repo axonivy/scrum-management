@@ -55,7 +55,7 @@
             rowIndexVar="index"
             editable="true"
             rowEditMode="lazy"
-            rowKey="#{index}"
+            rowKey="#{member.userId}"
             id="sprint-datatable"
             scrollable="true"
             allowUnsorting="true"
@@ -69,7 +69,7 @@
             <p:ajax
               event="rowEdit"
               oncomplete="refreshSprintTable()"
-              listener="#{logic.saveUserData()}"
+              listener="#{logic.saveUserData(member.userId)}"
             />
 
             <p:column headerText="Name" title="Name of user">

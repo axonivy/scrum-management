@@ -14,5 +14,8 @@
     "name" : "sprintIndex",
     "type" : "java.lang.Integer",
     "modifiers" : [ ]
+  }, {
+    "name" : "userId",
+    "modifiers" : [ ]
   } ]
 }

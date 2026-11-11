@@ -212,6 +212,14 @@
       "name" : "saveUserData",
       "config" : {
         "signature" : "saveUserData",
+        "input" : {
+          "params" : [
+            { "name" : "userId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.userId" : "param.userId"
+          }
+        },
         "guid" : "1A1158DE324F0E66"
       },
       "visual" : {
@@ -232,9 +240,14 @@
       "name" : "Save User Data",
       "config" : {
         "output" : {
+          "map" : {
+            "out" : "in",
+            "out.userId" : "in.userId"
+          },
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SaveUserData;",
-            "SaveUserData.saveUserData(in.sprint);"
+            "ivy.log.info(\"User id und sprint vor dem aufrufen der java methode\" + in.userId + in.sprint);",
+            "SaveUserData.saveUserData(in.sprint, in.userId);"
           ]
         }
       },
