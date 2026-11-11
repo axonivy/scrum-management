@@ -8,7 +8,6 @@ import ch.ivyteam.ivy.scrum.management.SprintUser;
 
 public class SaveUserData {
   public static void saveUserData(Sprint sprint, String userId) {
-    Ivy.log().info("userid:" + userId);
     List<SprintUser> users = sprint.getMembers();
     for (SprintUser user : users) {
       if (user.getUserId().equals(userId)) {

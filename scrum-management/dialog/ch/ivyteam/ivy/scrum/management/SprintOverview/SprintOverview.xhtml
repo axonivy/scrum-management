@@ -24,6 +24,30 @@
             border-radius: 0 8px 8px 0;
           }
         </style>
+        <script type="text/javascript">
+          function refreshChangedUsers(changes) {
+            if (!changes) {return};
+            changes.forEach((change) => {
+              const {id, days, capacity} = change;
+              const row = document.querySelector("tr.user-" + id);
+              if (!row) {return};
+
+              const active = Number(days) >= 0;
+              const points =
+                (Number(days) *
+                  Number(capacity) *
+                  Number("#{data.sprint.sprintPointsPerDay}")) /
+                100;
+
+              row.cells[1].querySelector(".ui-cell-editor-output").textContent =
+                active ? Number(days) : "";
+              row.cells[2].querySelector(".ui-cell-editor-output").textContent =
+                Number(capacity) + "%";
+              row.cells[3].textContent = active ? points.toFixed(1) : "";
+              row.classList.toggle("days-missing", !active);
+            });
+          }
+        </script>
         <h:form id="form">
           <p:panel
             header="#{data.sprint.versionCode}"
@@ -64,7 +88,7 @@
             cellNavigation="true"
             rowHover="true"
             styleClass="rounded-table"
-            rowStyleClass="#{member.workingDays.intValue() lt 0 ? 'days-missing' : ''}"
+            rowStyleClass="#{member.workingDays.intValue() lt 0 ? 'days-missing' : ''} user-#{member.userId}"
           >
             <p:ajax
               event="rowEdit"
@@ -163,6 +187,7 @@
             interval="5"
             process="@this"
             listener="#{logic.checkSprintUpdates}"
+            oncomplete="refreshChangedUsers(args.changedUsers)"
           />
           <br />
           <div

@@ -246,7 +246,6 @@
           },
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SaveUserData;",
-            "ivy.log.info(\"User id und sprint vor dem aufrufen der java methode\" + in.userId + in.sprint);",
             "SaveUserData.saveUserData(in.sprint, in.userId);"
           ]
         }
