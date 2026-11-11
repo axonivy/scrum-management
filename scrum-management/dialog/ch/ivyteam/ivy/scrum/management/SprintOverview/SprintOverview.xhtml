@@ -159,7 +159,11 @@
             process="@this"
             update="sprint-datatable totalpoints"
           />
-
+          <p:poll
+            interval="5"
+            process="@this"
+            listener="#{logic.checkSprintUpdates}"
+          />
           <br />
           <div
             style="

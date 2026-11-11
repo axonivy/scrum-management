@@ -257,5 +257,42 @@
       "connect" : [
         { "id" : "f50", "to" : "f47" }
       ]
+    }, {
+      "id" : "f51",
+      "type" : "HtmlDialogMethodStart",
+      "name" : "checkSprintUpdates()",
+      "config" : {
+        "signature" : "checkSprintUpdates",
+        "guid" : "1A1C9FE9A5CBEBA2"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 712 }
+      },
+      "connect" : [
+        { "id" : "f54", "to" : "f53" }
+      ]
+    }, {
+      "id" : "f52",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 536, "y" : 712 }
+      }
+    }, {
+      "id" : "f53",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.CheckSprintUpdates;",
+            "CheckSprintUpdates.checkSprintUpdates(in.sprint);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 296, "y" : 712 }
+      },
+      "connect" : [
+        { "id" : "f55", "to" : "f52", "color" : "default" }
+      ]
     } ]
 }
