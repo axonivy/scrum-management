@@ -8,7 +8,7 @@ import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
 
 public class SaveTask {
-  public static void SaveUserEntry(Sprint sprint, SprintUser member, List<LocalDate> absenceDays) {
+  public static void saveUserEntry(Sprint sprint, SprintUser member, List<LocalDate> absenceDays) {
     member.setWorkingDays(sprint.getMaxWorkingDays().intValue() - (absenceDays == null ? 0 : absenceDays.size()));
     Ivy.repo().save(sprint);
   }
