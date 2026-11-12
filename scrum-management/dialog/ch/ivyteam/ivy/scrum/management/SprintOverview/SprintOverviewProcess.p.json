@@ -104,7 +104,7 @@
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
             "",
-            "NextSprint.Result result = NextSprint.nextSprint(in.sprint , in.sprintIndex);",
+            "NextSprint.Result result = NextSprint.nextSprint(in.sprintIndex);",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
           ]
