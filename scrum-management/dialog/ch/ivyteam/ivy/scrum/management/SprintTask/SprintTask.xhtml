@@ -13,12 +13,12 @@
       <ui:define name="content">
         <h:form>
           <style type="text/css">
-            .sprint-calender
+            .sprint-calender.sprint-calender
               td:not(.ui-state-disabled)
-              a:not(.ui-state-active) {
+              a:not(.ui-state-active):not(.ui-state-active) {
               background-color: rgba(0, 255, 47, 0.35);
             }
-            .sprint-calender
+            .sprint-calender.sprint-calender
               td:not(.ui-state-disabled)
               a.ui-state-active.ui-state-active {
               background-color: rgba(228, 0, 0, 0.35);
@@ -35,38 +35,29 @@
             >
               <h:outputText
                 value="#{data.sprint.versionCode}"
-                style="font-size: 25px; font-weight: 550; display: block"
+                style="font-size: 25px; font-weight: 550"
               />
               <div style="display: flex; gap: 45px; margin-top: 12px">
                 <div>
                   <h:outputText
                     value="StartDate: "
-                    style="display: block; color: var(--surface-600)"
+                    style="color: var(--surface-600)"
                   />
-                  <h:outputText
-                    value="#{data.sprint.startDate}"
-                    style="display: block"
-                  />
+                  <h:outputText value="#{data.sprint.startDate}" />
                 </div>
                 <div>
                   <h:outputText
                     value="EndDate: "
-                    style="display: block; color: var(--surface-600)"
+                    style="color: var(--surface-600)"
                   />
-                  <h:outputText
-                    value="#{data.sprint.endDate}"
-                    style="display: block"
-                  />
+                  <h:outputText value="#{data.sprint.endDate}" />
                 </div>
                 <div>
                   <h:outputText
                     value="Sprint Number: "
-                    style="display: block; color: var(--surface-600)"
+                    style="color: var(--surface-600)"
                   />
-                  <h:outputText
-                    value="Sprint #{data.sprint.sprintNumber}"
-                    style="display: block"
-                  />
+                  <h:outputText value="Sprint #{data.sprint.sprintNumber}" />
                 </div>
               </div>
             </div>
@@ -111,8 +102,8 @@
               style="
                 font-size: 18px;
                 display: block;
-                margin-bottom: 10px;
                 font-weight: 550;
+                margin-bottom: 10px;
               "
               >Select the days you are absent</span
             >
@@ -141,7 +132,7 @@
               <div>
                 <h:outputText
                   value="Max working days"
-                  style="display: block; color: var(--surface-600)"
+                  style="color: var(--surface-600)"
                 />
                 <h:outputText
                   value="#{data.sprint.maxWorkingDays}"
@@ -152,23 +143,23 @@
               <div>
                 <h:outputText
                   value="Selected absence days"
-                  style="display: block; color: var(--surface-600)"
+                  style="color: var(--surface-600)"
                 />
                 <h:outputText
                   value="#{empty data.absenceDays ? 0 : data.absenceDays.size()}"
-                  style="display: block"
                   id="selectedAbsenceDays"
+                  style="display: block"
                 />
               </div>
               <div>
                 <h:outputText
                   value="Working days "
-                  style="display: block; color: var(--surface-600)"
+                  style="color: var(--surface-600)"
                 />
                 <h:outputText
                   value="#{data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())}"
-                  style="display: block"
                   id="workingDays"
+                  style="display: block"
                 />
               </div>
             </div>
@@ -218,17 +209,14 @@
               >Points preview</span
             >
             <div>
-              <h:outputText
-                value="Estimated Sprint Points"
-                style="display: block"
-              />
+              <h:outputText value="Estimated Sprint Points" />
               <h:outputText
                 value="#{(data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())) * data.sprint.sprintPointsPerDay.doubleValue() * (data.member.capacity / 100)}"
                 style="
-                  display: block;
                   margin-top: 5px;
                   font-size: 24px;
                   font-weight: 500;
+                  display: block;
                 "
                 id="sprintPointsPreview"
                 ><f:convertNumber pattern="0.0"
