@@ -13,7 +13,7 @@
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.sprint.edit.LoadBusinessData;",
             "",
-            "out.sprint = LoadBusinessData.LoadExistingSprint(in.sprintId);"
+            "out.sprint = LoadBusinessData.loadExistingSprint(in.sprintId);"
           ]
         }
       },
@@ -34,7 +34,7 @@
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.sprint.edit.SavingBusinessData;",
             "",
-            "out.sprint = SavingBusinessData.SavingInBusinessData(in.sprint , in.sprintId);"
+            "out.sprint = SavingBusinessData.savingInBusinessData(in.sprint , in.sprintId);"
           ]
         }
       },

@@ -5,7 +5,7 @@ import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class InitializingBusinessdata {
-  public static NextSprint.Result SortingBusinessdata(Sprint sprint, Integer sprintIndex) {
+  public static NextSprint.Result sortingBusinessdata(Sprint sprint, Integer sprintIndex) {
 
     java.util.List<Sprint> sprints = Ivy.repo().search(Sprint.class)
         .limit(10000)

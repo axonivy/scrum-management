@@ -192,7 +192,7 @@
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.InitializingBusinessdata;",
             "",
-            "NextSprint.Result result = InitializingBusinessdata.SortingBusinessdata(in.sprint , in.sprintIndex);",
+            "NextSprint.Result result = InitializingBusinessdata.sortingBusinessdata(in.sprint , in.sprintIndex);",
             "",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
