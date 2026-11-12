@@ -2,7 +2,7 @@ package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSorting;
 
 public class NextSprint {
   public record Result(Sprint sprint, Integer sprintIndex) {}
@@ -13,7 +13,7 @@ public class NextSprint {
         .execute()
         .getAll();
 
-    sprintSorting.sortSprints(sprints);
+    SprintSorting.sortSprints(sprints);
 
     if (!sprints.isEmpty() && sprintIndex < sprints.size() - 1) {
       int newIndex = sprintIndex + 1;

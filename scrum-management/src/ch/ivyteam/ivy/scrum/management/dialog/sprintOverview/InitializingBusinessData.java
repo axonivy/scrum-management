@@ -2,9 +2,9 @@ package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSorting;
 
-public class InitializingBusinessdata {
+public class InitializingBusinessData {
   public static NextSprint.Result sortingBusinessdata(Sprint sprint, Integer sprintIndex) {
 
     java.util.List<Sprint> sprints = Ivy.repo().search(Sprint.class)
@@ -12,7 +12,7 @@ public class InitializingBusinessdata {
         .execute()
         .getAll();
 
-    sprintSorting.sortSprints(sprints);
+    SprintSorting.sortSprints(sprints);
 
     if (!sprints.isEmpty()) {
       int lastIndex = sprints.size() - 1;
