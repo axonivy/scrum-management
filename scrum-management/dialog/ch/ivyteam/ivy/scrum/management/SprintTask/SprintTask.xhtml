@@ -11,20 +11,17 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">SprintTask</ui:define>
       <ui:define name="content">
+        <style type="text/css">
+          .sprint-calender td:not(.ui-state-disabled) a:not(.ui-state-active) {
+            background-color: rgba(0, 255, 47, 0.35);
+          }
+          .sprint-calender
+            td:not(.ui-state-disabled)
+            a.ui-state-active.ui-state-active {
+            background-color: rgba(228, 0, 0, 0.35);
+          }
+        </style>
         <h:form>
-          <style type="text/css">
-            .sprint-calender
-              td:not(.ui-state-disabled)
-              a:not(.ui-state-active) {
-              background-color: rgba(0, 255, 47, 0.35);
-            }
-            .sprint-calender
-              td:not(.ui-state-disabled)
-              a.ui-state-active.ui-state-active {
-              background-color: rgba(228, 0, 0, 0.35);
-            }
-          </style>
-
           <p:card>
             <div
               style="
