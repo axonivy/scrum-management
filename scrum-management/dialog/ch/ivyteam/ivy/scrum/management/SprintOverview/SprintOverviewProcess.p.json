@@ -190,9 +190,9 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.InitializingBusinessdata;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.InitializingBusinessData;",
             "",
-            "NextSprint.Result result = InitializingBusinessdata.sortingBusinessdata(in.sprint , in.sprintIndex);",
+            "NextSprint.Result result = InitializingBusinessData.sortingBusinessdata(in.sprint , in.sprintIndex);",
             "",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
