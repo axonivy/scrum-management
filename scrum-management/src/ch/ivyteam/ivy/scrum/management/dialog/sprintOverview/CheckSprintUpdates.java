@@ -9,7 +9,7 @@ import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
 
 public class CheckSprintUpdates {
-  public static void checkSprintUpdates(Sprint sprint) {
+  public static void check(Sprint sprint) {
     var sprintId = Ivy.repo().getId(sprint);
     var currentSprint = Ivy.repo().find(sprintId, Sprint.class);
     if (currentSprint != null) {

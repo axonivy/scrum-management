@@ -77,7 +77,7 @@
             "",
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.TotalPoints;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "out.totalPoints = TotalPoints.calculateTotalPoints(in.sprint);"
+            "out.totalPoints = TotalPoints.calculate(in.sprint);"
           ]
         }
       },
@@ -245,7 +245,7 @@
           },
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SaveUserData;",
-            "SaveUserData.saveUserData(in.sprint, in.userId);"
+            "SaveUserData.save(in.sprint, in.userId);"
           ]
         }
       },
@@ -282,7 +282,7 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.CheckSprintUpdates;",
-            "CheckSprintUpdates.checkSprintUpdates(in.sprint);"
+            "CheckSprintUpdates.check(in.sprint);"
           ]
         }
       },

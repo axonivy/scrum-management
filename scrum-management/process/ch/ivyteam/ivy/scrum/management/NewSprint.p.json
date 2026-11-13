@@ -67,7 +67,7 @@
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.sprint.create.CreateSprint;",
             "",
-            "out.sprint = CreateSprint.newSprint();"
+            "out.sprint = CreateSprint.create();"
           ]
         }
       },

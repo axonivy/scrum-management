@@ -4,14 +4,14 @@ import java.util.List;
 
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSorting;
 
 public class InitializingBusinessdata {
   public static ChangeSprint.Result SortingBusinessdata(Sprint sprint, Integer sprintIndex) {
 
     List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
-    SprintSorting.sortSprints(sprints);
+    SprintSorting.sort(sprints);
 
     if (!sprints.isEmpty()) {
       int lastIndex = sprints.size() - 1;

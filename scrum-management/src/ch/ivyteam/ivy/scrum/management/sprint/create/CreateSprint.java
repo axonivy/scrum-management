@@ -6,13 +6,13 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSorting;
 
 public class CreateSprint {
-  public static Sprint newSprint() {
+  public static Sprint create() {
     List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
-    SprintSorting.sortSprints(sprints);
+    SprintSorting.sort(sprints);
 
     Sprint nextSprint = new Sprint();
     if (!sprints.isEmpty()) {
