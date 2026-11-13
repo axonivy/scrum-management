@@ -77,7 +77,7 @@
             "",
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.TotalPoints;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "out.totalPoints = TotalPoints.calculateTotalPoints(in.sprint);"
+            "out.totalPoints = TotalPoints.calculate(in.sprint);"
           ]
         }
       },
@@ -102,9 +102,9 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsNextSprint;",
             "",
-            "NextSprint.Result result = NextSprint.nextSprint(in.sprint , in.sprintIndex);",
+            "LoadsNextSprint.Result result = LoadsNextSprint.load(in.sprint , in.sprintIndex);",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
           ]
@@ -158,11 +158,11 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LastSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsLastSprint;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsNextSprint;",
             "",
-            "NextSprint.Result result = LastSprint.lastSprint(in.sprint , in.sprintIndex);",
+            "LoadsNextSprint.Result result = LoadsLastSprint.load(in.sprint , in.sprintIndex);",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
           ]
@@ -189,10 +189,10 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.NextSprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.InitializingBusinessData;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsNextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SortingBusinessData;",
             "",
-            "NextSprint.Result result = InitializingBusinessData.sortingBusinessdata(in.sprint , in.sprintIndex);",
+            "LoadsNextSprint.Result result = SortingBusinessData.sort(in.sprint , in.sprintIndex);",
             "",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
@@ -246,7 +246,7 @@
           },
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SaveUserData;",
-            "SaveUserData.saveUserData(in.sprint, in.userId);"
+            "SaveUserData.save(in.sprint, in.userId);"
           ]
         }
       },
@@ -283,7 +283,7 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.CheckSprintUpdates;",
-            "CheckSprintUpdates.checkSprintUpdates(in.sprint);"
+            "CheckSprintUpdates.check(in.sprint);"
           ]
         }
       },

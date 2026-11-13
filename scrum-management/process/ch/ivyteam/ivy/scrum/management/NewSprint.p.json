@@ -67,7 +67,7 @@
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.sprint.create.CreateSprint;",
             "",
-            "out.sprint = CreateSprint.newSprint();"
+            "out.sprint = CreateSprint.create();"
           ]
         }
       },
@@ -107,9 +107,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.sprint.create.SavingBusinessData;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.create.SaveNewSprint;",
             "",
-            "out.sprint = SavingBusinessData.savedSprint(in.sprint);",
+            "out.sprint = SaveNewSprint.save(in.sprint);",
             "out.sprintId = ivy.repo.getId(out.sprint);",
             "out.taskIndex = 0;"
           ]
