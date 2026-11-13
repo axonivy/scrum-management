@@ -1,5 +1,7 @@
 package ch.ivyteam.ivy.scrum.management.sprint.create;
 
+import java.util.List;
+
 import org.apache.commons.lang3.time.DateUtils;
 
 import ch.ivyteam.ivy.scrum.management.Sprint;
@@ -8,14 +10,14 @@ import ch.ivyteam.ivy.scrum.management.sprint.methods.sprintSorting;
 
 public class CreateSprint {
   public static Sprint newSprint() {
-    java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
+    List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
     sprintSorting.sortSprints(sprints);
 
     Sprint nextSprint = new Sprint();
     if (!sprints.isEmpty()) {
       Sprint lastSprint = sprints.getLast();
-      nextSprint.setSprintNumber(lastSprint.getSprintNumber().doubleValue() + 1);
+      nextSprint.setSprintNumber(lastSprint.getSprintNumber() + 1);
       nextSprint.setStartDate(DateUtils.addDays(lastSprint.getStartDate(), 21));
       nextSprint.setEndDate(DateUtils.addDays(lastSprint.getEndDate(), 21));
       nextSprint.setVersionCode(lastSprint.getVersionCode());
