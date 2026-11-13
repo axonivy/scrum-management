@@ -61,15 +61,15 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.LoadData;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.LoadSprint;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "",
             "out.sprintId = in.sprintId;",
             "out.userId = in.userId;",
             "",
-            "out.sprint = LoadData.getSprint(in.sprintId);",
-            "out.member = LoadData.getSprintUser(out.sprint, in.userId);"
+            "out.sprint = LoadSprint.getSprint(in.sprintId);",
+            "out.member = LoadSprint.getSprintUser(out.sprint, in.userId);"
           ]
         }
       },
@@ -88,7 +88,7 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.SaveTask;",
-            "SaveTask.saveUserEntry(in.sprint , in.member , in.absenceDays);"
+            "SaveTask.save(in.sprint , in.member , in.absenceDays);"
           ]
         }
       },
@@ -126,8 +126,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.CalculateWorkingDays;",
-            "out.workingDates = CalculateWorkingDays.workingDates(in.sprint);"
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.WorkingDays;",
+            "out.workingDates = WorkingDays.calculate(in.sprint);"
           ]
         }
       },

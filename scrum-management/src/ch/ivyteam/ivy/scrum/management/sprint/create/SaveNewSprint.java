@@ -5,8 +5,8 @@ import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
 import ch.ivyteam.ivy.security.IUser;
 
-public class SavingBusinessData {
-  public static Sprint savedSprint(Sprint sprint) {
+public class SaveNewSprint {
+  public static Sprint save(Sprint sprint) {
 
     java.util.List<Sprint> sprints = Ivy.repo().search(Sprint.class)
         .limit(10000)
@@ -31,7 +31,6 @@ public class SavingBusinessData {
     newSprint.setSprintPointsPerDay(sprint.getSprintPointsPerDay());
     newSprint.setVersionCode(sprint.getVersionCode());
 
-    // Inputs users from users.yaml
     newSprint.setMembers(ch.ivyteam.ivy.scripting.objects.List.create(SprintUser.class));
     for (IUser user : Ivy.security().users().paged()) {
 

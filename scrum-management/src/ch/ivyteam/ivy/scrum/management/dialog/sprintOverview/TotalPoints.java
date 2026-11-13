@@ -4,7 +4,7 @@ import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
 
 public class TotalPoints {
-   public static Double calculateTotalPoints(Sprint sprint) {
+   public static Double calculate(Sprint sprint) {
       double totalpoints = 0;
       if (sprint != null && sprint.getMembers() != null) {
          for (SprintUser member : sprint.getMembers()) {

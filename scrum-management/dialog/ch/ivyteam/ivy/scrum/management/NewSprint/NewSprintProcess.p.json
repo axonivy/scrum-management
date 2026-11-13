@@ -100,7 +100,7 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.CalculateMaxWorkingDays;",
-            "out.sprint.maxWorkingDays = CalculateMaxWorkingDays.calculateMaxWorkingDays(in.sprint);"
+            "out.sprint.maxWorkingDays = CalculateMaxWorkingDays.calculate(in.sprint);"
           ]
         }
       },
