@@ -13,17 +13,17 @@ public class CalculateWorkingDays {
         if (sprint.getStartDate() != null && sprint.getEndDate() != null) {
 
             Calendar currentDate = Calendar.getInstance();
-            currentDate.setTime(sprint.getStartDate().toJavaDate());
+            currentDate.setTime(sprint.getStartDate());
 
             Calendar endDate = Calendar.getInstance();
-            endDate.setTime(sprint.getEndDate().toJavaDate());
+            endDate.setTime(sprint.getEndDate());
             Calendar lastWednesday = Calendar.getInstance();
-            lastWednesday.setTime(sprint.getEndDate().toJavaDate());
+            lastWednesday.setTime(sprint.getEndDate());
 
             while (lastWednesday.get(Calendar.DAY_OF_WEEK) != Calendar.WEDNESDAY) {
                 lastWednesday.add(Calendar.DAY_OF_MONTH, -1);
             }
-            
+
             while (!currentDate.after(endDate)) {
 
                 int day = currentDate.get(Calendar.DAY_OF_WEEK);

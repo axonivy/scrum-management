@@ -12,7 +12,7 @@
     "name" : "sprintId"
   }, {
     "name" : "taskIndex",
-    "type" : "Number"
+    "type" : "java.lang.Integer"
   }, {
     "name" : "members",
     "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>"

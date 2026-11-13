@@ -11,15 +11,8 @@
     <ui:composition template="/layouts/frame-10.xhtml">
       <ui:define name="title">New Sprint</ui:define>
       <ui:define name="content">
-        <style type="text/css">
-          .small-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 16px;
-          }
-        </style>
+        <h:outputStylesheet name="layouts/NewSprint.css" />
+        <style type="text/css"></style>
         <h:form id="CreateSprintForm">
           <p:messages id="messages" showDetail="true" />
           <p:card title="Create sprint">
@@ -38,6 +31,8 @@
                       text-align: center;
                     "
                     value="#{data.sprint.versionCode}"
+                    required="true"
+                    requiredMessage="Sprint Name Missing"
                   ></p:inputText>
                 </p:card>
               </div>
@@ -48,6 +43,8 @@
                     <span style="font-size: 18px"> Start Date</span>
                   </div>
                   <p:datePicker
+                    required="true"
+                    requiredMessage="Start Date Missing"
                     id="startdate"
                     value="#{data.sprint.startDate}"
                     pattern="dd/MM/yyyy"
@@ -70,6 +67,8 @@
                     <span style="font-size: 18px"> End Date</span>
                   </div>
                   <p:datePicker
+                    required="true"
+                    requiredMessage="End Date Missing"
                     id="enddate"
                     value="#{data.sprint.endDate}"
                     pattern="dd/MM/yyyy"
@@ -92,10 +91,12 @@
                     <span style="font-size: 18px"> Max Working days</span>
                   </div>
                   <p:inputNumber
+                    required="true"
                     value="#{data.sprint.maxWorkingDays}"
                     minValue="0"
                     decimalPlaces="1"
                     id="maxWorkingDays"
+                    requiredMessage="Max Working days Missing"
                   />
                 </p:card>
               </div>
@@ -107,9 +108,10 @@
                     <span style="font-size: 18px"> Story Points/Day</span>
                   </div>
                   <p:inputNumber
+                    required="true"
                     value="#{data.sprint.sprintPointsPerDay}"
                     minValue="0"
-                    decimalPlaces="2"
+                    requiredMessage="Story Points/Day Missing"
                   />
                 </p:card>
               </div>
@@ -120,7 +122,11 @@
                     <i class="pi pi-hashtag"></i>
                     <span style="font-size: 18px"> Sprint Number</span>
                   </div>
-                  <p:inputNumber value="#{data.sprint.sprintNumber}" />
+                  <p:inputNumber
+                    value="#{data.sprint.sprintNumber}"
+                    required="true"
+                    requiredMessage="Sprint Number Missing"
+                  />
                 </p:card>
               </div>
 
@@ -130,20 +136,20 @@
                 >
                   <p:commandButton
                     value="Save"
-                    style="padding: 8px 16px; margin-left: 5px"
                     styleClass="ui-button-raised ui-button-primary"
                     process="@form"
                     update="messages"
                     actionListener="#{logic.save}"
                     icon="pi pi-save"
+                    style="padding: 8px 16px; margin-left: 5px"
                   />
                   <p:commandButton
                     value="Close"
-                    style="padding: 8px 16px; margin-left: 5px"
                     styleClass="ui-button-raised ui-button-secondary"
                     process="@this"
                     actionListener="#{logic.close}"
                     icon="pi pi-times"
+                    style="padding: 8px 16px; margin-left: 5px"
                   ></p:commandButton>
                 </p:card>
               </div>

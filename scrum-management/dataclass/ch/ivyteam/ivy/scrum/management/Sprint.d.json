@@ -6,13 +6,13 @@
     "name" : "versionCode"
   }, {
     "name" : "sprintNumber",
-    "type" : "Number"
+    "type" : "java.lang.Long"
   }, {
     "name" : "startDate",
-    "type" : "Date"
+    "type" : "java.util.Date"
   }, {
     "name" : "endDate",
-    "type" : "Date"
+    "type" : "java.util.Date"
   }, {
     "name" : "members",
     "type" : "List<ch.ivyteam.ivy.scrum.management.SprintUser>"
@@ -21,7 +21,7 @@
     "type" : "java.lang.Float"
   }, {
     "name" : "sprintPointsPerDay",
-    "type" : "Number"
+    "type" : "java.lang.Double"
   }, {
     "name" : "sortIndex",
     "type" : "java.lang.Integer"
