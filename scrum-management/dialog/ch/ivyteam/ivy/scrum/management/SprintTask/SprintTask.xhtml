@@ -23,6 +23,10 @@
               a.ui-state-active.ui-state-active {
               background-color: var(--error-color);
             }
+            .sprint-calender
+              :is(.ui-datepicker-prev, .ui-datepicker-next).ui-state-disabled {
+              display: none;
+            }
           </style>
 
           <p:card>
@@ -114,6 +118,8 @@
               enabledDates="#{data.workingDates}"
               panelStyleClass="sprint-calender"
               style="width: 100%"
+              mindate="#{data.sprint.startDate.toJavaDate()}"
+              maxdate="#{data.sprint.endDate.toJavaDate()}"
             >
               <p:ajax
                 event="dateSelect"
