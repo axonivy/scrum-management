@@ -10,7 +10,7 @@ public class TotalPoints {
          for (SprintUser member : sprint.getMembers()) {
 
             if (member.getWorkingDays().intValue() >= 0) {
-               totalpoints = totalpoints + member.getWorkingDays().doubleValue() * (member.getCapacity().doubleValue() / 100) * sprint.getSprintPointsPerDay().doubleValue();
+               totalpoints = totalpoints + member.getWorkingDays() * (member.getCapacity() / 100) * sprint.getSprintPointsPerDay();
             }
 
          }
