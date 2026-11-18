@@ -31,39 +31,23 @@
               "
             >
               <h:outputText
-                value="#{data.sprint.versionCode}"
-                style="font-size: 25px; font-weight: 550; display: block"
+                value="#{data.sprint.versionCode} #{data.sprint.sprintNumber}"
+                style="font-size: 25px; font-weight: 550"
               />
-              <div style="display: flex; gap: 45px; margin-top: 12px">
+              <div style="display: flex; gap: 25px; margin-top: 12px">
                 <div>
                   <h:outputText
                     value="StartDate: "
-                    style="display: block; color: var(--surface-600)"
+                    style="color: var(--surface-600)"
                   />
-                  <h:outputText
-                    value="#{data.sprint.startDate}"
-                    style="display: block"
-                  />
+                  <h:outputText value="#{data.sprint.startDate}" />
                 </div>
                 <div>
                   <h:outputText
                     value="EndDate: "
-                    style="display: block; color: var(--surface-600)"
+                    style="color: var(--surface-600)"
                   />
-                  <h:outputText
-                    value="#{data.sprint.endDate}"
-                    style="display: block"
-                  />
-                </div>
-                <div>
-                  <h:outputText
-                    value="Sprint Number: "
-                    style="display: block; color: var(--surface-600)"
-                  />
-                  <h:outputText
-                    value="Sprint #{data.sprint.sprintNumber}"
-                    style="display: block"
-                  />
+                  <h:outputText value="#{data.sprint.endDate}" />
                 </div>
               </div>
             </div>
@@ -106,9 +90,9 @@
             <span
               style="
                 font-size: 18px;
-                display: block;
-                margin-bottom: 10px;
+                display: flex;
                 font-weight: 550;
+                margin-bottom: 10px;
               "
               >Select the days you are absent</span
             >
@@ -134,40 +118,36 @@
                 justify-content: space-between;
               "
             >
-              <div>
+              <div style="display: flex; flex-direction: column">
                 <h:outputText
                   value="Max working days"
-                  style="display: block; color: var(--surface-600)"
+                  style="color: var(--surface-600)"
                 />
-                <h:outputText
-                  value="#{data.sprint.maxWorkingDays}"
-                  style="display: block"
-                />
+                <h:outputText value="#{data.sprint.maxWorkingDays}" />
               </div>
 
-              <div>
+              <div style="display: flex; flex-direction: column">
                 <h:outputText
                   value="Selected absence days"
-                  style="display: block; color: var(--surface-600)"
+                  style="color: var(--surface-600)"
                 />
                 <h:outputText
                   value="#{empty data.absenceDays ? 0 : data.absenceDays.size()}"
-                  style="display: block"
                   id="selectedAbsenceDays"
                 />
               </div>
-              <div>
+              <div style="display: flex; flex-direction: column">
                 <h:outputText
                   value="Working days "
-                  style="display: block; color: var(--surface-600)"
+                  style="color: var(--surface-600)"
                 />
                 <h:outputText
                   value="#{data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())}"
-                  style="display: block"
                   id="workingDays"
                 />
               </div>
             </div>
+
             <div style="margin-top: 20px; color: var(--surface-400)">
               <h:outputText value="Review, Saturday and Sunday (Excluded)" />
             </div>
@@ -203,29 +183,23 @@
               >
             </div>
           </p:card>
+
           <p:card style="margin-top: 10px">
-            <span
-              style="
-                font-size: 18px;
-                display: block;
-                margin-bottom: 10px;
-                font-weight: 550;
-              "
-              >Points preview</span
-            >
-            <div>
-              <h:outputText
-                value="Estimated Sprint Points"
-                style="display: block"
-              />
+            <div style="display: flex; flex-direction: column">
+              <span
+                style="
+                  font-size: 18px;
+
+                  margin-bottom: 10px;
+                  font-weight: 550;
+                "
+                >Points preview</span
+              >
+
+              <h:outputText value="Estimated Sprint Points" />
               <h:outputText
                 value="#{(data.sprint.maxWorkingDays.intValue() - (empty data.absenceDays ? 0 : data.absenceDays.size())) * data.sprint.sprintPointsPerDay.doubleValue() * (data.member.capacity / 100)}"
-                style="
-                  display: block;
-                  margin-top: 5px;
-                  font-size: 24px;
-                  font-weight: 500;
-                "
+                style="margin-top: 5px; font-size: 24px; font-weight: 500"
                 id="sprintPointsPreview"
                 ><f:convertNumber pattern="0.0"
               /></h:outputText>
