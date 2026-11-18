@@ -6,10 +6,10 @@
     "name" : "name"
   }, {
     "name" : "workingDays",
-    "type" : "Number"
+    "type" : "java.lang.Double"
   }, {
     "name" : "capacity",
-    "type" : "Number"
+    "type" : "java.lang.Integer"
   }, {
     "name" : "userId"
   }, {
