@@ -68,8 +68,8 @@
             "out.sprintId = in.sprintId;",
             "out.userId = in.userId;",
             "",
-            "out.sprint = LoadData.GetSprint(in.sprintId);",
-            "out.member = LoadData.GetSprintUser(out.sprint, in.userId);"
+            "out.sprint = LoadData.getSprint(in.sprintId);",
+            "out.member = LoadData.getSprintUser(out.sprint, in.userId);"
           ]
         }
       },
@@ -88,7 +88,7 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.SaveTask;",
-            "SaveTask.SaveUserEntry(in.sprint , in.member , in.absenceDays);"
+            "SaveTask.saveUserEntry(in.sprint , in.member , in.absenceDays);"
           ]
         }
       },
@@ -127,7 +127,7 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.CalculateWorkingDays;",
-            "out.workingDates = CalculateWorkingDays.WorkingDates(in.sprint);"
+            "out.workingDates = CalculateWorkingDays.workingDates(in.sprint);"
           ]
         }
       },

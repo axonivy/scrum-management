@@ -8,7 +8,7 @@ import java.util.List;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 
 public class CalculateWorkingDays {
-    public static List<java.time.LocalDate> WorkingDates(Sprint sprint) {
+    public static List<java.time.LocalDate> workingDates(Sprint sprint) {
         List<LocalDate> workingDates = new ArrayList<>();
         if (sprint.getStartDate() != null && sprint.getEndDate() != null) {
 
