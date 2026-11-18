@@ -11,7 +11,7 @@
     "modifiers" : [ ]
   }, {
     "name" : "taskIndex",
-    "type" : "Number",
+    "type" : "java.lang.Integer",
     "modifiers" : [ ]
   }, {
     "name" : "save",
