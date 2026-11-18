@@ -12,7 +12,7 @@ public class CreateSprint {
   public static Sprint newSprint() {
     List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
-    sprintSorting.sortSprints(sprints);
+    SprintSorting.sortSprints(sprints);
 
     Sprint nextSprint = new Sprint();
     if (!sprints.isEmpty()) {

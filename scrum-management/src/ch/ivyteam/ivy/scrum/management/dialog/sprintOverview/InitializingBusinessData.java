@@ -11,7 +11,7 @@ public class InitializingBusinessdata {
 
     List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
-    sprintSorting.sortSprints(sprints);
+    SprintSorting.sortSprints(sprints);
 
     if (!sprints.isEmpty()) {
       int lastIndex = sprints.size() - 1;
