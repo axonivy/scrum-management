@@ -3,8 +3,8 @@ package ch.ivyteam.ivy.scrum.management.sprint.edit;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 
-public class SavingBusinessData {
-  public static Sprint savingInBusinessData(Sprint sprint, String sprintId) {
+public class SprintData {
+  public static Sprint update(Sprint sprint, String sprintId) {
     if (sprintId != null && !sprintId.isBlank()) {
 
       Sprint existingSprint = Ivy.repo().find(sprintId, Sprint.class);
@@ -22,5 +22,14 @@ public class SavingBusinessData {
 
     }
     throw new IllegalArgumentException("Sprint Id is empty");
+  }
+  public static Sprint find(String sprintId) {
+    if (sprintId != null && !sprintId.isBlank()) {
+
+      Sprint existingSprint = Ivy.repo().find(sprintId, Sprint.class);
+      return existingSprint;
+    }
+    return null;
+
   }
 }

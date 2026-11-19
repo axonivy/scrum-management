@@ -65,9 +65,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.sprint.create.CreateSprint;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.create.SprintData;",
             "",
-            "out.sprint = CreateSprint.newSprint();"
+            "out.sprint = SprintData.create();"
           ]
         }
       },

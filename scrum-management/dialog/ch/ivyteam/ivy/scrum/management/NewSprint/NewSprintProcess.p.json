@@ -99,8 +99,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.CalculateMaxWorkingDays;",
-            "out.sprint.maxWorkingDays = CalculateMaxWorkingDays.calculateMaxWorkingDays(in.sprint);"
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.MaxWorkingDays;",
+            "out.sprint.maxWorkingDays = MaxWorkingDays.calculate(in.sprint);"
           ]
         }
       },
@@ -145,8 +145,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.CalculateMaxWorkingDays;",
-            "out.sprint.maxWorkingDays = CalculateMaxWorkingDays.calculateMaxWorkingDays(in.sprint);"
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.MaxWorkingDays;",
+            "out.sprint.maxWorkingDays = MaxWorkingDays.calculate(in.sprint);"
           ]
         }
       },

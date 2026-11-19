@@ -11,9 +11,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.sprint.edit.LoadBusinessData;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.edit.SprintData;",
             "",
-            "out.sprint = LoadBusinessData.loadExistingSprint(in.sprintId);"
+            "out.sprint = SprintData.find(in.sprintId);"
           ]
         }
       },
@@ -32,9 +32,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.sprint.edit.SavingBusinessData;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.edit.SprintData;",
             "",
-            "out.sprint = SavingBusinessData.savingInBusinessData(in.sprint , in.sprintId);"
+            "out.sprint = SprintData.update(in.sprint , in.sprintId);"
           ]
         }
       },

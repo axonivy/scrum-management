@@ -4,8 +4,8 @@ import java.util.Calendar;
 
 import ch.ivyteam.ivy.scrum.management.Sprint;
 
-public class CalculateMaxWorkingDays {
-  public static float calculateMaxWorkingDays(Sprint sprint) {
+public class MaxWorkingDays {
+  public static float calculate(Sprint sprint) {
 
     Float maxworkingdays = 0f;
 

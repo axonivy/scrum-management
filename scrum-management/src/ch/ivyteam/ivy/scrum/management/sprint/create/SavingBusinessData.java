@@ -5,8 +5,9 @@ import java.util.List;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
-import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
+import ch.ivyteam.ivy.security.IUser;
+
 public class SavingBusinessData {
   public static Sprint savedSprint(Sprint sprint) {
 
@@ -20,7 +21,7 @@ public class SavingBusinessData {
         previousSprint = existingSprint;
       }
     }
-    
+
     sprint.setSortIndex(nextSortIndex);
 
     // Inputs users from users.yaml
