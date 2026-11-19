@@ -8,8 +8,8 @@ import ch.ivyteam.ivy.scrum.management.SprintUser;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
 import ch.ivyteam.ivy.security.IUser;
 
-public class SavingBusinessData {
-  public static Sprint savedSprint(Sprint sprint) {
+public class SaveNewSprint {
+  public static Sprint save(Sprint sprint) {
 
     List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
     int nextSortIndex = 0;

@@ -53,8 +53,8 @@
         </script>
         <h:form id="form">
           <p:panel
-            header="#{data.sprint.versionCode}"
             style="text-align: center; font-size: 30px"
+            header="#{data.sprint.versionCode} #{ data.sprint.sprintNumber}"
           >
             <h:outputText
               value="#{data.sprint.startDate}"
@@ -68,10 +68,6 @@
             <h:outputText value="#{data.sprint.endDate}" style="font-size: 50%">
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </h:outputText>
-            <h:outputText
-              value=" / Sprint Number: #{data.sprint.sprintNumber}"
-              style="font-size: 50%"
-            />
           </p:panel>
 
           <br />
@@ -99,7 +95,11 @@
               listener="#{logic.saveUserData(member.userId)}"
             />
 
-            <p:column headerText="Name" title="Name of user">
+            <p:column
+              headerText="Name"
+              title="Name of user"
+              sortBy="#{member.name}"
+            >
               <div
                 style="
                   display: flex;
@@ -231,7 +231,11 @@
               />
             </div>
             <div style="font-weight: 600">
-              <h:outputText value="Total Points "> </h:outputText>
+              <h:outputText
+                value="Total Points "
+                style="color: var(--surface-500)"
+              >
+              </h:outputText>
               <h:outputText
                 id="totalpoints"
                 value="#{logic.calculateTotalPoints()}"
@@ -239,6 +243,7 @@
                 <f:convertNumber pattern="#0.0" />
               </h:outputText>
             </div>
+
             <div
               class="command-btns"
               style="display: flex; align-items: center; gap: 8px"

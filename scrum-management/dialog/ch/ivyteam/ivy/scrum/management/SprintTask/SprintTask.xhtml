@@ -22,6 +22,23 @@
           }
         </style>
         <h:form>
+          <style type="text/css">
+            .sprint-calender.sprint-calender
+              td:not(.ui-state-disabled)
+              a:not(.ui-state-active):not(.ui-state-active) {
+              background-color: var(--success-color);
+            }
+            .sprint-calender.sprint-calender
+              td:not(.ui-state-disabled)
+              a.ui-state-active.ui-state-active {
+              background-color: var(--error-color);
+            }
+            .sprint-calender
+              :is(.ui-datepicker-prev, .ui-datepicker-next).ui-state-disabled {
+              display: none;
+            }
+          </style>
+
           <p:card>
             <div
               style="
@@ -103,6 +120,8 @@
               enabledDates="#{data.workingDates}"
               panelStyleClass="sprint-calender"
               style="width: 100%"
+              mindate="#{data.sprint.startDate}"
+              maxdate="#{data.sprint.endDate}"
             >
               <p:ajax
                 event="dateSelect"

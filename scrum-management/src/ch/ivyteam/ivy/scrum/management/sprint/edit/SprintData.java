@@ -4,6 +4,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 
 public class SprintData {
+
   public static Sprint update(Sprint sprint, String sprintId) {
     if (sprintId != null && !sprintId.isBlank()) {
 
@@ -23,6 +24,7 @@ public class SprintData {
     }
     throw new IllegalArgumentException("Sprint Id is empty");
   }
+
   public static Sprint find(String sprintId) {
     if (sprintId != null && !sprintId.isBlank()) {
 
