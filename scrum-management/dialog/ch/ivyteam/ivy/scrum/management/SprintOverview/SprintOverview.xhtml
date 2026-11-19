@@ -53,14 +53,10 @@
           }
         </script>
         <h:form id="form">
-          <p:panel style="text-align: center; font-size: 30px">
-            <f:facet name="header">
-              <h:outputText value="#{data.sprint.versionCode} " />
-              <h:outputText
-                value="#{data.sprint.sprintNumber}"
-
-              />
-            </f:facet>
+          <p:panel
+            style="text-align: center; font-size: 30px"
+            header="#{data.sprint.versionCode} #{ data.sprint.sprintNumber}"
+          >
             <h:outputText
               value="#{data.sprint.startDate}"
               style="font-size: 50%"
