@@ -102,9 +102,9 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsNextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.ChangeSprint;",
             "",
-            "LoadsNextSprint.Result result = LoadsNextSprint.load(in.sprint , in.sprintIndex);",
+            "ChangeSprint.Result result = ChangeSprint.nextSprint(in.sprint , in.sprintIndex);",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
           ]
@@ -158,11 +158,10 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsLastSprint;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsNextSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.ChangeSprint;",
             "",
-            "LoadsNextSprint.Result result = LoadsLastSprint.load(in.sprint , in.sprintIndex);",
+            "ChangeSprint.Result result = ChangeSprint.lastSprint(in.sprint , in.sprintIndex);",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
           ]
@@ -189,10 +188,10 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.LoadsNextSprint;",
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SortingBusinessData;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SprintPropertys;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.ChangeSprint;",
             "",
-            "LoadsNextSprint.Result result = SortingBusinessData.sort(in.sprint , in.sprintIndex);",
+            "ChangeSprint.Result result = SprintPropertys.get(in.sprint , in.sprintIndex);",
             "",
             "out.sprint = result.sprint();",
             "out.sprintIndex = result.sprintIndex();"
@@ -245,8 +244,8 @@
             "out.userId" : "in.userId"
           },
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SaveUserData;",
-            "SaveUserData.save(in.sprint, in.userId);"
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.UserData;",
+            "UserData.save(in.sprint, in.userId);"
           ]
         }
       },
@@ -282,8 +281,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.CheckSprintUpdates;",
-            "CheckSprintUpdates.check(in.sprint);"
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintOverview.SprintUpdates;",
+            "SprintUpdates.check(in.sprint);"
           ]
         }
       },

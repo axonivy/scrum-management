@@ -1,0 +1,29 @@
+package ch.ivyteam.ivy.scrum.management.sprint.create;
+
+import java.util.List;
+
+import org.apache.commons.lang3.time.DateUtils;
+
+import ch.ivyteam.ivy.scrum.management.Sprint;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintDataUtil;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
+
+public class SprintData {
+  public static Sprint create() {
+    List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
+
+    SprintDataUtil.sort(sprints);
+
+    Sprint nextSprint = new Sprint();
+    if (!sprints.isEmpty()) {
+      Sprint lastSprint = sprints.getLast();
+      nextSprint.setSprintNumber(lastSprint.getSprintNumber() + 1);
+      nextSprint.setStartDate(DateUtils.addDays(lastSprint.getStartDate(), 21));
+      nextSprint.setEndDate(DateUtils.addDays(lastSprint.getEndDate(), 21));
+      nextSprint.setVersionCode(lastSprint.getVersionCode());
+      nextSprint.setSprintPointsPerDay(lastSprint.getSprintPointsPerDay());
+
+    }
+    return nextSprint;
+  }
+}

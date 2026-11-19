@@ -36,7 +36,7 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f52", "to" : "f1" }
+        { "id" : "f52", "to" : "f60" }
       ]
     }, {
       "id" : "f1",
@@ -69,7 +69,7 @@
         "at" : { "x" : 96, "y" : 272 }
       },
       "connect" : [
-        { "id" : "f44", "to" : "f50" }
+        { "id" : "f59", "to" : "f58" }
       ]
     }, {
       "id" : "f22",
@@ -99,8 +99,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.CalculateMaxWorkingDays;",
-            "out.sprint.maxWorkingDays = CalculateMaxWorkingDays.calculate(in.sprint);"
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.MaxWorkingDays;",
+            "out.sprint.maxWorkingDays = MaxWorkingDays.calculate(in.sprint);"
           ]
         }
       },
@@ -117,10 +117,7 @@
       "name" : "SetsSaveTrue",
       "config" : {
         "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.SetsSaveTrue;",
-            "out.save = SetsSaveTrue.setsSaveTrue(in.save);"
-          ]
+          "code" : "out.save = true;"
         }
       },
       "visual" : {
@@ -128,25 +125,6 @@
       },
       "connect" : [
         { "id" : "f55", "to" : "f57" }
-      ]
-    }, {
-      "id" : "f50",
-      "type" : "Script",
-      "name" : "SetsSaveFalse",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.SetsSaveFalse;",
-            "out.save = SetsSaveFalse.setsSaveFalse(in.save);"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 224, "y" : 272 },
-        "description" : "SetsSaveFalse"
-      },
-      "connect" : [
-        { "id" : "f59", "to" : "f58" }
       ]
     }, {
       "id" : "f57",
@@ -160,5 +138,24 @@
       "visual" : {
         "at" : { "x" : 360, "y" : 272 }
       }
+    }, {
+      "id" : "f60",
+      "type" : "Script",
+      "name" : "CalculateMaxWorkingDays",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.scrum.management.dialog.newSprint.MaxWorkingDays;",
+            "out.sprint.maxWorkingDays = MaxWorkingDays.calculate(in.sprint);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "description" : "Calculates the max working days excludes review day and weekends (saturday, sunday)"
+      },
+      "connect" : [
+        { "id" : "f61", "to" : "f1", "color" : "default" }
+      ]
     } ]
 }

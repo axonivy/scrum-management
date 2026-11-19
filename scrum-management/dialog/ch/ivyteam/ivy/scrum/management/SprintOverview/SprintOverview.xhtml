@@ -36,7 +36,6 @@
                 return;
               }
 
-              const active = Number(days) >= 0;
               const points =
                 (Number(days) *
                   Number(capacity) *
@@ -44,11 +43,11 @@
                 100;
 
               row.cells[1].querySelector(".ui-cell-editor-output").textContent =
-                active ? Number(days) : "";
+                Number(days);
               row.cells[2].querySelector(".ui-cell-editor-output").textContent =
                 Number(capacity) + "%";
-              row.cells[3].textContent = active ? points.toFixed(1) : "";
-              row.classList.toggle("days-missing", !active);
+              row.cells[3].textContent = points.toFixed(1);
+              row.classList.remove("days-missing");
             });
           }
         </script>
