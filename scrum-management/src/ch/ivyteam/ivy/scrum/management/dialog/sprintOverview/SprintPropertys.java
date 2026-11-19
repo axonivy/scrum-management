@@ -3,15 +3,15 @@ package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 import java.util.List;
 
 import ch.ivyteam.ivy.scrum.management.Sprint;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintDataUtil;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSorting;
 
-public class InitializingBusinessdata {
-  public static ChangeSprint.Result SortingBusinessdata(Sprint sprint, Integer sprintIndex) {
+public class SprintPropertys {
+  public static ChangeSprint.Result get(Sprint sprint, Integer sprintIndex) {
 
     List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
 
-    SprintSorting.sort(sprints);
+    SprintDataUtil.sort(sprints);
 
     if (!sprints.isEmpty()) {
       int lastIndex = sprints.size() - 1;

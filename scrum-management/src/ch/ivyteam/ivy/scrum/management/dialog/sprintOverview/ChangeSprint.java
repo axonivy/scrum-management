@@ -2,7 +2,7 @@ package ch.ivyteam.ivy.scrum.management.dialog.sprintOverview;
 
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSearch;
-import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintSorting;
+import ch.ivyteam.ivy.scrum.management.sprint.methods.SprintDataUtil;
 
 public class ChangeSprint {
   public record Result(Sprint sprint, Integer sprintIndex) {}
@@ -28,7 +28,7 @@ public class ChangeSprint {
 
   private static Result changeSprint(Integer newIndex) {
     java.util.List<Sprint> sprints = SprintSearch.sprintFromBusinessdata();
-    SprintSorting.sort(sprints);
+    SprintDataUtil.sort(sprints);
     if (!sprints.isEmpty() && newIndex >= 0 && newIndex < sprints.size()) {
       Sprint sprint = sprints.get(newIndex);
       return new Result(sprint, newIndex);

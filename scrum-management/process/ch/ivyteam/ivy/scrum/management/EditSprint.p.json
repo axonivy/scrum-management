@@ -11,9 +11,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.sprint.edit.LoadExistingSprint;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.edit.SprintData;",
             "",
-            "out.sprint = LoadExistingSprint.load(in.sprintId);"
+            "out.sprint = SprintData.find(in.sprintId);"
           ]
         }
       },
@@ -32,9 +32,9 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.sprint.edit.UpdateExistingSprint;",
+            "import ch.ivyteam.ivy.scrum.management.sprint.edit.SprintData;",
             "",
-            "out.sprint = UpdateExistingSprint.update(in.sprint , in.sprintId);"
+            "out.sprint = SprintData.update(in.sprint , in.sprintId);"
           ]
         }
       },

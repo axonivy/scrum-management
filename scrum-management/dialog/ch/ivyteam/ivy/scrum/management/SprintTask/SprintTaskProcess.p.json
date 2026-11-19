@@ -61,15 +61,15 @@
       "config" : {
         "output" : {
           "code" : [
-            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.LoadSprint;",
+            "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.SprintData;",
             "import ch.ivyteam.ivy.scrum.management.SprintUser;",
             "import ch.ivyteam.ivy.scrum.management.Sprint;",
             "",
             "out.sprintId = in.sprintId;",
             "out.userId = in.userId;",
             "",
-            "out.sprint = LoadSprint.getSprint(in.sprintId);",
-            "out.member = LoadSprint.getSprintUser(out.sprint, in.userId);"
+            "out.sprint = SprintData.getSprint(in.sprintId);",
+            "out.member = SprintData.getSprintUser(out.sprint, in.userId);"
           ]
         }
       },
@@ -88,7 +88,7 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.scrum.management.dialog.sprintTask.SaveTask;",
-            "SaveTask.save(in.sprint , in.member , in.absenceDays);"
+            "SaveTask.saveUserInputs(in.sprint , in.member , in.absenceDays);"
           ]
         }
       },

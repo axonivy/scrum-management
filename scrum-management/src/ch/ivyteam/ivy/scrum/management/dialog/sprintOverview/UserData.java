@@ -6,7 +6,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.scrum.management.Sprint;
 import ch.ivyteam.ivy.scrum.management.SprintUser;
 
-public class SaveUserData {
+public class UserData {
   public static void save(Sprint sprint, String userId) {
     List<SprintUser> users = sprint.getMembers();
     for (SprintUser user : users) {
