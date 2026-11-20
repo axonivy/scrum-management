@@ -27,7 +27,9 @@ public class MaxWorkingDays {
 
         currentDate.add(Calendar.DAY_OF_MONTH, 1);
       }
-      maxworkingdays--;
+      if (maxworkingdays >= 1) {
+        maxworkingdays--;
+      }
 
       sprint.setMaxWorkingDays(maxworkingdays);
     }
