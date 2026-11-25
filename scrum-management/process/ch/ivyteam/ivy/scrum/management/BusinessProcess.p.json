@@ -58,6 +58,9 @@
             "out.userName" : "param.userName"
           }
         },
+        "request" : {
+          "isVisibleOnStartList" : false
+        },
         "triggerable" : true,
         "task" : {
           "name" : "UserTask",

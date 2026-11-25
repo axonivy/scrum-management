@@ -53,6 +53,7 @@
         </script>
         <h:form id="form">
           <p:panel
+            id="sprint-header"
             style="text-align: center; font-size: 30px"
             header="#{data.sprint.versionCode} #{ data.sprint.sprintNumber}"
           >
@@ -184,13 +185,13 @@
           <p:remoteCommand
             name="refreshSprintTable"
             process="@this"
-            update="sprint-datatable totalpoints"
+            update="sprint-header sprint-datatable totalpoints"
           />
           <p:poll
             interval="5"
             process="@this"
             listener="#{logic.checkSprintUpdates}"
-            oncomplete="refreshChangedUsers(args.changedUsers)"
+            oncomplete="refreshChangedUsers(args.changedUsers); if (args.sprintChanged) {refreshSprintTable();} "
           />
           <br />
           <div
