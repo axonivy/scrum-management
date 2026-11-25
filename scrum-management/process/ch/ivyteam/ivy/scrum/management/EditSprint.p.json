@@ -43,7 +43,7 @@
         "size" : { "width" : 120, "height" : 56 }
       },
       "connect" : [
-        { "id" : "f31", "to" : "f22" }
+        { "id" : "f33", "to" : "f32" }
       ]
     }, {
       "id" : "f18",
@@ -59,20 +59,8 @@
       },
       "connect" : [
         { "id" : "f20", "to" : "f5" },
-        { "id" : "f24", "to" : "f21" }
+        { "id" : "f24", "to" : "f35" }
       ]
-    }, {
-      "id" : "f21",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 1008, "y" : 592 }
-      }
-    }, {
-      "id" : "f22",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 1248, "y" : 528 }
-      }
     }, {
       "id" : "f27",
       "type" : "RequestStart",
@@ -88,7 +76,8 @@
           }
         },
         "request" : {
-          "name" : "EditSprint"
+          "name" : "EditSprint",
+          "isVisibleOnStartList" : false
         }
       },
       "visual" : {
@@ -122,5 +111,23 @@
       "connect" : [
         { "id" : "f30", "to" : "f18", "color" : "default" }
       ]
+    }, {
+      "id" : "f32",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.scrum.management.SprintOverview:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 1280, "y" : 528 }
+      }
+    }, {
+      "id" : "f35",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.scrum.management.SprintOverview:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 1008, "y" : 624 }
+      }
     } ]
 }
